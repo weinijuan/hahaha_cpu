@@ -1,5 +1,5 @@
 `ifndef MYCPU_H
-    `define MYCPU_H
+`define MYCPU_H
 
 //    `define BR_BUS_WD       33  //bug5 32->33
 //    `define FS_TO_DS_BUS_WD 109
