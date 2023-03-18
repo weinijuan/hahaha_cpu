@@ -1,3 +1,5 @@
+`include "cpu.svh"
+
 import cpuDefine::*;
 
 module cpu_top (

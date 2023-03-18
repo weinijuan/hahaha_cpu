@@ -1,3 +1,5 @@
+`include "cpu.svh"
+
 import cpuDefine::*;
 module PcUpdate (
     input  logic clk,

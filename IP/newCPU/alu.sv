@@ -1,3 +1,5 @@
+`include "cpu.svh"
+
 import cpuDefine::*;
 module alu (
     input  DType   aluSrc1,

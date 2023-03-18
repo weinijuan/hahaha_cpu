@@ -1,3 +1,5 @@
+`include "cpu.svh"
+
 import cpuDefine::*;
 module DCache (
     input  logic clk,

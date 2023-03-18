@@ -1,3 +1,6 @@
+`ifndef _CPU_VH
+`define _CPU_VH
+
 package cpuDefine;
     typedef logic [4:0] Gr;  // reg type 
     typedef logic [31:0] DType;  // normal 32 bit data type
@@ -56,3 +59,5 @@ package cpuDefine;
         REG_WRITE_PC
     } RegWriteDataSel;
 endpackage : cpuDefine
+
+`endif
