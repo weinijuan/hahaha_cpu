@@ -118,8 +118,7 @@ module exception #(
     CSR_6  CSR6;
     CSR_7  CSR7;
     CSR_8  CSR8;
-    CSR_9  CSR3;
-    CSR_9  CSR4;
+    CSR_9  CSR9;
     CSR_10 CSR10;
     always_comb begin  //该模块产生excode
         if (TLB_virtaddr[12] == 0) begin

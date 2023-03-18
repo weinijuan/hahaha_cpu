@@ -1,7 +1,8 @@
 `include "cpu.svh"
 
-import cpuDefine::*;
-module Comparator (
+module Comparator
+    import cpuDefine::*;
+(
     input  DType rj,
     rk,
     input  logic unsign,

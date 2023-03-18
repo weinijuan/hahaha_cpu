@@ -1,7 +1,8 @@
 `include "cpu.svh"
 
-import cpuDefine::*;
-module alu (
+module alu
+    import cpuDefine::*;
+(
     input  DType   aluSrc1,
     input  DType   aluSrc2,
     input  AluCtrl aluctrl,
@@ -19,10 +20,10 @@ module alu (
                 aluout = aluSrc1 - aluSrc2;
             end
             ALU_SLT: begin
-                aluout = ($signed(aluSrc1) < $signed(aluSrc2));
+                aluout = $bits(DType)'($signed(aluSrc1) < $signed(aluSrc2));
             end
             ALU_SLTU: begin
-                aluout = aluSrc1 < aluSrc2;
+                aluout = $bits(DType)'(aluSrc1 < aluSrc2);
             end
             ALU_AND: begin
                 aluout = aluSrc1 & aluSrc2;

@@ -1,7 +1,8 @@
 `include "cpu.svh"
 
-import cpuDefine::*;
-module PcUpdate (
+module PcUpdate
+    import cpuDefine::*;
+(
     input  logic clk,
     reset,
     en,

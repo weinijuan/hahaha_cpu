@@ -1,10 +1,12 @@
 `include "cpu.svh"
 
-import cpuDefine::*;
-module ImmGen (
+module ImmGen
+    import cpuDefine::*;
+(
+    // verilator lint_off UNUSED
     input Instr instr,
-    Itype,
-    itype,
+    // verilator lint_on UNUSED
+    Itype itype,
     logic unsign,
     output DType immout
 );
@@ -12,10 +14,10 @@ module ImmGen (
         unique case (itype)
             // I8 must sll/sra/srl , unsigned extend
             I8: begin
-                immout = instr[14:10];
+                immout = $bits(DType)'(instr[14:10]);
             end
             I12: begin
-                if (unsign) immout = instr[21:10];
+                if (unsign) immout = $bits(DType)'(instr[21:10]);
                 else immout = {{20{instr[21]}}, instr[21:10]};
             end
             I14: begin

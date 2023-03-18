@@ -1,8 +1,8 @@
 `include "cpu.svh"
 
-import cpuDefine::*;
-
-module cpu_top (
+module cpu_top
+    import cpuDefine::*;
+(
     input logic clk,
     reset
 );
@@ -46,7 +46,7 @@ module cpu_top (
 
     DType rj, rk, rd, immout;
 
-    RF rf (
+    regfile rf (
         .clk(clk),
         .reset(reset),
         .rd_in(instr[4:0]),

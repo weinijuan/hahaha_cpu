@@ -1,7 +1,8 @@
 `include "cpu.svh"
 
-import cpuDefine::*;
-module Control (
+module Control
+    import cpuDefine::*;
+(
     input  Instr   instr,
     input  logic   zero,
     input  logic   lt,
