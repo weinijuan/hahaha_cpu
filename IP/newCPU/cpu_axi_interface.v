@@ -25,95 +25,92 @@ THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 --------------------------------------------------------------------------------
 ------------------------------------------------------------------------------*/
 
-module cpu_axi_interface
-    (
-        input         clk,
-        input         resetn,
+module cpu_axi_interface (
+    input clk,
+    input resetn,
 
-        //inst sram-like
-        input         inst_req     ,
-        input         inst_wr      ,
-        input  [1 :0] inst_size    ,
-        input  [31:0] inst_addr    ,
-        input  [31:0] inst_wdata   ,
-        input  [3 :0] inst_wstrb   ,
-        output [31:0] inst_rdata   ,
-        output        inst_addr_ok ,
-        output        inst_data_ok ,
+    //inst sram-like
+    input          inst_req,
+    input          inst_wr,
+    input  [1 : 0] inst_size,
+    input  [ 31:0] inst_addr,
+    input  [ 31:0] inst_wdata,
+    input  [3 : 0] inst_wstrb,
+    output [ 31:0] inst_rdata,
+    output         inst_addr_ok,
+    output         inst_data_ok,
 
-        //data sram-like
-        input         data_req     ,
-        input         data_wr      ,
-        input  [1 :0] data_size    ,
-        input  [3 :0] data_wstrb   ,
-        input  [31:0] data_addr    ,
-        input  [31:0] data_wdata   ,
-        output [31:0] data_rdata   ,
-        output        data_addr_ok ,
-        output        data_data_ok ,
+    //data sram-like
+    input          data_req,
+    input          data_wr,
+    input  [1 : 0] data_size,
+    input  [3 : 0] data_wstrb,
+    input  [ 31:0] data_addr,
+    input  [ 31:0] data_wdata,
+    output [ 31:0] data_rdata,
+    output         data_addr_ok,
+    output         data_data_ok,
 
-        //axi
-        //ar
-        output [3 :0] arid         ,
-        output [31:0] araddr       ,
-        output [7 :0] arlen        ,
-        output [2 :0] arsize       ,
-        output [1 :0] arburst      ,
-        output [1 :0] arlock        ,
-        output [3 :0] arcache      ,
-        output [2 :0] arprot       ,
-        output        arvalid      ,
-        input         arready      ,
-        //r
-        input  [3 :0] rid          ,
-        input  [31:0] rdata        ,
-        input  [1 :0] rresp        ,
-        input         rlast        ,
-        input         rvalid       ,
-        output        rready       ,
-        //aw
-        output [3 :0] awid         ,
-        output [31:0] awaddr       ,
-        output [7 :0] awlen        ,
-        output [2 :0] awsize       ,
-        output [1 :0] awburst      ,
-        output [1 :0] awlock       ,
-        output [3 :0] awcache      ,
-        output [2 :0] awprot       ,
-        output        awvalid      ,
-        input         awready      ,
-        //w
-        output [3 :0] wid          ,
-        output [31:0] wdata        ,
-        output [3 :0] wstrb        ,
-        output        wlast        ,
-        output        wvalid       ,
-        input         wready       ,
-        //b
-        input  [3 :0] bid          ,
-        input  [1 :0] bresp        ,
-        input         bvalid       ,
-        output        bready
-    );
+    //axi
+    //ar
+    output [3 : 0] arid,
+    output [ 31:0] araddr,
+    output [7 : 0] arlen,
+    output [2 : 0] arsize,
+    output [1 : 0] arburst,
+    output [1 : 0] arlock,
+    output [3 : 0] arcache,
+    output [2 : 0] arprot,
+    output         arvalid,
+    input          arready,
+    //r
+    input  [3 : 0] rid,
+    input  [ 31:0] rdata,
+    input  [1 : 0] rresp,
+    input          rlast,
+    input          rvalid,
+    output         rready,
+    //aw
+    output [3 : 0] awid,
+    output [ 31:0] awaddr,
+    output [7 : 0] awlen,
+    output [2 : 0] awsize,
+    output [1 : 0] awburst,
+    output [1 : 0] awlock,
+    output [3 : 0] awcache,
+    output [2 : 0] awprot,
+    output         awvalid,
+    input          awready,
+    //w
+    output [3 : 0] wid,
+    output [ 31:0] wdata,
+    output [3 : 0] wstrb,
+    output         wlast,
+    output         wvalid,
+    input          wready,
+    //b
+    input  [3 : 0] bid,
+    input  [1 : 0] bresp,
+    input          bvalid,
+    output         bready
+);
     //addr
-    reg do_req;
-    reg do_req_or; //req is inst or data;1:data,0:inst
-    reg        do_wr_r;
-    reg [1 :0] do_size_r;
-    reg [31:0] do_addr_r;
-    reg [31:0] do_wdata_r;
-    reg [3 :0] do_wstrb_r;
-    wire data_back;
+    reg          do_req;
+    reg          do_req_or;  //req is inst or data;1:data,0:inst
+    reg          do_wr_r;
+    reg  [1 : 0] do_size_r;
+    reg  [ 31:0] do_addr_r;
+    reg  [ 31:0] do_wdata_r;
+    reg  [3 : 0] do_wstrb_r;
+    wire         data_back;
 
-    assign inst_addr_ok = !do_req&&!data_req;
+    assign inst_addr_ok = !do_req && !data_req;
     assign data_addr_ok = !do_req;
-    always @(posedge clk)
-    begin
+    always @(posedge clk) begin
         do_req     <= !resetn                       ? 1'b0 :
                    (inst_req||data_req)&&!do_req ? 1'b1 :
                    data_back                     ? 1'b0 : do_req;
-        do_req_or  <= !resetn ? 1'b0 :
-                   !do_req ? data_req : do_req_or;
+        do_req_or <= !resetn ? 1'b0 : !do_req ? data_req : do_req_or;
 
         do_wr_r    <= data_req&&data_addr_ok ? data_wr :
                    inst_req&&inst_addr_ok ? inst_wr : do_wr_r;
@@ -128,8 +125,8 @@ module cpu_axi_interface
     end
 
     //inst sram-like
-    assign inst_data_ok = do_req&&!do_req_or&&data_back;
-    assign data_data_ok = do_req&& do_req_or&&data_back;
+    assign inst_data_ok = do_req && !do_req_or && data_back;
+    assign data_data_ok = do_req && do_req_or && data_back;
     assign inst_rdata   = rdata;
     assign data_rdata   = rdata;
 
@@ -137,9 +134,8 @@ module cpu_axi_interface
     reg addr_rcv;
     reg wdata_rcv;
 
-    assign data_back = addr_rcv && (rvalid&&rready||bvalid&&bready);
-    always @(posedge clk)
-    begin
+    assign data_back = addr_rcv && (rvalid && rready || bvalid && bready);
+    always @(posedge clk) begin
         addr_rcv  <= !resetn          ? 1'b0 :
                   arvalid&&arready ? 1'b1 :
                   awvalid&&awready ? 1'b1 :

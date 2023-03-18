@@ -1,6 +1,6 @@
-module ICache(
-    input logic clk, 
-    input Addr addr, 
+module ICache (
+    input  logic clk,
+    input  Addr  addr,
     output Instr instr
 );
     Instr RAM[instrNum-1:0];
@@ -9,4 +9,3 @@ module ICache(
     assign instr = RAM[addr[addrLen-1:2]];
 
 endmodule
-
