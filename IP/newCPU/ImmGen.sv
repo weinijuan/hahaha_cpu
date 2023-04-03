@@ -1,13 +1,11 @@
 `include "cpu.svh"
-
 module ImmGen
     import cpuDefine::*;
+
 (
-    // verilator lint_off UNUSED
-    input Instr instr,
-    // verilator lint_on UNUSED
-    Itype itype,
-    logic unsign,
+    input  Instr instr,
+    input  Itype itype,
+    input  logic is_unsign,
     output DType immout
 );
     localparam width = $bits(DType);
@@ -18,7 +16,7 @@ module ImmGen
                 immout = width'(instr[14:10]);
             end
             I12: begin
-                if (unsign) immout = width'(instr[21:10]);
+                if (is_unsign) immout = width'(instr[21:10]);
                 else immout = width'(signed'(instr[21:10]));
             end
             I14: begin
@@ -39,6 +37,7 @@ module ImmGen
             default: begin
                 immout = '0;
             end
+
         endcase
     end
 

@@ -1,6 +1,5 @@
 `include "cpu.svh"
 
-
 module regfile
     import cpuDefine::*;
 (
@@ -26,23 +25,25 @@ module regfile
             end
         end
 
-    always_comb begin
-        if (rj_in != 0) begin
-            rj = rf[rj_in];
-        end else begin
-            rj = 0;
-        end
-        if (rk_in != 0) begin
-            rk = rf[rk_in];
-        end else begin
-            rk = 0;
-        end
-        if (rd_in != 0) begin
-            rd = rf[rd_in];
-        end else begin
-            rd = 0;
-        end
+  always_comb begin 
+    if (rj_in != 0 && rj_in == rd_in) begin
+        rj = regWriteData;
+    end else if (rj_in != 0)
+    begin
+        rj = rf[rj_in];
     end
-    //   assign rd1 = (ra1 != 0) ? rf[ra1] : 0;
-    //   assign rd2 = (ra2 != 0) ? rf[ra2] : 0;
+    else begin
+      rj = '0;
+    end
+
+    if (rk_in != 0 && rk_in == rd_in) begin
+      rk = regWriteData;
+    end else if (rk_in != 0) begin
+        rk = rf[rk_in];
+    end
+    else begin
+      rk = '0;
+    end
+  end
+
 endmodule
