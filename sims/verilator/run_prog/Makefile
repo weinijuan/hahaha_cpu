@@ -63,6 +63,7 @@ include ../../../chip/config-generator.mak
 
 ifeq ('${MYCPU}', 'y') 
 VERILATOR_INCLUDE += -y ${MYCPU_SRC} 
+VERILATOR_SRC += ${MYCPU_SRC}/*.sv
 VERILATOR_SRC += ${MYCPU_SRC}/*.v
 endif
 
@@ -225,7 +226,7 @@ verilator:${VERILATOR_SRC}
 	@echo "============================================================================================================="
 	mkdir -p log
 	mkdir -p ${OBJ_DIR}
-	verilator ${VERILATOR_INCLUDE} ${WAVEOPTION} --savable --threads ${THREAD} -O3 -Wno-fatal -DSIMU -DSIMULATION=1 -Wall --trace -cc ${VFLAGS} ${SIMU_TOP_NAME}.v ${DIFFTEST}.v ${VERILATOR_SRC} 2>&1 | tee log/compile.log
+	verilator ${VERILATOR_INCLUDE} ${WAVEOPTION} --error-limit 1000 --trace-structs --savable --threads ${THREAD} -O3 -Wno-fatal -DSIMU -DSIMULATION=1 -Wall --trace -cc ${VFLAGS} ${SIMU_TOP_NAME}.v ${DIFFTEST}.v ${VERILATOR_SRC} 2>&1 | tee log/compile.log
 	$(MAKE) -C ${OBJ_DIR} -f "V${SIMU_TOP_NAME}.mk" || exit "$$?"
 
 testbench:${TESTBENCH_SRC}/*.cpp 

@@ -94,6 +94,12 @@ module cpu_axi_interface (
     input          bvalid,
     output         bready
 );
+
+
+
+
+
+
     //addr
     reg          do_req;
     reg          do_req_or;  //req is inst or data;1:data,0:inst

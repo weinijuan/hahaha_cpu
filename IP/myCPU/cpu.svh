@@ -81,6 +81,8 @@ package cpuDefine;
     typedef struct packed {
         logic memWriteEn;
         logic memRead;
+        logic[1:0] size_mem;
+        logic is_unsign_load;
     } MEM_CONTROL_DATA;
 
     typedef struct packed {
@@ -101,16 +103,19 @@ package cpuDefine;
     typedef struct packed {
         MEM_CONTROL_DATA mem_control_data;
         WB_CONTROL_DATA wb_control_data;
+        logic [3:0] wstrb_mem; 
         Gr rdNo;
         DType aluout;
-        DType memaddr;
+        DType pc;
     } MEM_DATA;
 
     typedef struct packed {
         WB_CONTROL_DATA wb_control_data;
         Gr rdNo;
         DType aluout;
-        DType memReadData;
+        DType readData;
+        DType pc;
+        logic[3:0] wstrb;
     } WB_DATA;
 
     // nop define
@@ -133,8 +138,8 @@ package cpuDefine;
 
 
     typedef struct packed {
-        logic clk;
-        logic reset;
+        logic aclk;
+        logic aresetn;
     } DivNeed;
 
     // please look for the encode table in our github repository

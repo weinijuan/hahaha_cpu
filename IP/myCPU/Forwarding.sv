@@ -26,8 +26,8 @@ module Forwarding
 
 
 
-assign MEM_forward_valid =  MEM_regWriteEn && (MEM_rd != 0);
-assign WB_forward_valid = WB_regWriteEn && (WB_rd != 0) ;
+logic MEM_forward_valid =  regWriteEn_mem && (rd_no_mem != 0);
+logic WB_forward_valid = regWriteEn_wb && (rd_no_wb != 0) ;
 
 always_comb begin
     if (MEM_forward_valid && (rd_no_mem == rj_no_id)) begin
