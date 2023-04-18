@@ -1,6 +1,5 @@
 `include "cpu.svh"
 
-
 module cpu_sram
     import cpuDefine::*;
 (
@@ -34,7 +33,6 @@ module cpu_sram
 );
 
 
-
     // preif will have : allow_out and valid_in is no drive
     logic preif_allow_in;
     logic preif_valid;
@@ -47,6 +45,7 @@ module cpu_sram
     logic if_allow_in;
     logic if_valid_in;
     DType if_data_in;
+
     DType if_data_out;
     logic if_ready_go;
     logic if_flush;
@@ -101,7 +100,7 @@ module cpu_sram
 
     assign preif_ready_go = addr_ok_inst & req_inst ;
     // 复位时不能发请求
-    assign req_inst = if_allow_in & aresetn;
+    assign req_inst = preif_allow_in & aresetn;
     assign preif_valid = 1;
 
     // if  signal 
@@ -124,7 +123,8 @@ module cpu_sram
     assign if_flush = 0;
 
     Pipeline #(
-        .WIDTH($bits(nextPC)),
+        // .WIDTH($bits(nextPC)),
+        .T(DType),
         .reset_value(32'h1bfffffc),
         .isPc(1)
     ) If (
@@ -138,7 +138,7 @@ module cpu_sram
         .flush(if_flush),
         .valid_out(id_valid_in),
         .data_out(if_data_out),
-        .allow_out()
+        .allow_out(preif_allow_in)
     );
 
     assign pc_if = if_data_out;
@@ -152,10 +152,10 @@ module cpu_sram
     end
 
     always_ff @(posedge aclk) begin
-        if (if_ready_go && ~id_allow_in) begin
+        if (if_ready_go && ~if_allow_in) begin
             instr_temp <= instr;
             instr_temp_valid <= 1;
-        end else if (instr_temp_valid && id_allow_in) begin
+        end else if (instr_temp_valid && if_allow_in) begin
             instr_temp_valid <= 0;
         end
     end
@@ -179,7 +179,8 @@ module cpu_sram
     // add x0, x0, x0
     assign id_nop = '{pc: '0, instr: 32'h00100000};
     Pipeline #(
-        .WIDTH($bits(id_data_in))
+        // .WIDTH($bits(id_data_in))
+        .T(ID_DATA)
     ) id (
         .aclk(aclk),
         .aresetn(aresetn),
@@ -190,7 +191,7 @@ module cpu_sram
         .data_in(id_data_in),
         .ready_go(id_ready_go),
         .flush(id_flush),
-        .nop_data('0),
+        .nop_data(id_nop),
         .data_out(id_data_out)
     );
 
@@ -412,7 +413,8 @@ module cpu_sram
         };
 
     Pipeline #(
-        .WIDTH($bits(ex_data_in))
+        // .WIDTH($bits(ex_data_in))
+        .T(EX_DATA)
     ) ex (
         .aclk(aclk),
         .aresetn(aresetn),
@@ -591,12 +593,13 @@ module cpu_sram
     // pipelined signal 这里改动了，与preif不完全相同
     assign ex_ready_go = (addr_ok_mem & req_mem & (memRead_ex | memWriteEn_ex) ) 
                         | (~(memRead_ex | memWriteEn_ex));
-    assign req_mem = mem_allow_in & (memRead_ex | memWriteEn_ex);
+    assign req_mem = ex_allow_in & (memRead_ex | memWriteEn_ex);
     assign mem_ready_go = data_ok_mem || readData_temp_valid || (~(memRead_mem | memWriteEn_mem));
 
 
     Pipeline #(
-        .WIDTH($bits(mem_data_in))
+        // .WIDTH($bits(mem_data_in))
+        .T(MEM_DATA)
     ) mem (
         .aclk(aclk),
         .aresetn(aresetn),
@@ -651,10 +654,10 @@ module cpu_sram
 
     // 这里也改动了，与preif不完全相同
     always_ff @(posedge aclk) begin
-        if (mem_ready_go && ~wb_allow_in && (memRead_mem | memWriteEn_mem)) begin
+        if (mem_ready_go && ~ex_allow_in && (memRead_mem | memWriteEn_mem)) begin
             readData_temp <= readData;
             readData_temp_valid <= 1;
-        end else if (readData_temp_valid && wb_allow_in) begin
+        end else if (readData_temp_valid && ex_allow_in) begin
             readData_temp_valid <= 0;
         end
     end
@@ -694,8 +697,12 @@ module cpu_sram
             wstrb:'0
         };
 
+    assign wb_allow_in = 1;
+    assign wb_ready_go = 1;
+
     Pipeline #(
-        .WIDTH($bits(wb_data_in))
+        // .WIDTH($bits(wb_data_in))
+        .T(WB_DATA)
     ) wb (
         .aclk(aclk),
         .aresetn(aresetn),

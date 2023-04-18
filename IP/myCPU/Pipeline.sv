@@ -2,20 +2,21 @@
 module Pipeline
     import cpuDefine::*;
 #(
-    parameter WIDTH = 100,
+    // parameter WIDTH = 100,
+    type T = ID_DATA,
     parameter reset_value = 0,
     parameter logic isPc = 0
 ) (
     input logic aclk,
     input logic aresetn,
     input logic valid_in,
-    input logic [WIDTH-1:0] data_in,
+    input T data_in,
     input logic ready_go,
-    input logic [WIDTH-1:0] nop_data,
+    input T nop_data,
     input logic allow_in,
     input logic flush,
     output logic valid_out,
-    output logic [WIDTH-1:0] data_out,
+    output T data_out,
     output logic allow_out
 );
 // allow_in 和 valid_in 系列参与了逐级互锁机制，因此不能动
@@ -25,11 +26,11 @@ module Pipeline
 
     // valid = request and allow = response
     // valid_out = next valid_in != pipeline_valid
-
     logic pipeline_valid;
-    logic [WIDTH-1:0] pipeline_data;
+    T pipeline_data;
     // allow pre to this , allow_in = ~stall
     assign allow_out = !pipeline_valid || (valid_out && allow_in);
+    // wb 的valid_out暂时没有使用，后续需要考虑是否在寄存器中加一个，因为wb的valid_out好像没啥用
     assign valid_out = pipeline_valid && ready_go;
 
 
