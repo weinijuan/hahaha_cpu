@@ -260,6 +260,7 @@ module cpu_sram
         .rd_in(rd_no_id),
         .rj_in(rj_no_id),
         .rk_in(rk_no_id),
+        .rd_wb_in(rd_no_wb),
         .regWriteEn(regWriteEn_wb),
         .regWriteData(regWriteData_wb),
         .rj(rj_id),
@@ -739,7 +740,7 @@ module cpu_sram
 
     always_comb begin
         unique case (regWriteDataSel_wb)
-            REG_WRITE_ALU: regWriteData_wb = aluout_mem;
+            REG_WRITE_ALU: regWriteData_wb = aluout_wb;
             REG_WRITE_MEM: regWriteData_wb = readData_wb;
             default: regWriteData_wb = '0;
         endcase

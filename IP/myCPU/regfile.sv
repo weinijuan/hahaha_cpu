@@ -8,6 +8,7 @@ module regfile
     input Gr rd_in,
     input Gr rj_in,
     input Gr rk_in,
+    input Gr rd_wb_in,
     input logic regWriteEn,
     input DType regWriteData,
     output DType rj,
@@ -21,13 +22,13 @@ module regfile
     // 特殊的方式使之能够同时读写
     always @(posedge aclk)
         if (regWriteEn) begin
-            if (rd_in != 0) begin
-                rf[rd_in] <= regWriteData;
+            if (rd_wb_in != 0) begin
+                rf[rd_wb_in] <= regWriteData;
             end
         end
 
   always_comb begin 
-    if (rj_in != 0 && rj_in == rd_in) begin
+    if (rj_in != 0 && rj_in == rd_wb_in) begin
         rj = regWriteData;
     end else if (rj_in != 0)
     begin
@@ -37,7 +38,7 @@ module regfile
       rj = '0;
     end
 
-    if (rk_in != 0 && rk_in == rd_in) begin
+    if (rk_in != 0 && rk_in == rd_wb_in) begin
       rk = regWriteData;
     end else if (rk_in != 0) begin
         rk = rf[rk_in];
@@ -45,6 +46,16 @@ module regfile
     else begin
       rk = '0;
     end
+
+
+  if (rd_in != 0 && rd_in == rd_wb_in) begin
+      rd = regWriteData;
+  end else if (rd_in != 0) begin
+      rd = rf[rd_in];
+  end
+  else begin
+      rd = '0;
+  end
   end
 
 endmodule

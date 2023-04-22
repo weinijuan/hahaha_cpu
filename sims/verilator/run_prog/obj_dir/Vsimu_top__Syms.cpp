@@ -3,42 +3,48 @@
 
 #include "Vsimu_top__Syms.h"
 #include "Vsimu_top.h"
+#include "Vsimu_top___024root.h"
 #include "Vsimu_top___024unit.h"
 
-
 void Vsimu_top__Syms::__Vserialize(VerilatedSerialize& os) {
-    // LOCAL STATE
+    // Internal state
     os<<__Vm_activity;
-    os<<__Vm_didInit;
-    // SUBCELL STATE
+    os << __Vm_didInit;
+    // Module instance state
+    TOP.__Vserialize(os);
     TOP____024unit.__Vserialize(os);
 }
 void Vsimu_top__Syms::__Vdeserialize(VerilatedDeserialize& os) {
-    // LOCAL STATE
+    // Internal state
     os>>__Vm_activity;
-    os>>__Vm_didInit;
-    // SUBCELL STATE
+    os >> __Vm_didInit;
+    // Module instance state
+    TOP.__Vdeserialize(os);
     TOP____024unit.__Vdeserialize(os);
 }
 
-
 // FUNCTIONS
-Vsimu_top__Syms::Vsimu_top__Syms(Vsimu_top* topp, const char* namep)
-    // Setup locals
-    : __Vm_namep(namep)
-    , __Vm_activity(false)
-    , __Vm_didInit(false)
-    // Setup submodule names
-    , TOP____024unit(Verilated::catName(topp->name(), "$unit"))
+Vsimu_top__Syms::~Vsimu_top__Syms()
 {
-    // Pointer to top level
-    TOPp = topp;
+}
+
+Vsimu_top__Syms::Vsimu_top__Syms(VerilatedContext* contextp, const char* namep, Vsimu_top* modelp)
+    : VerilatedSyms{contextp}
+    // Setup internal state of the Syms class
+    , __Vm_modelp{modelp}
+    // Setup module instances
+    , TOP{this, namep}
+    , TOP____024unit{this, Verilated::catName(namep, "$unit")}
+{
+    // Configure time unit / time precision
+    _vm_contextp__->timeunit(-12);
+    _vm_contextp__->timeprecision(-12);
     // Setup each module's pointers to their submodules
-    TOPp->__PVT____024unit = &TOP____024unit;
+    TOP.__PVT____024unit = &TOP____024unit;
     // Setup each module's pointer back to symbol table (for public functions)
-    TOPp->__Vconfigure(this, true);
-    TOP____024unit.__Vconfigure(this, true);
+    TOP.__Vconfigure(true);
+    TOP____024unit.__Vconfigure(true);
     // Setup export functions
-    for (int __Vfinal=0; __Vfinal<2; __Vfinal++) {
+    for (int __Vfinal = 0; __Vfinal < 2; ++__Vfinal) {
     }
 }

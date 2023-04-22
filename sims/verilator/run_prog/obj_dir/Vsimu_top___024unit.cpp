@@ -9,74 +9,50 @@
 
 //==========
 
-VL_CTOR_IMP(Vsimu_top___024unit) {
-    // Reset internal values
-    // Reset structure values
-    _ctor_var_reset();
-}
-
-void Vsimu_top___024unit::__Vconfigure(Vsimu_top__Syms* vlSymsp, bool first) {
-    if (0 && first) {}  // Prevent unused
-    this->__VlSymsp = vlSymsp;
-}
-
-Vsimu_top___024unit::~Vsimu_top___024unit() {
-}
-
-// Savable
-void Vsimu_top___024unit::__Vserialize(VerilatedSerialize& os) {
-    vluint64_t __Vcheckval = VL_ULL(0xe3b0c44298fc1c14);
-    os<<__Vcheckval;
-}
-void Vsimu_top___024unit::__Vdeserialize(VerilatedDeserialize& os) {
-    vluint64_t __Vcheckval = VL_ULL(0xe3b0c44298fc1c14);
-    os.readAssert(__Vcheckval);
-}
-
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_InstrCommit_TOP____024unit(const CData/*7:0*/ coreid, const CData/*7:0*/ index, const CData/*0:0*/ valid, const QData/*63:0*/ pc, const IData/*31:0*/ instr, const CData/*0:0*/ skip, const CData/*0:0*/ is_TLBFILL, const CData/*7:0*/ TLBFILL_index, const CData/*0:0*/ is_CNTinst, const QData/*63:0*/ timer_64_value, const CData/*0:0*/ wen, const CData/*7:0*/ wdest, const QData/*63:0*/ wdata, const CData/*0:0*/ csr_rstat, const IData/*31:0*/ csr_data) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_InstrCommit_TOP____024unit(CData/*7:0*/ coreid, CData/*7:0*/ index, CData/*0:0*/ valid, QData/*63:0*/ pc, IData/*31:0*/ instr, CData/*0:0*/ skip, CData/*0:0*/ is_TLBFILL, CData/*7:0*/ TLBFILL_index, CData/*0:0*/ is_CNTinst, QData/*63:0*/ timer_64_value, CData/*0:0*/ wen, CData/*7:0*/ wdest, QData/*63:0*/ wdata, CData/*0:0*/ csr_rstat, IData/*31:0*/ csr_data) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_InstrCommit_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
     coreid__Vcvt = coreid;
     char index__Vcvt;
     index__Vcvt = index;
-    unsigned char valid__Vcvt;
+    svBit valid__Vcvt;
     valid__Vcvt = valid;
     long long pc__Vcvt;
     pc__Vcvt = pc;
     int instr__Vcvt;
     instr__Vcvt = instr;
-    unsigned char skip__Vcvt;
+    svBit skip__Vcvt;
     skip__Vcvt = skip;
-    unsigned char is_TLBFILL__Vcvt;
+    svBit is_TLBFILL__Vcvt;
     is_TLBFILL__Vcvt = is_TLBFILL;
     char TLBFILL_index__Vcvt;
     TLBFILL_index__Vcvt = TLBFILL_index;
-    unsigned char is_CNTinst__Vcvt;
+    svBit is_CNTinst__Vcvt;
     is_CNTinst__Vcvt = is_CNTinst;
     long long timer_64_value__Vcvt;
     timer_64_value__Vcvt = timer_64_value;
-    unsigned char wen__Vcvt;
+    svBit wen__Vcvt;
     wen__Vcvt = wen;
     char wdest__Vcvt;
     wdest__Vcvt = wdest;
     long long wdata__Vcvt;
     wdata__Vcvt = wdata;
-    unsigned char csr_rstat__Vcvt;
+    svBit csr_rstat__Vcvt;
     csr_rstat__Vcvt = csr_rstat;
     int csr_data__Vcvt;
     csr_data__Vcvt = csr_data;
     v_difftest_InstrCommit(coreid__Vcvt, index__Vcvt, valid__Vcvt, pc__Vcvt, instr__Vcvt, skip__Vcvt, is_TLBFILL__Vcvt, TLBFILL_index__Vcvt, is_CNTinst__Vcvt, timer_64_value__Vcvt, wen__Vcvt, wdest__Vcvt, wdata__Vcvt, csr_rstat__Vcvt, csr_data__Vcvt);
 }
 
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_ExcpEvent_TOP____024unit(const CData/*7:0*/ coreid, const CData/*7:0*/ excp_valid, const CData/*0:0*/ eret, const IData/*31:0*/ intrNo, const IData/*31:0*/ cause, const QData/*63:0*/ exceptionPC, const IData/*31:0*/ exceptionInst) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_ExcpEvent_TOP____024unit(CData/*7:0*/ coreid, CData/*7:0*/ excp_valid, CData/*0:0*/ eret, IData/*31:0*/ intrNo, IData/*31:0*/ cause, QData/*63:0*/ exceptionPC, IData/*31:0*/ exceptionInst) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_ExcpEvent_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
     coreid__Vcvt = coreid;
     char excp_valid__Vcvt;
     excp_valid__Vcvt = excp_valid;
-    unsigned char eret__Vcvt;
+    svBit eret__Vcvt;
     eret__Vcvt = eret;
     int intrNo__Vcvt;
     intrNo__Vcvt = intrNo;
@@ -89,12 +65,12 @@ VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_ExcpEvent_TOP___
     v_difftest_ExcpEvent(coreid__Vcvt, excp_valid__Vcvt, eret__Vcvt, intrNo__Vcvt, cause__Vcvt, exceptionPC__Vcvt, exceptionInst__Vcvt);
 }
 
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_TrapEvent_TOP____024unit(const CData/*7:0*/ coreid, const CData/*0:0*/ valid, const CData/*7:0*/ code, const QData/*63:0*/ pc, const QData/*63:0*/ cycleCnt, const QData/*63:0*/ instrCnt) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_TrapEvent_TOP____024unit(CData/*7:0*/ coreid, CData/*0:0*/ valid, CData/*7:0*/ code, QData/*63:0*/ pc, QData/*63:0*/ cycleCnt, QData/*63:0*/ instrCnt) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_TrapEvent_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
     coreid__Vcvt = coreid;
-    unsigned char valid__Vcvt;
+    svBit valid__Vcvt;
     valid__Vcvt = valid;
     char code__Vcvt;
     code__Vcvt = code;
@@ -107,7 +83,7 @@ VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_TrapEvent_TOP___
     v_difftest_TrapEvent(coreid__Vcvt, valid__Vcvt, code__Vcvt, pc__Vcvt, cycleCnt__Vcvt, instrCnt__Vcvt);
 }
 
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_StoreEvent_TOP____024unit(const CData/*7:0*/ coreid, const CData/*7:0*/ index, const CData/*7:0*/ valid, const QData/*63:0*/ storePAddr, const QData/*63:0*/ storeVAddr, const QData/*63:0*/ storeData) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_StoreEvent_TOP____024unit(CData/*7:0*/ coreid, CData/*7:0*/ index, CData/*7:0*/ valid, QData/*63:0*/ storePAddr, QData/*63:0*/ storeVAddr, QData/*63:0*/ storeData) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_StoreEvent_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
@@ -125,7 +101,7 @@ VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_StoreEvent_TOP__
     v_difftest_StoreEvent(coreid__Vcvt, index__Vcvt, valid__Vcvt, storePAddr__Vcvt, storeVAddr__Vcvt, storeData__Vcvt);
 }
 
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_LoadEvent_TOP____024unit(const CData/*7:0*/ coreid, const CData/*7:0*/ index, const CData/*7:0*/ valid, const QData/*63:0*/ paddr, const QData/*63:0*/ vaddr) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_LoadEvent_TOP____024unit(CData/*7:0*/ coreid, CData/*7:0*/ index, CData/*7:0*/ valid, QData/*63:0*/ paddr, QData/*63:0*/ vaddr) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_LoadEvent_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
@@ -141,7 +117,7 @@ VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_LoadEvent_TOP___
     v_difftest_LoadEvent(coreid__Vcvt, index__Vcvt, valid__Vcvt, paddr__Vcvt, vaddr__Vcvt);
 }
 
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_CSRRegState_TOP____024unit(const CData/*7:0*/ coreid, const QData/*63:0*/ crmd, const QData/*63:0*/ prmd, const QData/*63:0*/ euen, const QData/*63:0*/ ecfg, const QData/*63:0*/ estat, const QData/*63:0*/ era, const QData/*63:0*/ badv, const QData/*63:0*/ eentry, const QData/*63:0*/ tlbidx, const QData/*63:0*/ tlbehi, const QData/*63:0*/ tlbelo0, const QData/*63:0*/ tlbelo1, const QData/*63:0*/ asid, const QData/*63:0*/ pgdl, const QData/*63:0*/ pgdh, const QData/*63:0*/ save0, const QData/*63:0*/ save1, const QData/*63:0*/ save2, const QData/*63:0*/ save3, const QData/*63:0*/ tid, const QData/*63:0*/ tcfg, const QData/*63:0*/ tval, const QData/*63:0*/ ticlr, const QData/*63:0*/ llbctl, const QData/*63:0*/ tlbrentry, const QData/*63:0*/ dmw0, const QData/*63:0*/ dmw1) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_CSRRegState_TOP____024unit(CData/*7:0*/ coreid, QData/*63:0*/ crmd, QData/*63:0*/ prmd, QData/*63:0*/ euen, QData/*63:0*/ ecfg, QData/*63:0*/ estat, QData/*63:0*/ era, QData/*63:0*/ badv, QData/*63:0*/ eentry, QData/*63:0*/ tlbidx, QData/*63:0*/ tlbehi, QData/*63:0*/ tlbelo0, QData/*63:0*/ tlbelo1, QData/*63:0*/ asid, QData/*63:0*/ pgdl, QData/*63:0*/ pgdh, QData/*63:0*/ save0, QData/*63:0*/ save1, QData/*63:0*/ save2, QData/*63:0*/ save3, QData/*63:0*/ tid, QData/*63:0*/ tcfg, QData/*63:0*/ tval, QData/*63:0*/ ticlr, QData/*63:0*/ llbctl, QData/*63:0*/ tlbrentry, QData/*63:0*/ dmw0, QData/*63:0*/ dmw1) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_CSRRegState_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
@@ -203,7 +179,7 @@ VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_CSRRegState_TOP_
     v_difftest_CSRRegState(coreid__Vcvt, crmd__Vcvt, prmd__Vcvt, euen__Vcvt, ecfg__Vcvt, estat__Vcvt, era__Vcvt, badv__Vcvt, eentry__Vcvt, tlbidx__Vcvt, tlbehi__Vcvt, tlbelo0__Vcvt, tlbelo1__Vcvt, asid__Vcvt, pgdl__Vcvt, pgdh__Vcvt, save0__Vcvt, save1__Vcvt, save2__Vcvt, save3__Vcvt, tid__Vcvt, tcfg__Vcvt, tval__Vcvt, ticlr__Vcvt, llbctl__Vcvt, tlbrentry__Vcvt, dmw0__Vcvt, dmw1__Vcvt);
 }
 
-VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_GRegState_TOP____024unit(const CData/*7:0*/ coreid, const QData/*63:0*/ gpr_0, const QData/*63:0*/ gpr_1, const QData/*63:0*/ gpr_2, const QData/*63:0*/ gpr_3, const QData/*63:0*/ gpr_4, const QData/*63:0*/ gpr_5, const QData/*63:0*/ gpr_6, const QData/*63:0*/ gpr_7, const QData/*63:0*/ gpr_8, const QData/*63:0*/ gpr_9, const QData/*63:0*/ gpr_10, const QData/*63:0*/ gpr_11, const QData/*63:0*/ gpr_12, const QData/*63:0*/ gpr_13, const QData/*63:0*/ gpr_14, const QData/*63:0*/ gpr_15, const QData/*63:0*/ gpr_16, const QData/*63:0*/ gpr_17, const QData/*63:0*/ gpr_18, const QData/*63:0*/ gpr_19, const QData/*63:0*/ gpr_20, const QData/*63:0*/ gpr_21, const QData/*63:0*/ gpr_22, const QData/*63:0*/ gpr_23, const QData/*63:0*/ gpr_24, const QData/*63:0*/ gpr_25, const QData/*63:0*/ gpr_26, const QData/*63:0*/ gpr_27, const QData/*63:0*/ gpr_28, const QData/*63:0*/ gpr_29, const QData/*63:0*/ gpr_30, const QData/*63:0*/ gpr_31) {
+VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_GRegState_TOP____024unit(CData/*7:0*/ coreid, QData/*63:0*/ gpr_0, QData/*63:0*/ gpr_1, QData/*63:0*/ gpr_2, QData/*63:0*/ gpr_3, QData/*63:0*/ gpr_4, QData/*63:0*/ gpr_5, QData/*63:0*/ gpr_6, QData/*63:0*/ gpr_7, QData/*63:0*/ gpr_8, QData/*63:0*/ gpr_9, QData/*63:0*/ gpr_10, QData/*63:0*/ gpr_11, QData/*63:0*/ gpr_12, QData/*63:0*/ gpr_13, QData/*63:0*/ gpr_14, QData/*63:0*/ gpr_15, QData/*63:0*/ gpr_16, QData/*63:0*/ gpr_17, QData/*63:0*/ gpr_18, QData/*63:0*/ gpr_19, QData/*63:0*/ gpr_20, QData/*63:0*/ gpr_21, QData/*63:0*/ gpr_22, QData/*63:0*/ gpr_23, QData/*63:0*/ gpr_24, QData/*63:0*/ gpr_25, QData/*63:0*/ gpr_26, QData/*63:0*/ gpr_27, QData/*63:0*/ gpr_28, QData/*63:0*/ gpr_29, QData/*63:0*/ gpr_30, QData/*63:0*/ gpr_31) {
     VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::__Vdpiimwrap_v_difftest_GRegState_TOP____024unit\n"); );
     // Body
     char coreid__Vcvt;
@@ -273,8 +249,4 @@ VL_INLINE_OPT void Vsimu_top___024unit::__Vdpiimwrap_v_difftest_GRegState_TOP___
     long long gpr_31__Vcvt;
     gpr_31__Vcvt = gpr_31;
     v_difftest_GRegState(coreid__Vcvt, gpr_0__Vcvt, gpr_1__Vcvt, gpr_2__Vcvt, gpr_3__Vcvt, gpr_4__Vcvt, gpr_5__Vcvt, gpr_6__Vcvt, gpr_7__Vcvt, gpr_8__Vcvt, gpr_9__Vcvt, gpr_10__Vcvt, gpr_11__Vcvt, gpr_12__Vcvt, gpr_13__Vcvt, gpr_14__Vcvt, gpr_15__Vcvt, gpr_16__Vcvt, gpr_17__Vcvt, gpr_18__Vcvt, gpr_19__Vcvt, gpr_20__Vcvt, gpr_21__Vcvt, gpr_22__Vcvt, gpr_23__Vcvt, gpr_24__Vcvt, gpr_25__Vcvt, gpr_26__Vcvt, gpr_27__Vcvt, gpr_28__Vcvt, gpr_29__Vcvt, gpr_30__Vcvt, gpr_31__Vcvt);
-}
-
-void Vsimu_top___024unit::_ctor_var_reset() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+        Vsimu_top___024unit::_ctor_var_reset\n"); );
 }

@@ -1,941 +1,223 @@
 // Verilated -*- C++ -*-
-// DESCRIPTION: Verilator output: Primary design header
+// DESCRIPTION: Verilator output: Primary model header
 //
 // This header should be included by all source files instantiating the design.
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef _VSIMU_TOP_H_
-#define _VSIMU_TOP_H_  // guard
+#ifndef VERILATED_VSIMU_TOP_H_
+#define VERILATED_VSIMU_TOP_H_  // guard
 
 #include "verilated.h"
 #include "verilated_save.h"
-#include "Vsimu_top__Dpi.h"
-
-//==========
+#include "svdpi.h"
 
 class Vsimu_top__Syms;
-class Vsimu_top_VerilatedFst;
+class Vsimu_top___024root;
+class VerilatedFstC;
 class Vsimu_top___024unit;
 
 
-//----------
+// This class is the main interface to the Verilated model
+class Vsimu_top VL_NOT_FINAL : public VerilatedModel {
+  private:
+    // Symbol table holding complete model state (owned by this class)
+    Vsimu_top__Syms* const vlSymsp;
 
-VL_MODULE(Vsimu_top) {
   public:
-    // CELLS
-    // Public to allow access to /*verilator_public*/ items;
-    // otherwise the application code can consider these internals.
-    Vsimu_top___024unit* __PVT____024unit;
-    
+
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    // Begin mtask footprint all: 
-    VL_IN8(DifftestInstrCommit__02Eclock,0,0);
-    VL_IN8(DifftestExcpEvent__02Eclock,0,0);
-    VL_IN8(DifftestTrapEvent__02Eclock,0,0);
-    VL_IN8(DifftestStoreEvent__02Eclock,0,0);
-    VL_IN8(DifftestLoadEvent__02Eclock,0,0);
-    VL_IN8(DifftestCSRRegState__02Eclock,0,0);
-    VL_IN8(DifftestGRegState__02Eclock,0,0);
-    VL_IN8(aclk,0,0);
-    VL_IN8(DifftestInstrCommit__02Ecoreid,7,0);
-    VL_IN8(DifftestInstrCommit__02Eindex,7,0);
-    VL_IN8(DifftestInstrCommit__02Evalid,0,0);
-    VL_IN8(skip,0,0);
-    VL_IN8(is_TLBFILL,0,0);
-    VL_IN8(TLBFILL_index,4,0);
-    VL_IN8(is_CNTinst,0,0);
-    VL_IN8(wen,0,0);
-    VL_IN8(wdest,7,0);
-    VL_IN8(csr_rstat,0,0);
-    VL_IN8(DifftestExcpEvent__02Ecoreid,7,0);
-    VL_IN8(excp_valid,0,0);
-    VL_IN8(eret,0,0);
-    VL_IN8(DifftestTrapEvent__02Ecoreid,7,0);
-    VL_IN8(DifftestTrapEvent__02Evalid,0,0);
-    VL_IN8(code,2,0);
-    VL_IN8(DifftestStoreEvent__02Ecoreid,7,0);
-    VL_IN8(DifftestStoreEvent__02Eindex,7,0);
-    VL_IN8(DifftestStoreEvent__02Evalid,7,0);
-    VL_IN8(DifftestLoadEvent__02Ecoreid,7,0);
-    VL_IN8(DifftestLoadEvent__02Eindex,7,0);
-    VL_IN8(DifftestLoadEvent__02Evalid,7,0);
-    VL_IN8(DifftestCSRRegState__02Ecoreid,7,0);
-    VL_IN8(DifftestGRegState__02Ecoreid,7,0);
-    VL_IN8(aresetn,0,0);
-    VL_IN8(enable_delay,0,0);
-    VL_OUT8(ram_ren,0,0);
-    VL_OUT8(ram_wen,3,0);
-    VL_OUT8(debug0_wb_rf_wen,0,0);
-    VL_OUT8(debug0_wb_rf_wnum,4,0);
-    VL_OUT8(open_trace,0,0);
-    VL_OUT8(num_monitor,0,0);
-    VL_OUT8(confreg_uart_data,7,0);
-    VL_OUT8(write_uart_valid,0,0);
-    VL_INOUT8(uart_rx,0,0);
-    VL_INOUT8(uart_tx,0,0);
-    VL_OUT8(led_rg0,1,0);
-    VL_OUT8(led_rg1,1,0);
-    VL_OUT8(num_csn,7,0);
-    VL_OUT8(num_a_g,6,0);
-    VL_IN8(__SYM__switch,7,0);
-    VL_OUT8(btn_key_col,3,0);
-    VL_IN8(btn_key_row,3,0);
-    VL_IN8(btn_step,1,0);
-    VL_OUT16(led,15,0);
-    VL_IN(instr,31,0);
-    VL_IN(csr_data,31,0);
-    VL_IN(intrNo,31,0);
-    VL_IN(cause,31,0);
-    VL_IN(exceptionInst,31,0);
-    VL_IN(random_seed,22,0);
-    VL_OUT(ram_raddr,31,0);
-    VL_IN(ram_rdata,31,0);
-    VL_OUT(ram_waddr,31,0);
-    VL_OUT(ram_wdata,31,0);
-    VL_OUT(debug0_wb_pc,31,0);
-    VL_OUT(debug0_wb_rf_wdata,31,0);
-    VL_OUT(num_data,31,0);
-    VL_OUTW(uart_ctr_bus,127,0,4);
-    VL_IN64(DifftestInstrCommit__02Epc,63,0);
-    VL_IN64(timer_64_value,63,0);
-    VL_IN64(wdata,63,0);
-    VL_IN64(exceptionPC,63,0);
-    VL_IN64(DifftestTrapEvent__02Epc,63,0);
-    VL_IN64(cycleCnt,63,0);
-    VL_IN64(instrCnt,63,0);
-    VL_IN64(storePAddr,63,0);
-    VL_IN64(storeVAddr,63,0);
-    VL_IN64(storeData,63,0);
-    VL_IN64(paddr,63,0);
-    VL_IN64(vaddr,63,0);
-    VL_IN64(crmd,63,0);
-    VL_IN64(prmd,63,0);
-    VL_IN64(euen,63,0);
-    VL_IN64(ecfg,63,0);
-    VL_IN64(estat,63,0);
-    VL_IN64(era,63,0);
-    VL_IN64(badv,63,0);
-    VL_IN64(eentry,63,0);
-    VL_IN64(tlbidx,63,0);
-    VL_IN64(tlbehi,63,0);
-    VL_IN64(tlbelo0,63,0);
-    VL_IN64(tlbelo1,63,0);
-    VL_IN64(asid,63,0);
-    VL_IN64(pgdl,63,0);
-    VL_IN64(pgdh,63,0);
-    VL_IN64(save0,63,0);
-    VL_IN64(save1,63,0);
-    VL_IN64(save2,63,0);
-    VL_IN64(save3,63,0);
-    VL_IN64(tid,63,0);
-    VL_IN64(tcfg,63,0);
-    VL_IN64(tval,63,0);
-    VL_IN64(ticlr,63,0);
-    VL_IN64(llbctl,63,0);
-    VL_IN64(tlbrentry,63,0);
-    VL_IN64(dmw0,63,0);
-    VL_IN64(dmw1,63,0);
-    VL_IN64(gpr_0,63,0);
-    VL_IN64(gpr_1,63,0);
-    VL_IN64(gpr_2,63,0);
-    VL_IN64(gpr_3,63,0);
-    VL_IN64(gpr_4,63,0);
-    VL_IN64(gpr_5,63,0);
-    VL_IN64(gpr_6,63,0);
-    VL_IN64(gpr_7,63,0);
-    VL_IN64(gpr_8,63,0);
-    VL_IN64(gpr_9,63,0);
-    VL_IN64(gpr_10,63,0);
-    VL_IN64(gpr_11,63,0);
-    VL_IN64(gpr_12,63,0);
-    VL_IN64(gpr_13,63,0);
-    VL_IN64(gpr_14,63,0);
-    VL_IN64(gpr_15,63,0);
-    VL_IN64(gpr_16,63,0);
-    VL_IN64(gpr_17,63,0);
-    VL_IN64(gpr_18,63,0);
-    VL_IN64(gpr_19,63,0);
-    VL_IN64(gpr_20,63,0);
-    VL_IN64(gpr_21,63,0);
-    VL_IN64(gpr_22,63,0);
-    VL_IN64(gpr_23,63,0);
-    VL_IN64(gpr_24,63,0);
-    VL_IN64(gpr_25,63,0);
-    VL_IN64(gpr_26,63,0);
-    VL_IN64(gpr_27,63,0);
-    VL_IN64(gpr_28,63,0);
-    VL_IN64(gpr_29,63,0);
-    VL_IN64(gpr_30,63,0);
-    VL_IN64(gpr_31,63,0);
-    
-    // LOCAL SIGNALS
-    // Internals; generally not touched by application code
-    // Anonymous structures to workaround compiler member-count bugs
-    struct {
-        // Begin mtask footprint all: 
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu_awvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu_wvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu_arvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_awvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_awready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_wvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_wready;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__m0_bid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__m0_bresp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_bvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_bready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_arvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_arready;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__m0_rid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__m0_rresp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_rlast;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_rvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__m0_rready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__s0_wready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_s_wready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_awready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_wready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_bvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_arready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_rlast;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_rvalid;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_s_ram_wen;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__UART_RI;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__uart0_int;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__uart0_txd_oe;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wen;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wnum;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__req_inst;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__cpu__DOT__wstrb_inst;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__addr_ok_inst;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__req_mem;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__cpu__DOT__wstrb_mem;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_allow_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_ready_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_flush;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_allow_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_ready_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_valid_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_allow_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_valid_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_allow_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_flush;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_valid_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_ready_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_allow_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_flush;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_valid_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_ready_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_flush;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_out;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__overflow;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__itype;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluctrl_id;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_id;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__divNeed;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
-    };
-    struct {
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__allow_out;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_PC_BRANCH;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_LOAD_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_ANDI_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_ORI_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_XORI_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_LD_BU_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_LD_HU_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_JIRL_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BL_TYPE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__MEM_forward_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__WB_forward_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__stall;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divSigned;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divEn;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_cin;
-        CData/*5:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__count;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_req;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_req_or;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wr_r;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_size_r;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wstrb_r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__data_back;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__addr_rcv;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__wdata_rcv;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_ar;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_ar_disable;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_aw;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_aw_disable;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_no_delay;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_short_delay;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_w;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_w_disable;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_awready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_wready;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_bid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_bresp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_bvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_arready;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rresp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rlast;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_awready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_wready;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_bid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_bresp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_bvalid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_arready;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rresp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rlast;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rvalid;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_data_s_hit;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_hit;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_addr_hit;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_resp_s_hit;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_awready;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_wready;
-    };
-    struct {
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bvalid;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_arready;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_rlast;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_rvalid;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_awvalid;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_wvalid;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bready;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_arvalid;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_rready;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_sel_group_0;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_sel_group_1;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_sel_group_0;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_sel_group_1;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo_empty;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo_full;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_fifo_empty;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_fifo_full;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_dir_ins;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_data_dir;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_addr_dir;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_resp_pre_sel;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_resp_prog;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_resp_sel_reg;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_resp_sel;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_dir_ins;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_dir;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_pre_sel;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__wr_ptr;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__rd_ptr;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_fifo__DOT__wr_ptr;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_fifo__DOT__rd_ptr;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_rw_dma;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_psel_dma;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_enab_dma;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_valid_dma;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__dma_grant;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__dma_ack_i;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_ce;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_psel_cpu;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_enab_cpu;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_datai_cpu;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_datao_cpu;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_word_trans_cpu;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_valid_cpu;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_clk_dma;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_reset_n_dma;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_uart0_enab;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_uart0_psel;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_nand_enab;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_nand_psel;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__reg_ready;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_sel_rd;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_sel_wr;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__csr_rw_sm;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__csr_rw_sm_nxt;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_w_id;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_r_id;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_rstrb;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__apb_s_wstrb;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__rd_count;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__apb_rd_size;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__apb_wr_size;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_apb_mux16__DOT__apb_rw;
-    };
-    struct {
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_apb_mux16__DOT__apb_psel;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_apb_mux16__DOT__apb_enab;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_apb_mux16__DOT__apb_datai;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_apb_mux16__DOT__apb_datao;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__we;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__re;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__rx_en;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__tx2rx_en;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__isomode;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__enable;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__srx_pad;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ier;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__iir;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__fcr;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__mcr;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__infrared;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rx_pol;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lcr;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__msr;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__start_dlc;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr_mask_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__msi_reset;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__trigger_level;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rx_reset;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tx_reset;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__sclk_reg;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__sclk_en_reg;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__mode_reg;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__fi_di_reg;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__sclk_count;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__repeat_reg;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr0;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr5;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr6;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr7;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr0r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr1r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr2r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr3r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr4r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr5r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr6r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr7r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr_mask;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rls_int;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rda_int;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__thre_int;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ms_int;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tf_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_pop;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_count;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tf_count;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tstate;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rstate;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__block_cnt;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__block_value;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__serial_out;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__serial_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_overrun;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_push_pulse;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr_mask_condition;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__iir_read;
-    };
-    struct {
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__msr_read;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__fifo_read;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__fifo_write;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__delayed_modem_signals;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr0_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr1_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr2_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr3_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr4_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr5_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr6_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr7_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__M_toggle;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rls_int_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__thre_int_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ms_int_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rda_int_d;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rls_int_pnd;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rda_int_pnd;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__thre_int_pnd;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ms_int_pnd;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__d1_fifo_read;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
-        CData/*6:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__stx_o_tmp;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__parity_xor;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tf_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_out;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tx_error;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__error_time;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tf_data_out;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tf_overrun;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tf_data_bak;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__top;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__bottom;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__top_plus_1;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__i_uart_sync_flops__DOT__flop_0;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rcounter16;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rbit_counter;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rshift;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rparity;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rparity_error;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rframing_error;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rbit_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rparity_xor;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__counter_b;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rf_push_q;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rf_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rcounter16_eq_7;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rcounter16_eq_0;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rcounter16_minus_1;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__data8_out;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__top;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__bottom;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__top_plus_1;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_int;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_iordy_r0;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_iordy_r1;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_type_r1;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_type_r2;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_STATE;
-    };
-    struct {
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_clr_ack;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DONE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_CE_;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NANDtag;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_IORDY;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT0;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT1;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT2;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT3;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT6;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT7;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT8;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT9;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT10;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT11;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_HIT;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DMA_REQ;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_cmd_valid;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__status;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_number;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_CE_pre_o;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_IORDY_post_i;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__ADDR_pointer;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_ADDR_COUNT;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__WAIT_NUM;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HOLD_NUM;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__COMMAND;
-        CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__PRE_STATE;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__READ_ID_NUM;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_GO;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_ACK;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__DMA_OP_DONE;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__ERASE_SERIAL;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__now_up_half;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__now_oob;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_arburst;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_arid;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_arlen;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_arlen_last;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_arsize;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_queue_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_queue_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_queue_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_en;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_rcur;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_rid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_rlast;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_rvalid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awburst;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awid;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awlen;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awsize;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_allow_out;
-    };
-    struct {
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_data;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_pop;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_queue_datas;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_queue_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_queue_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_queue_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_en;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_wlast;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_wstrb;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_wvalid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_arburst;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_arid;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_arlen;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_arlen_last;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_arsize;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_en;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_rcur;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_rid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_rlast;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_rvalid;
-        CData/*1:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awburst;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awid;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awlen;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awsize;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_allow_out;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_data;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_pop;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_queue_datas;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_queue_pop;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_queue_push;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_queue_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_b_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_en;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_go;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_wlast;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_wstrb;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_wvalid;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__confreg__DOT__confreg_uart_data;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__confreg_uart_valid;
-        CData/*7:0*/ simu_top__DOT__soc__DOT__confreg__DOT__virtual_uart_data;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__open_trace;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__num_monitor;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin_r1;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin_r2;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin_r3;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_end_r1;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_end_r2;
-    };
-    struct {
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_uart_valid;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__confreg__DOT__state;
-        CData/*2:0*/ simu_top__DOT__soc__DOT__confreg__DOT__next_state;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__key_flag;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__confreg__DOT__state_count;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__btn_step0_r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__btn_step1_r;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__step0_flag;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__step1_flag;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__confreg__DOT__scan_data;
-        SData/*15:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__dlc;
-        SData/*10:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_data_out;
-        SData/*9:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__counter_t;
-        SData/*8:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__M_cnt;
-        SData/*8:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__M_next;
-        SData/*10:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rf_data_in;
-        SData/*9:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__toc_value;
-        SData/*13:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_addr_c;
-        SData/*15:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_timing;
-        SData/*13:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__WRITE_MAX_COUNT;
-        SData/*13:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__READ_MAX_COUNT;
-        SData/*13:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__data_count;
-        SData/*15:0*/ simu_top__DOT__soc__DOT__confreg__DOT__btn_key_r;
-        SData/*15:0*/ simu_top__DOT__soc__DOT__confreg__DOT__btn_key_tmp;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__m0_rdata;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_pc;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wdata;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__wdata_inst;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_in;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_out;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_nop;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteData_wb;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__immout_id;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id_true;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc1_ex;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc2_ex;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_ex;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_ex;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_data;
-        WData/*188:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data[6];
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_result;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__slt_result;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_b;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_u;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__remainder_u;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__dividend_reg;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__dividend_next;
-        WData/*79:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data[3];
-        WData/*106:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data[4];
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_addr_r;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wdata_r;
-        IData/*22:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_random;
-        IData/*22:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_random_next;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rdata;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rdata;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__w_addr_dir_int;
-    };
-    struct {
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_hit_int;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir_int;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__i;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_fifo__DOT__i;
-        IData/*19:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_addr_dma;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_wdata_dma;
-        IData/*23:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_high_24b_wr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__apb_nand_datai;
-        IData/*19:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_req_addr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__reg_datai_32;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__reg_datao_32;
-        IData/*19:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_apb_mux16__DOT__apb_addr;
-        IData/*23:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__dl;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__REG_DAT_T;
-        IData/*24:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_addr_r;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_op_num;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_parameter;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_ce_map0;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_ce_map1;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_rdy_map0;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_rdy_map1;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_command;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_OP_NUM;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DAT_O_RD;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DAT_I_WR;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_araddr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_araddr_incr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_araddr_next;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_data_araddr_wrap;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awaddr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awaddr_incr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awaddr_next;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_data_awaddr_wrap;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_wdata;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_araddr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_araddr_incr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_araddr_next;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_data_araddr_wrap;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awaddr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awaddr_incr;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awaddr_next;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_data_awaddr_wrap;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_wdata;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr0;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr1;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr2;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr3;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr4;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr5;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr6;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr7;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__led_data;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__led_rg0_data;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__led_rg1_data;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__num_data;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__timer_r2;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__simu_flag;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__io_simu;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__conf_rdata_reg;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__conf_wdata_r;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__conf_wdata_r1;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__conf_wdata_r2;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__timer_r1;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__timer;
-    };
-    struct {
-        IData/*19:0*/ simu_top__DOT__soc__DOT__confreg__DOT__key_count;
-        IData/*19:0*/ simu_top__DOT__soc__DOT__confreg__DOT__step0_count;
-        IData/*19:0*/ simu_top__DOT__soc__DOT__confreg__DOT__step1_count;
-        IData/*19:0*/ simu_top__DOT__soc__DOT__confreg__DOT__count;
-        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_data;
-        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__unnamedblk1__DOT__mul_result;
-        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__unnamedblk2__DOT__mul_result;
-        QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend;
-        QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_shifted;
-        QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_next;
-        QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__difference;
-        QData/*37:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__addr_in_die;
-        QData/*47:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__ID_INFORM;
-        QData/*37:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_ADDR;
-        QData/*44:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_queue_datas;
-        QData/*44:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_datas;
-        QData/*44:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_datas;
-        QData/*44:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_datas;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rf__DOT__rf[32];
-        CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bid[5];
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bresp[5];
-        CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_rid[5];
-        IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_rdata[5];
-        CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_rresp[5];
-        CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__BASE_ADDR[5];
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__fifo_ram[2];
-        CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_fifo__DOT__fifo_ram[2];
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram[16];
-        CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__fifo[16];
-        CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__rfifo__DOT__ram[16];
-    };
-    
-    // LOCAL VARIABLES
-    // Internals; generally not touched by application code
-    // Begin mtask footprint all: 
-    CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT____Vcellinp__myDiv__clk;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound1;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound2;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound4;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound5;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound6;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound7;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound9;
-    CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____Vcellinp__receiver__enable;
-    CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__Vfuncout;
-    CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__valid;
-    CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__pre_num;
-    CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__Vfuncout;
-    CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__valid;
-    CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__pre_num;
-    CData/*4:0*/ __Vtableidx1;
-    CData/*4:0*/ __Vtableidx2;
-    CData/*7:0*/ __Vtableidx3;
-    CData/*7:0*/ __Vtableidx4;
-    CData/*0:0*/ __VinpClk__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT____Vcellinp__myDiv__clk;
-    CData/*0:0*/ __Vclklast__TOP____VinpClk__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT____Vcellinp__myDiv__clk;
-    CData/*0:0*/ __Vclklast__TOP__DifftestLoadEvent__02Eclock;
-    CData/*0:0*/ __Vclklast__TOP__DifftestTrapEvent__02Eclock;
-    CData/*0:0*/ __Vclklast__TOP__DifftestStoreEvent__02Eclock;
-    CData/*0:0*/ __Vclklast__TOP__DifftestExcpEvent__02Eclock;
-    CData/*0:0*/ __Vclklast__TOP__aclk;
-    CData/*0:0*/ __Vclklast__TOP__DifftestInstrCommit__02Eclock;
-    CData/*0:0*/ __Vclklast__TOP__DifftestCSRRegState__02Eclock;
-    CData/*0:0*/ __Vclklast__TOP__DifftestGRegState__02Eclock;
-    CData/*0:0*/ __Vchglast__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT____Vcellinp__myDiv__clk;
-    WData/*188:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__ex__data_out[6];
-    WData/*79:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__mem__data_out[3];
-    WData/*106:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out[4];
-    IData/*31:0*/ __Vm_traceActivity;
-    QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__id__data_out;
-    static CData/*2:0*/ __Vtable1_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_addr_dir[32];
-    static IData/*31:0*/ __Vtable1_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__w_addr_dir_int[32];
-    static CData/*2:0*/ __Vtable2_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir[32];
-    static IData/*31:0*/ __Vtable2_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir_int[32];
-    static CData/*7:0*/ __Vtable3_simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__block_value[256];
-    static SData/*9:0*/ __Vtable4_simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__toc_value[256];
-    static CData/*6:0*/ __Vtable5_num_a_g[32];
-    
-    // INTERNAL VARIABLES
-    // Internals; generally not touched by application code
-    Vsimu_top__Syms* __VlSymsp;  // Symbol table
-    
+    VL_IN8(&DifftestInstrCommit__02Eclock,0,0);
+    VL_IN8(&DifftestExcpEvent__02Eclock,0,0);
+    VL_IN8(&DifftestTrapEvent__02Eclock,0,0);
+    VL_IN8(&DifftestStoreEvent__02Eclock,0,0);
+    VL_IN8(&DifftestLoadEvent__02Eclock,0,0);
+    VL_IN8(&DifftestCSRRegState__02Eclock,0,0);
+    VL_IN8(&DifftestGRegState__02Eclock,0,0);
+    VL_IN8(&aclk,0,0);
+    VL_IN8(&DifftestInstrCommit__02Ecoreid,7,0);
+    VL_IN8(&DifftestInstrCommit__02Eindex,7,0);
+    VL_IN8(&DifftestInstrCommit__02Evalid,0,0);
+    VL_IN8(&skip,0,0);
+    VL_IN8(&is_TLBFILL,0,0);
+    VL_IN8(&TLBFILL_index,4,0);
+    VL_IN8(&is_CNTinst,0,0);
+    VL_IN8(&wen,0,0);
+    VL_IN8(&wdest,7,0);
+    VL_IN8(&csr_rstat,0,0);
+    VL_IN8(&DifftestExcpEvent__02Ecoreid,7,0);
+    VL_IN8(&excp_valid,0,0);
+    VL_IN8(&eret,0,0);
+    VL_IN8(&DifftestTrapEvent__02Ecoreid,7,0);
+    VL_IN8(&DifftestTrapEvent__02Evalid,0,0);
+    VL_IN8(&code,2,0);
+    VL_IN8(&DifftestStoreEvent__02Ecoreid,7,0);
+    VL_IN8(&DifftestStoreEvent__02Eindex,7,0);
+    VL_IN8(&DifftestStoreEvent__02Evalid,7,0);
+    VL_IN8(&DifftestLoadEvent__02Ecoreid,7,0);
+    VL_IN8(&DifftestLoadEvent__02Eindex,7,0);
+    VL_IN8(&DifftestLoadEvent__02Evalid,7,0);
+    VL_IN8(&DifftestCSRRegState__02Ecoreid,7,0);
+    VL_IN8(&DifftestGRegState__02Ecoreid,7,0);
+    VL_IN8(&aresetn,0,0);
+    VL_IN8(&enable_delay,0,0);
+    VL_OUT8(&ram_ren,0,0);
+    VL_OUT8(&ram_wen,3,0);
+    VL_OUT8(&debug0_wb_rf_wen,0,0);
+    VL_OUT8(&debug0_wb_rf_wnum,4,0);
+    VL_OUT8(&open_trace,0,0);
+    VL_OUT8(&num_monitor,0,0);
+    VL_OUT8(&confreg_uart_data,7,0);
+    VL_OUT8(&write_uart_valid,0,0);
+    VL_INOUT8(&uart_rx,0,0);
+    VL_INOUT8(&uart_tx,0,0);
+    VL_OUT8(&led_rg0,1,0);
+    VL_OUT8(&led_rg1,1,0);
+    VL_OUT8(&num_csn,7,0);
+    VL_OUT8(&num_a_g,6,0);
+    VL_IN8(&__SYM__switch,7,0);
+    VL_OUT8(&btn_key_col,3,0);
+    VL_IN8(&btn_key_row,3,0);
+    VL_IN8(&btn_step,1,0);
+    VL_OUT16(&led,15,0);
+    VL_IN(&instr,31,0);
+    VL_IN(&csr_data,31,0);
+    VL_IN(&intrNo,31,0);
+    VL_IN(&cause,31,0);
+    VL_IN(&exceptionInst,31,0);
+    VL_IN(&random_seed,22,0);
+    VL_OUT(&ram_raddr,31,0);
+    VL_IN(&ram_rdata,31,0);
+    VL_OUT(&ram_waddr,31,0);
+    VL_OUT(&ram_wdata,31,0);
+    VL_OUT(&debug0_wb_pc,31,0);
+    VL_OUT(&debug0_wb_rf_wdata,31,0);
+    VL_OUT(&num_data,31,0);
+    VL_OUTW(&uart_ctr_bus,127,0,4);
+    VL_IN64(&DifftestInstrCommit__02Epc,63,0);
+    VL_IN64(&timer_64_value,63,0);
+    VL_IN64(&wdata,63,0);
+    VL_IN64(&exceptionPC,63,0);
+    VL_IN64(&DifftestTrapEvent__02Epc,63,0);
+    VL_IN64(&cycleCnt,63,0);
+    VL_IN64(&instrCnt,63,0);
+    VL_IN64(&storePAddr,63,0);
+    VL_IN64(&storeVAddr,63,0);
+    VL_IN64(&storeData,63,0);
+    VL_IN64(&paddr,63,0);
+    VL_IN64(&vaddr,63,0);
+    VL_IN64(&crmd,63,0);
+    VL_IN64(&prmd,63,0);
+    VL_IN64(&euen,63,0);
+    VL_IN64(&ecfg,63,0);
+    VL_IN64(&estat,63,0);
+    VL_IN64(&era,63,0);
+    VL_IN64(&badv,63,0);
+    VL_IN64(&eentry,63,0);
+    VL_IN64(&tlbidx,63,0);
+    VL_IN64(&tlbehi,63,0);
+    VL_IN64(&tlbelo0,63,0);
+    VL_IN64(&tlbelo1,63,0);
+    VL_IN64(&asid,63,0);
+    VL_IN64(&pgdl,63,0);
+    VL_IN64(&pgdh,63,0);
+    VL_IN64(&save0,63,0);
+    VL_IN64(&save1,63,0);
+    VL_IN64(&save2,63,0);
+    VL_IN64(&save3,63,0);
+    VL_IN64(&tid,63,0);
+    VL_IN64(&tcfg,63,0);
+    VL_IN64(&tval,63,0);
+    VL_IN64(&ticlr,63,0);
+    VL_IN64(&llbctl,63,0);
+    VL_IN64(&tlbrentry,63,0);
+    VL_IN64(&dmw0,63,0);
+    VL_IN64(&dmw1,63,0);
+    VL_IN64(&gpr_0,63,0);
+    VL_IN64(&gpr_1,63,0);
+    VL_IN64(&gpr_2,63,0);
+    VL_IN64(&gpr_3,63,0);
+    VL_IN64(&gpr_4,63,0);
+    VL_IN64(&gpr_5,63,0);
+    VL_IN64(&gpr_6,63,0);
+    VL_IN64(&gpr_7,63,0);
+    VL_IN64(&gpr_8,63,0);
+    VL_IN64(&gpr_9,63,0);
+    VL_IN64(&gpr_10,63,0);
+    VL_IN64(&gpr_11,63,0);
+    VL_IN64(&gpr_12,63,0);
+    VL_IN64(&gpr_13,63,0);
+    VL_IN64(&gpr_14,63,0);
+    VL_IN64(&gpr_15,63,0);
+    VL_IN64(&gpr_16,63,0);
+    VL_IN64(&gpr_17,63,0);
+    VL_IN64(&gpr_18,63,0);
+    VL_IN64(&gpr_19,63,0);
+    VL_IN64(&gpr_20,63,0);
+    VL_IN64(&gpr_21,63,0);
+    VL_IN64(&gpr_22,63,0);
+    VL_IN64(&gpr_23,63,0);
+    VL_IN64(&gpr_24,63,0);
+    VL_IN64(&gpr_25,63,0);
+    VL_IN64(&gpr_26,63,0);
+    VL_IN64(&gpr_27,63,0);
+    VL_IN64(&gpr_28,63,0);
+    VL_IN64(&gpr_29,63,0);
+    VL_IN64(&gpr_30,63,0);
+    VL_IN64(&gpr_31,63,0);
+
+    // CELLS
+    // Public to allow access to /* verilator public */ items.
+    // Otherwise the application code can consider these internals.
+    Vsimu_top___024unit* const __PVT____024unit;
+
+    // Root instance pointer to allow access to model internals,
+    // including inlined /* verilator public_flat_* */ items.
+    Vsimu_top___024root* const rootp;
+
     // CONSTRUCTORS
+    /// Construct the model; called by application code
+    /// If contextp is null, then the model will use the default global context
+    /// If name is "", then makes a wrapper with a
+    /// single model invisible with respect to DPI scope names.
+    explicit Vsimu_top(VerilatedContext* contextp, const char* name = "TOP");
+    explicit Vsimu_top(const char* name = "TOP");
+    /// Destroy the model; called (often implicitly) by application code
+    virtual ~Vsimu_top();
   private:
     VL_UNCOPYABLE(Vsimu_top);  ///< Copying not allowed
+
   public:
-    /// Construct the model; called by application code
-    /// The special name  may be used to make a wrapper with a
-    /// single model invisible with respect to DPI scope names.
-    Vsimu_top(const char* name = "TOP");
-    /// Destroy the model; called (often implicitly) by application code
-    ~Vsimu_top();
-    /// Trace signals in the model; called by application code
-    void trace(VerilatedFstC* tfp, int levels, int options = 0);
-    
     // API METHODS
     /// Evaluate the model.  Application must call when inputs change.
-    void eval();
+    void eval() { eval_step(); }
+    /// Evaluate when calling multiple units/models per time step.
+    void eval_step();
+    /// Evaluate at end of a timestep for tracing, when using eval_step().
+    /// Application must call after all eval() and before time changes.
+    void eval_end_step() {}
     /// Simulation complete, run final blocks.  Application must call on completion.
     void final();
-    
-    // INTERNAL METHODS
-  private:
-    static void _eval_initial_loop(Vsimu_top__Syms* __restrict vlSymsp);
-  public:
-    void __Vconfigure(Vsimu_top__Syms* symsp, bool first);
-  private:
-    static QData _change_request(Vsimu_top__Syms* __restrict vlSymsp);
-  public:
-    static void _combo__TOP__10(Vsimu_top__Syms* __restrict vlSymsp);
-  private:
-    void _ctor_var_reset() VL_ATTR_COLD;
-  public:
-    static void _eval(Vsimu_top__Syms* __restrict vlSymsp);
-  private:
-#ifdef VL_DEBUG
-    void _eval_debug_assertions();
-#endif  // VL_DEBUG
-  public:
-    static void _eval_initial(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _eval_settle(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _initial__TOP__1(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _initial__TOP__13(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _initial__TOP__16(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _multiclk__TOP__14(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__11(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__12(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__3(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__4(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__5(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__6(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__7(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__8(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__9(Vsimu_top__Syms* __restrict vlSymsp);
-    static void _settle__TOP__15(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _settle__TOP__17(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void _settle__TOP__2(Vsimu_top__Syms* __restrict vlSymsp) VL_ATTR_COLD;
-    static void traceChgThis(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__10(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__11(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__12(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__2(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__3(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__4(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__5(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__6(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__7(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__8(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceChgThis__9(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code);
-    static void traceFullThis(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code) VL_ATTR_COLD;
-    static void traceFullThis__1(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code) VL_ATTR_COLD;
-    static void traceInitThis(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code) VL_ATTR_COLD;
-    static void traceInitThis__1(Vsimu_top__Syms* __restrict vlSymsp, VerilatedFst* vcdp, uint32_t code) VL_ATTR_COLD;
-    static void traceInit(VerilatedFst* vcdp, void* userthis, uint32_t code);
-    static void traceFull(VerilatedFst* vcdp, void* userthis, uint32_t code);
-    static void traceChg(VerilatedFst* vcdp, void* userthis, uint32_t code);
-    void __Vserialize(VerilatedSerialize& os);
-    void __Vdeserialize(VerilatedDeserialize& os);
+    /// Are there scheduled events to handle?
+    bool eventsPending();
+    /// Returns time at next time slot. Aborts if !eventsPending()
+    uint64_t nextTimeSlot();
+    /// Trace signals in the model; called by application code
+    void trace(VerilatedFstC* tfp, int levels, int options = 0);
+    /// Retrieve name of this model instance (as passed to constructor).
+    const char* name() const;
+
+    // Serialization functions
+    friend VerilatedSerialize& operator<<(VerilatedSerialize& os, Vsimu_top& rhs);
+    friend VerilatedDeserialize& operator>>(VerilatedDeserialize& os, Vsimu_top& rhs);
+
+    // Abstract methods from VerilatedModel
+    const char* hierName() const override final;
+    const char* modelName() const override final;
+    unsigned threads() const override final;
+    std::unique_ptr<VerilatedTraceConfig> traceConfig() const override final;
 } VL_ATTR_ALIGNED(VL_CACHE_LINE_BYTES);
-
-//----------
-
-
-inline VerilatedSerialize& operator<<(VerilatedSerialize& os, Vsimu_top& rhs) {
-    Verilated::quiesce(); rhs.__Vserialize(os); return os; }
-inline VerilatedDeserialize& operator>>(VerilatedDeserialize& os, Vsimu_top& rhs) {
-    Verilated::quiesce(); rhs.__Vdeserialize(os); return os; }
 
 #endif  // guard

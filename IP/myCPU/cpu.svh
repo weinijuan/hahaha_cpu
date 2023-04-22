@@ -19,6 +19,10 @@ package cpuDefine;
         I21,
         I26
     } Itype;
+    typedef union packed {
+        logic[2:0] itype_bits;
+        Itype itype;
+    } ItypeBit;
     typedef enum logic [4:0] {
         ALU_ADD,
         ALU_SUB,
@@ -42,14 +46,30 @@ package cpuDefine;
         ALU_PCADD4
     } AluCtrl;
 
+    typedef union packed {
+        logic[4:0] aluctrl_bit;
+        AluCtrl aluctrl;
+    } AluCtrlBit;
+
     typedef enum logic {
         ALU_SEL_RJ,
         ALU_SEL_PC
     } AluSel1;
+
+    typedef union packed {
+        logic alusel1_bit;
+        AluSel1 alusel1;
+    } AluSel1Bit;
+
     typedef enum logic {
         ALU_SEL_RK,
         ALU_SEL_IMMOUT
     } AluSel2;
+
+    typedef union packed {
+        logic alusel2_bit;
+        AluSel2 alusel2;
+    } AluSel2Bit;
 
     // attention: enum + data type, the data type is modified for enum element not the number of element
     typedef enum logic {
@@ -57,6 +77,10 @@ package cpuDefine;
         PC_BRANCH
     } PcSel;
 
+    typedef union packed{
+        logic pcsel_bits;
+        PcSel pcsel;
+    } PcSelBit;
     // typedef enum logic[1:0] { REG_WRITE_IMM, REG_WRITE_ALU,REG_WRITE_MEM, REG_WRITE_PC } RegWriteDataSel;
     // lui: immout write into reg directly -> alu.add(immout,0) get aluout to reg so don't need REG_WRITE_IMM
     // jirl and bl : pc + 4 can be computed by alu so don't need REG_WRITE_PC
@@ -65,6 +89,10 @@ package cpuDefine;
         REG_WRITE_MEM
     } RegWriteDataSel;
 
+    typedef union packed{
+        logic regWriteDataSel_bit;
+        RegWriteDataSel regWriteDataSel;
+    } RegWriteDataSelBit;
 
 
     typedef struct packed {
