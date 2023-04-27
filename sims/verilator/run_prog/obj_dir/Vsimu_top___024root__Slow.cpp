@@ -27,16 +27,9 @@ Vsimu_top___024root::~Vsimu_top___024root() {
 
 // Savable
 void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
-    uint64_t __Vcheckval = 0xd6ae785b625d3456ULL;
+    uint64_t __Vcheckval = 0x996bf4e6b228972aULL;
     os << __Vcheckval;
     os << vlSymsp->_vm_contextp__;
-    os<<DifftestInstrCommit__02Eclock;
-    os<<DifftestExcpEvent__02Eclock;
-    os<<DifftestTrapEvent__02Eclock;
-    os<<DifftestStoreEvent__02Eclock;
-    os<<DifftestLoadEvent__02Eclock;
-    os<<DifftestCSRRegState__02Eclock;
-    os<<DifftestGRegState__02Eclock;
     os<<aclk;
     os<<simu_top__DOT__soc__DOT__m0_awvalid;
     os<<simu_top__DOT__soc__DOT__m0_wvalid;
@@ -61,30 +54,6 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT10;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT11;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_HIT;
-    os<<DifftestInstrCommit__02Ecoreid;
-    os<<DifftestInstrCommit__02Eindex;
-    os<<DifftestInstrCommit__02Evalid;
-    os<<skip;
-    os<<is_TLBFILL;
-    os<<TLBFILL_index;
-    os<<is_CNTinst;
-    os<<wen;
-    os<<wdest;
-    os<<csr_rstat;
-    os<<DifftestExcpEvent__02Ecoreid;
-    os<<excp_valid;
-    os<<eret;
-    os<<DifftestTrapEvent__02Ecoreid;
-    os<<DifftestTrapEvent__02Evalid;
-    os<<code;
-    os<<DifftestStoreEvent__02Ecoreid;
-    os<<DifftestStoreEvent__02Eindex;
-    os<<DifftestStoreEvent__02Evalid;
-    os<<DifftestLoadEvent__02Ecoreid;
-    os<<DifftestLoadEvent__02Eindex;
-    os<<DifftestLoadEvent__02Evalid;
-    os<<DifftestCSRRegState__02Ecoreid;
-    os<<DifftestGRegState__02Ecoreid;
     os<<aresetn;
     os<<enable_delay;
     os<<ram_ren;
@@ -106,6 +75,7 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<btn_key_row;
     os<<btn_step;
     os<<uart_rx__en0;
+    os<<simu_top__DOT__uart_rx__out__strong__out3;
     os<<simu_top__DOT__soc__DOT__cpu_awvalid;
     os<<simu_top__DOT__soc__DOT__cpu_wvalid;
     os<<simu_top__DOT__soc__DOT__cpu_arvalid;
@@ -145,6 +115,7 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_valid_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_allow_in;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_valid_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_allow_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_flush;
@@ -154,8 +125,9 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_valid_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_out;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__zero;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__eq;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lt;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__overflow;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__unsignBranchCmp;
@@ -165,9 +137,7 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel2;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel1;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__itype;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__pcsel;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_id;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteEn_wb;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel1_ex;
@@ -178,11 +148,33 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__size_mem_ex;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wstrb_mem_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_h78aa7f48__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__excp_flush;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ertn_flush;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ws_csr_ecode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlbfill_en;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rand_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cnt_inst_diff;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_rstat_en_diff;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_cnt_inst;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_ld_en;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_st_en;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_rstat_en;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wen;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdest;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_excp_flush;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ertn;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_ecode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_tlbfill_en;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_rand_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap_code;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_hb2577766__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SUB_TYPE;
@@ -235,14 +227,17 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_store_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_b_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_branch_inst;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_PC_BRANCH;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hffea2556__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hfa3cf28f__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_h9c888c86__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__MEM_forward_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__WB_forward_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__stall;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_hf7cffa19__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h2a69b9a6__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_valid;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divSigned;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divUnsigned;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divEn;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_cin;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_sign;
@@ -257,6 +252,7 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__data_back;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__addr_rcv;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__wdata_rcv;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT____VdfgTmp_hf519d2e1__0;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_ar_disable;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_aw_disable;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_no_delay;
@@ -319,7 +315,12 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_dir_ins;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_pre_sel;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h24eed626__0;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h78044575__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h6c6cb05b__1;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h4078c6a7__0;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h7d0af1f5__0;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h136afa62__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_hee60d8fe__1;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h58a8c0e9__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__wr_ptr;
@@ -442,6 +443,9 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__d1_fifo_read;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h84138141__0;
+    os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcfb8fec4__0;
+    os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h8af93b88__0;
+    os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcb11cbc5__0;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
@@ -616,13 +620,17 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__confreg__DOT__step1_flag;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__scan_data;
     os<<__VdfgTmp_hcd04e225__0;
-    os<<__Vtrigrprev__TOP__DifftestInstrCommit__02Eclock;
-    os<<__Vtrigrprev__TOP__DifftestExcpEvent__02Eclock;
-    os<<__Vtrigrprev__TOP__DifftestTrapEvent__02Eclock;
-    os<<__Vtrigrprev__TOP__DifftestStoreEvent__02Eclock;
-    os<<__Vtrigrprev__TOP__DifftestLoadEvent__02Eclock;
-    os<<__Vtrigrprev__TOP__DifftestCSRRegState__02Eclock;
-    os<<__Vtrigrprev__TOP__DifftestGRegState__02Eclock;
+    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__Vfuncout;
+    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__valid;
+    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__pre_num;
+    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__Vfuncout;
+    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__valid;
+    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__pre_num;
+    os<<__Vtableidx1;
+    os<<__Vtableidx2;
+    os<<__Vtableidx4;
+    os<<__Vtableidx5;
+    os<<__Vtableidx8;
     os<<__Vtrigrprev__TOP__aclk;
     os<<__VactContinue;
     os<<led;
@@ -639,11 +647,7 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__data_count;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__btn_key_r;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__btn_key_tmp;
-    os<<instr;
-    os<<csr_data;
-    os<<intrNo;
-    os<<cause;
-    os<<exceptionInst;
+    os<<__Vtableidx3;
     os<<random_seed;
     os<<ram_raddr;
     os<<ram_rdata;
@@ -663,13 +667,16 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_out;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_nop;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteData_wb;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__immout_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id_true;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id_true;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id_true;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_ex_true;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc1_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc2_ex;
@@ -678,8 +685,46 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_control_data_wb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_data_diff;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_paddr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_vaddr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_paddr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_vaddr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_data;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_data;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_pc;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_crmd_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_prmd_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ectl_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_estat_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_era_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_badv_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_eentry_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbidx_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbehi_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo0_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo1_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_asid_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save0_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save1_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save2_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save3_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tid_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tcfg_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tval_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ticlr_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_llbctl_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbrentry_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw0_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw1_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdl_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdh_diff_0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_data;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__quotient;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__remainder;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_result;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_b;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_u;
@@ -756,83 +801,19 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<__VstlIterCount;
     os<<__VicoIterCount;
     os<<__VactIterCount;
-    os<<DifftestInstrCommit__02Epc;
-    os<<timer_64_value;
-    os<<wdata;
-    os<<exceptionPC;
-    os<<DifftestTrapEvent__02Epc;
-    os<<cycleCnt;
-    os<<instrCnt;
-    os<<storePAddr;
-    os<<storeVAddr;
-    os<<storeData;
-    os<<paddr;
-    os<<vaddr;
-    os<<crmd;
-    os<<prmd;
-    os<<euen;
-    os<<ecfg;
-    os<<estat;
-    os<<era;
-    os<<badv;
-    os<<eentry;
-    os<<tlbidx;
-    os<<tlbehi;
-    os<<tlbelo0;
-    os<<tlbelo1;
-    os<<asid;
-    os<<pgdl;
-    os<<pgdh;
-    os<<save0;
-    os<<save1;
-    os<<save2;
-    os<<save3;
-    os<<tid;
-    os<<tcfg;
-    os<<tval;
-    os<<ticlr;
-    os<<llbctl;
-    os<<tlbrentry;
-    os<<dmw0;
-    os<<dmw1;
-    os<<gpr_0;
-    os<<gpr_1;
-    os<<gpr_2;
-    os<<gpr_3;
-    os<<gpr_4;
-    os<<gpr_5;
-    os<<gpr_6;
-    os<<gpr_7;
-    os<<gpr_8;
-    os<<gpr_9;
-    os<<gpr_10;
-    os<<gpr_11;
-    os<<gpr_12;
-    os<<gpr_13;
-    os<<gpr_14;
-    os<<gpr_15;
-    os<<gpr_16;
-    os<<gpr_17;
-    os<<gpr_18;
-    os<<gpr_19;
-    os<<gpr_20;
-    os<<gpr_21;
-    os<<gpr_22;
-    os<<gpr_23;
-    os<<gpr_24;
-    os<<gpr_25;
-    os<<gpr_26;
-    os<<gpr_27;
-    os<<gpr_28;
-    os<<gpr_29;
-    os<<gpr_30;
-    os<<gpr_31;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__id__data_out;
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__mem__data_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out[__Vi0];
     }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__timer_64_diff;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_timer_64;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cycleCnt;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instrCnt;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_data;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data[__Vi0];
     }
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__mul_result;
@@ -840,10 +821,10 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_shifted;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_next;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__difference;
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data[__Vi0];
     }
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__addr_in_die;
@@ -854,6 +835,9 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_datas;
     os<<simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_datas;
     os<<simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_datas;
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regs[__Vi0];
+    }
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rf__DOT__rf[__Vi0];
     }
@@ -895,16 +879,9 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     }
 }
 void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
-    uint64_t __Vcheckval = 0xd6ae785b625d3456ULL;
+    uint64_t __Vcheckval = 0x996bf4e6b228972aULL;
     os.readAssert(__Vcheckval);
     os >> vlSymsp->_vm_contextp__;
-    os>>DifftestInstrCommit__02Eclock;
-    os>>DifftestExcpEvent__02Eclock;
-    os>>DifftestTrapEvent__02Eclock;
-    os>>DifftestStoreEvent__02Eclock;
-    os>>DifftestLoadEvent__02Eclock;
-    os>>DifftestCSRRegState__02Eclock;
-    os>>DifftestGRegState__02Eclock;
     os>>aclk;
     os>>simu_top__DOT__soc__DOT__m0_awvalid;
     os>>simu_top__DOT__soc__DOT__m0_wvalid;
@@ -929,30 +906,6 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT10;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT11;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_HIT;
-    os>>DifftestInstrCommit__02Ecoreid;
-    os>>DifftestInstrCommit__02Eindex;
-    os>>DifftestInstrCommit__02Evalid;
-    os>>skip;
-    os>>is_TLBFILL;
-    os>>TLBFILL_index;
-    os>>is_CNTinst;
-    os>>wen;
-    os>>wdest;
-    os>>csr_rstat;
-    os>>DifftestExcpEvent__02Ecoreid;
-    os>>excp_valid;
-    os>>eret;
-    os>>DifftestTrapEvent__02Ecoreid;
-    os>>DifftestTrapEvent__02Evalid;
-    os>>code;
-    os>>DifftestStoreEvent__02Ecoreid;
-    os>>DifftestStoreEvent__02Eindex;
-    os>>DifftestStoreEvent__02Evalid;
-    os>>DifftestLoadEvent__02Ecoreid;
-    os>>DifftestLoadEvent__02Eindex;
-    os>>DifftestLoadEvent__02Evalid;
-    os>>DifftestCSRRegState__02Ecoreid;
-    os>>DifftestGRegState__02Ecoreid;
     os>>aresetn;
     os>>enable_delay;
     os>>ram_ren;
@@ -974,6 +927,7 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>btn_key_row;
     os>>btn_step;
     os>>uart_rx__en0;
+    os>>simu_top__DOT__uart_rx__out__strong__out3;
     os>>simu_top__DOT__soc__DOT__cpu_awvalid;
     os>>simu_top__DOT__soc__DOT__cpu_wvalid;
     os>>simu_top__DOT__soc__DOT__cpu_arvalid;
@@ -1013,6 +967,7 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_valid_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_allow_in;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_valid_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_allow_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_flush;
@@ -1022,8 +977,9 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_valid_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_out;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__zero;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__eq;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lt;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__overflow;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__unsignBranchCmp;
@@ -1033,9 +989,7 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel2;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel1;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__itype;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__pcsel;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_id;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteEn_wb;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel1_ex;
@@ -1046,11 +1000,33 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__size_mem_ex;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wstrb_mem_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_h78aa7f48__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__excp_flush;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ertn_flush;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ws_csr_ecode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlbfill_en;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rand_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cnt_inst_diff;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_rstat_en_diff;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_cnt_inst;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_ld_en;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_st_en;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_rstat_en;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wen;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdest;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_excp_flush;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ertn;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_ecode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_tlbfill_en;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_rand_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap_code;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_hb2577766__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SUB_TYPE;
@@ -1103,14 +1079,17 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_store_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_b_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_branch_inst;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_PC_BRANCH;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hffea2556__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hfa3cf28f__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_h9c888c86__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__MEM_forward_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__WB_forward_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__stall;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_hf7cffa19__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h2a69b9a6__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_valid;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divSigned;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divUnsigned;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divEn;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_cin;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_sign;
@@ -1125,6 +1104,7 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__data_back;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__addr_rcv;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__wdata_rcv;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT____VdfgTmp_hf519d2e1__0;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_ar_disable;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_aw_disable;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_no_delay;
@@ -1187,7 +1167,12 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_dir_ins;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_pre_sel;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h24eed626__0;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h78044575__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h6c6cb05b__1;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h4078c6a7__0;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h7d0af1f5__0;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h136afa62__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_hee60d8fe__1;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h58a8c0e9__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__wr_ptr;
@@ -1310,6 +1295,9 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__d1_fifo_read;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h84138141__0;
+    os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcfb8fec4__0;
+    os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h8af93b88__0;
+    os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcb11cbc5__0;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
@@ -1484,13 +1472,17 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__confreg__DOT__step1_flag;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__scan_data;
     os>>__VdfgTmp_hcd04e225__0;
-    os>>__Vtrigrprev__TOP__DifftestInstrCommit__02Eclock;
-    os>>__Vtrigrprev__TOP__DifftestExcpEvent__02Eclock;
-    os>>__Vtrigrprev__TOP__DifftestTrapEvent__02Eclock;
-    os>>__Vtrigrprev__TOP__DifftestStoreEvent__02Eclock;
-    os>>__Vtrigrprev__TOP__DifftestLoadEvent__02Eclock;
-    os>>__Vtrigrprev__TOP__DifftestCSRRegState__02Eclock;
-    os>>__Vtrigrprev__TOP__DifftestGRegState__02Eclock;
+    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__Vfuncout;
+    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__valid;
+    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__pre_num;
+    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__Vfuncout;
+    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__valid;
+    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__pre_num;
+    os>>__Vtableidx1;
+    os>>__Vtableidx2;
+    os>>__Vtableidx4;
+    os>>__Vtableidx5;
+    os>>__Vtableidx8;
     os>>__Vtrigrprev__TOP__aclk;
     os>>__VactContinue;
     os>>led;
@@ -1507,11 +1499,7 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__data_count;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__btn_key_r;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__btn_key_tmp;
-    os>>instr;
-    os>>csr_data;
-    os>>intrNo;
-    os>>cause;
-    os>>exceptionInst;
+    os>>__Vtableidx3;
     os>>random_seed;
     os>>ram_raddr;
     os>>ram_rdata;
@@ -1531,13 +1519,16 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_out;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_nop;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteData_wb;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__immout_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id_true;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id_true;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id_true;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_ex_true;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc1_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc2_ex;
@@ -1546,8 +1537,46 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_control_data_wb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_data_diff;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_paddr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_vaddr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_paddr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_vaddr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_data;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_data;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_pc;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_crmd_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_prmd_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ectl_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_estat_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_era_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_badv_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_eentry_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbidx_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbehi_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo0_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo1_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_asid_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save0_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save1_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save2_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save3_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tid_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tcfg_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tval_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ticlr_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_llbctl_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbrentry_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw0_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw1_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdl_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdh_diff_0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_data;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__quotient;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__remainder;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_result;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_b;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_u;
@@ -1624,83 +1653,19 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>__VstlIterCount;
     os>>__VicoIterCount;
     os>>__VactIterCount;
-    os>>DifftestInstrCommit__02Epc;
-    os>>timer_64_value;
-    os>>wdata;
-    os>>exceptionPC;
-    os>>DifftestTrapEvent__02Epc;
-    os>>cycleCnt;
-    os>>instrCnt;
-    os>>storePAddr;
-    os>>storeVAddr;
-    os>>storeData;
-    os>>paddr;
-    os>>vaddr;
-    os>>crmd;
-    os>>prmd;
-    os>>euen;
-    os>>ecfg;
-    os>>estat;
-    os>>era;
-    os>>badv;
-    os>>eentry;
-    os>>tlbidx;
-    os>>tlbehi;
-    os>>tlbelo0;
-    os>>tlbelo1;
-    os>>asid;
-    os>>pgdl;
-    os>>pgdh;
-    os>>save0;
-    os>>save1;
-    os>>save2;
-    os>>save3;
-    os>>tid;
-    os>>tcfg;
-    os>>tval;
-    os>>ticlr;
-    os>>llbctl;
-    os>>tlbrentry;
-    os>>dmw0;
-    os>>dmw1;
-    os>>gpr_0;
-    os>>gpr_1;
-    os>>gpr_2;
-    os>>gpr_3;
-    os>>gpr_4;
-    os>>gpr_5;
-    os>>gpr_6;
-    os>>gpr_7;
-    os>>gpr_8;
-    os>>gpr_9;
-    os>>gpr_10;
-    os>>gpr_11;
-    os>>gpr_12;
-    os>>gpr_13;
-    os>>gpr_14;
-    os>>gpr_15;
-    os>>gpr_16;
-    os>>gpr_17;
-    os>>gpr_18;
-    os>>gpr_19;
-    os>>gpr_20;
-    os>>gpr_21;
-    os>>gpr_22;
-    os>>gpr_23;
-    os>>gpr_24;
-    os>>gpr_25;
-    os>>gpr_26;
-    os>>gpr_27;
-    os>>gpr_28;
-    os>>gpr_29;
-    os>>gpr_30;
-    os>>gpr_31;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__id__data_out;
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__mem__data_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out[__Vi0];
     }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__timer_64_diff;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_timer_64;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cycleCnt;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instrCnt;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_data;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data[__Vi0];
     }
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__mul_result;
@@ -1708,10 +1673,10 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_shifted;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_next;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__difference;
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data[__Vi0];
     }
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__addr_in_die;
@@ -1722,6 +1687,9 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_datas;
     os>>simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_datas;
     os>>simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_datas;
+    for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regs[__Vi0];
+    }
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rf__DOT__rf[__Vi0];
     }

@@ -8,6 +8,7 @@ module regfile
     input Gr rd_in,
     input Gr rj_in,
     input Gr rk_in,
+    // 写回寄存器编号
     input Gr rd_wb_in,
     input logic regWriteEn,
     input DType regWriteData,

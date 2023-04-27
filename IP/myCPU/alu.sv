@@ -9,21 +9,25 @@ module alu
         input DivNeed divNeed,
         output DType aluout,
         output logic overflow,
-        output DType memaddr
+        output DType memaddr,
+        output logic ready_go
     );
 
+    assign ready_go = (divEn && completed) ||(~divEn);
+
     // -------------------div-----------------------
-    logic divSigned = (aluctrl == ALU_DIVU) | (aluctrl == ALU_MODU);
-    logic divEn = (aluctrl == ALU_DIV) | (aluctrl == ALU_DIVU) | (aluctrl == ALU_MOD) | (aluctrl == ALU_MODU);
+    wire divUnsigned = (aluctrl == ALU_DIVU) | (aluctrl == ALU_MODU);
+    // logic divEn = (aluctrl == ALU_DIV) | (aluctrl == ALU_DIVU) | (aluctrl == ALU_MOD) | (aluctrl == ALU_MODU);
+    wire divEn = (aluctrl == ALU_DIV) | (aluctrl == ALU_DIVU) | (aluctrl == ALU_MOD) | (aluctrl == ALU_MODU);
     // what happened when quotient is zero ?
     DType quotient;
     DType remainder;
     logic completed;
     div myDiv(
         .clk(divNeed.aclk),
-        .reset(divNeed.aresetn),
+        .reset(~divNeed.aresetn),
         .en(divEn),
-        .is_signed(divSigned),
+        .is_signed(~divUnsigned),
         .dividend(aluSrc1),
         .divisor(aluSrc2),
         .quotient(quotient),
@@ -103,11 +107,14 @@ module alu
 
 
 
+
+
+
     always_comb begin
         unique case (aluctrl)
             ALU_ADD: begin
                 aluout = adder_result;
-                memaddr = aluout;
+                // memaddr = aluout;
             end
             ALU_SUB: begin
                 aluout = adder_result;
@@ -140,7 +147,7 @@ module alu
                 aluout = ($signed(aluSrc1)) >>> aluSrc2[4:0];
             end
             ALU_MUL: begin
-                aluout = mul_result;
+                aluout = mul_result[31:0];
             end
             ALU_MULH: begin
                  aluout = mul_result[63:32] ;
@@ -158,7 +165,7 @@ module alu
                 aluout = quotient;
             end
             ALU_MODU: begin
-                aluout = quotient;
+                aluout = remainder;
             end
             ALU_LUI: begin
                 aluout = aluSrc2;
@@ -168,6 +175,18 @@ module alu
             end
             default:begin
                 aluout = '0;
+                // memaddr = '0;
+            end
+        endcase
+    end
+
+
+    always_comb begin
+        unique case (aluctrl)
+            ALU_ADD: begin
+                memaddr = aluout;
+            end
+            default: begin
                 memaddr = '0;
             end
         endcase

@@ -21,14 +21,14 @@ module HazardDetect
 );
 
     // rd will have load-use hazard 
-    logic hazard_ex = (rd_no_ex == rj_no_id) || (rd_no_ex == rk_no_id);
-    logic hazard_mem = (rd_no_mem == rj_no_id) || (rd_no_mem == rk_no_id);
-    logic hazard_load_use = ((alusel1_id == ALU_SEL_RJ) && (rd_no_ex == rj_no_id)) 
+    wire hazard_ex = (rd_no_ex == rj_no_id) || (rd_no_ex == rd_no_id);
+    wire hazard_mem = (rd_no_mem == rj_no_id) || (rd_no_mem == rd_no_id);
+    wire hazard_load_use = ((alusel1_id == ALU_SEL_RJ) && (rd_no_ex == rj_no_id)) 
                         || ((alusel2_id == ALU_SEL_RK) && (rd_no_ex == rk_no_id)) 
                         || (rd_no_ex == rd_no_id);
     // branch : 1. ex is load 2. ex is write reg 3. mem is load
     // load-use: 1. ex is load and id need rj/rk/rd
-    logic stall = (memRead_ex && hazard_ex && is_compare)
+    wire stall = (memRead_ex && hazard_ex && is_compare)
              || (!memRead_ex && regWriteEn_ex && hazard_ex && is_compare) 
              || (memRead_mem && hazard_mem && is_compare) 
              || (memRead_ex && hazard_load_use && (!is_compare)) ;
@@ -45,7 +45,7 @@ module HazardDetect
             EXFlush   = 0;
         end
 
-        if (pcsel == PC_BRANCH) begin
+        if (pcsel == PC_BRANCH && ~EXFlush)  begin
             IDFlush = 1;
         end else begin
             IDFlush = 0;

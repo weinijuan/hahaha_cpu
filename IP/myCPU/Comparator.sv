@@ -4,12 +4,12 @@ module Comparator
     import cpuDefine::*;
 (
     input  DType rj,
-    rk,
+    input DType rd,
     input  logic unsign,
-    output logic zero,
-    lt
+    output logic eq,
+    output logic lt
 );
-    assign zero = (rj == rk);
-    assign lt = (unsign & (rj < rk)) | (~unsign & ($signed(rj) < $signed(rk)));
+    assign eq = (rj == rd);
+    assign lt = (unsign & (rj < rd)) | (~unsign & ($signed(rj) < $signed(rd)));
 
 endmodule

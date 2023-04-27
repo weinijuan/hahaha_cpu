@@ -20,13 +20,6 @@ class Vsimu_top___024root final : public VerilatedModule {
     // DESIGN SPECIFIC STATE
     // Anonymous structures to workaround compiler member-count bugs
     struct {
-        VL_IN8(DifftestInstrCommit__02Eclock,0,0);
-        VL_IN8(DifftestExcpEvent__02Eclock,0,0);
-        VL_IN8(DifftestTrapEvent__02Eclock,0,0);
-        VL_IN8(DifftestStoreEvent__02Eclock,0,0);
-        VL_IN8(DifftestLoadEvent__02Eclock,0,0);
-        VL_IN8(DifftestCSRRegState__02Eclock,0,0);
-        VL_IN8(DifftestGRegState__02Eclock,0,0);
         VL_IN8(aclk,0,0);
         CData/*0:0*/ simu_top__DOT__soc__DOT__m0_awvalid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__m0_wvalid;
@@ -51,30 +44,6 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT10;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT11;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_HIT;
-        VL_IN8(DifftestInstrCommit__02Ecoreid,7,0);
-        VL_IN8(DifftestInstrCommit__02Eindex,7,0);
-        VL_IN8(DifftestInstrCommit__02Evalid,0,0);
-        VL_IN8(skip,0,0);
-        VL_IN8(is_TLBFILL,0,0);
-        VL_IN8(TLBFILL_index,4,0);
-        VL_IN8(is_CNTinst,0,0);
-        VL_IN8(wen,0,0);
-        VL_IN8(wdest,7,0);
-        VL_IN8(csr_rstat,0,0);
-        VL_IN8(DifftestExcpEvent__02Ecoreid,7,0);
-        VL_IN8(excp_valid,0,0);
-        VL_IN8(eret,0,0);
-        VL_IN8(DifftestTrapEvent__02Ecoreid,7,0);
-        VL_IN8(DifftestTrapEvent__02Evalid,0,0);
-        VL_IN8(code,2,0);
-        VL_IN8(DifftestStoreEvent__02Ecoreid,7,0);
-        VL_IN8(DifftestStoreEvent__02Eindex,7,0);
-        VL_IN8(DifftestStoreEvent__02Evalid,7,0);
-        VL_IN8(DifftestLoadEvent__02Ecoreid,7,0);
-        VL_IN8(DifftestLoadEvent__02Eindex,7,0);
-        VL_IN8(DifftestLoadEvent__02Evalid,7,0);
-        VL_IN8(DifftestCSRRegState__02Ecoreid,7,0);
-        VL_IN8(DifftestGRegState__02Ecoreid,7,0);
         VL_IN8(aresetn,0,0);
         VL_IN8(enable_delay,0,0);
         VL_OUT8(ram_ren,0,0);
@@ -84,8 +53,6 @@ class Vsimu_top___024root final : public VerilatedModule {
         VL_OUT8(open_trace,0,0);
         VL_OUT8(num_monitor,0,0);
         VL_OUT8(confreg_uart_data,7,0);
-    };
-    struct {
         VL_OUT8(write_uart_valid,0,0);
         VL_INOUT8(uart_rx,0,0);
         VL_INOUT8(uart_tx,0,0);
@@ -98,6 +65,7 @@ class Vsimu_top___024root final : public VerilatedModule {
         VL_IN8(btn_key_row,3,0);
         VL_IN8(btn_step,1,0);
         CData/*0:0*/ uart_rx__en0;
+        CData/*0:0*/ simu_top__DOT__uart_rx__out__strong__out3;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu_awvalid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu_wvalid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu_arvalid;
@@ -116,6 +84,8 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_awready;
         CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_bvalid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_arready;
+    };
+    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_rlast;
         CData/*0:0*/ simu_top__DOT__soc__DOT__apb_s_rvalid;
         CData/*3:0*/ simu_top__DOT__soc__DOT__conf_s_ram_wen;
@@ -137,6 +107,7 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_valid_in;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_allow_in;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_flush;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_valid_in;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_allow_in;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_flush;
@@ -146,12 +117,11 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_valid_in;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_flush;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_out;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__zero;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__eq;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lt;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__overflow;
-    };
-    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__unsignBranchCmp;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_id;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__regWriteDataSel;
@@ -159,9 +129,7 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel2;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel1;
         CData/*2:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__itype;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__pcsel;
         CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_id;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteEn_wb;
         CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_mem;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_ex;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel1_ex;
@@ -172,11 +140,35 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_ex;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_ex;
         CData/*1:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__size_mem_ex;
+        CData/*3:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wstrb_mem_mem;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_mem;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_mem;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_mem;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_h78aa7f48__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__excp_flush;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ertn_flush;
+        CData/*5:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ws_csr_ecode;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlbfill_en;
+        CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rand_index;
+    };
+    struct {
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cnt_inst_diff;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_rstat_en_diff;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_valid;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_cnt_inst;
+        CData/*7:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_ld_en;
+        CData/*7:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_st_en;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_rstat_en;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wen;
+        CData/*7:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdest;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_excp_flush;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ertn;
+        CData/*5:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_ecode;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_tlbfill_en;
+        CData/*4:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_rand_index;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap;
+        CData/*7:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap_code;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_hb2577766__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SUB_TYPE;
@@ -216,8 +208,6 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_LD_HU_TYPE;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_JIRL_TYPE;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BL_TYPE;
-    };
-    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BEQ_TYPE;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BNE_TYPE;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BLT_TYPE;
@@ -226,19 +216,24 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BGEU_TYPE;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_reg_inst;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_shamt_inst;
+    };
+    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_regimm_inst;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_u_inst;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_store_inst;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_b_inst;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_branch_inst;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_PC_BRANCH;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hffea2556__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hfa3cf28f__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_h9c888c86__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__MEM_forward_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__WB_forward_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__stall;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_hf7cffa19__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h2a69b9a6__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_valid;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divSigned;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divUnsigned;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divEn;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_cin;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_sign;
@@ -253,6 +248,7 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__data_back;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__addr_rcv;
         CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__wdata_rcv;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT____VdfgTmp_hf519d2e1__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_ar_disable;
         CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_aw_disable;
         CData/*0:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_no_delay;
@@ -282,12 +278,12 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*3:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rid;
         CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rresp;
         CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rlast;
-    };
-    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rvalid;
         CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_data_s_hit;
         CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_hit;
         CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_addr_hit;
+    };
+    struct {
         CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_resp_s_hit;
         CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_awready;
         CData/*4:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_wready;
@@ -317,7 +313,12 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_dir_ins;
         CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir;
         CData/*2:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_pre_sel;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h24eed626__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h78044575__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h6c6cb05b__1;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h4078c6a7__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h7d0af1f5__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h136afa62__0;
         CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_hee60d8fe__1;
         CData/*0:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h58a8c0e9__0;
         CData/*1:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__wr_ptr;
@@ -347,9 +348,9 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__csr_rw_sm_nxt;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_w_id;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_r_id;
-        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_rstrb;
     };
     struct {
+        CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__axi_s_rstrb;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__apb_s_wstrb;
         CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__rd_count;
         CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__AA_axi2apb_bridge_cpu__DOT__apb_rd_size;
@@ -413,9 +414,9 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__max_repeat_time;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__serial_out;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__serial_in;
-        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_overrun;
     };
     struct {
+        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_overrun;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_push_pulse;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____Vcellinp__receiver__enable;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__lsr_mask_condition;
@@ -444,6 +445,9 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__d1_fifo_read;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h84138141__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcfb8fec4__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h8af93b88__0;
+        CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcb11cbc5__0;
         CData/*4:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
         CData/*2:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
         CData/*6:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
@@ -476,12 +480,12 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rcounter16_eq_0;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rcounter16_minus_1;
         CData/*7:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__data8_out;
+    };
+    struct {
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__top;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__bottom;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__top_plus_1;
         CData/*0:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_int;
-    };
-    struct {
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_iordy_r0;
         CData/*3:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_iordy_r1;
         CData/*1:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__nand_type_r1;
@@ -542,12 +546,12 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_push;
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_pop;
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_push;
+    };
+    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_valid;
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_allow_out;
         CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_data;
-    };
-    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_pop;
         CData/*3:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_queue_datas;
         CData/*0:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_b_queue_pop;
@@ -608,12 +612,12 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin_r1;
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin_r2;
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_begin_r3;
+    };
+    struct {
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_end_r1;
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer_end_r2;
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_timer;
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__write_uart_valid;
-    };
-    struct {
         CData/*2:0*/ simu_top__DOT__soc__DOT__confreg__DOT__state;
         CData/*2:0*/ simu_top__DOT__soc__DOT__confreg__DOT__next_state;
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__key_flag;
@@ -624,13 +628,17 @@ class Vsimu_top___024root final : public VerilatedModule {
         CData/*0:0*/ simu_top__DOT__soc__DOT__confreg__DOT__step1_flag;
         CData/*3:0*/ simu_top__DOT__soc__DOT__confreg__DOT__scan_data;
         CData/*2:0*/ __VdfgTmp_hcd04e225__0;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestInstrCommit__02Eclock;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestExcpEvent__02Eclock;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestTrapEvent__02Eclock;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestStoreEvent__02Eclock;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestLoadEvent__02Eclock;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestCSRRegState__02Eclock;
-        CData/*0:0*/ __Vtrigrprev__TOP__DifftestGRegState__02Eclock;
+        CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__Vfuncout;
+        CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__valid;
+        CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__pre_num;
+        CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__Vfuncout;
+        CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__valid;
+        CData/*2:0*/ __Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__pre_num;
+        CData/*4:0*/ __Vtableidx1;
+        CData/*4:0*/ __Vtableidx2;
+        CData/*1:0*/ __Vtableidx4;
+        CData/*7:0*/ __Vtableidx5;
+        CData/*7:0*/ __Vtableidx8;
         CData/*0:0*/ __Vtrigrprev__TOP__aclk;
         CData/*0:0*/ __VactContinue;
         VL_OUT16(led,15,0);
@@ -647,11 +655,7 @@ class Vsimu_top___024root final : public VerilatedModule {
         SData/*13:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__data_count;
         SData/*15:0*/ simu_top__DOT__soc__DOT__confreg__DOT__btn_key_r;
         SData/*15:0*/ simu_top__DOT__soc__DOT__confreg__DOT__btn_key_tmp;
-        VL_IN(instr,31,0);
-        VL_IN(csr_data,31,0);
-        VL_IN(intrNo,31,0);
-        VL_IN(cause,31,0);
-        VL_IN(exceptionInst,31,0);
+        SData/*9:0*/ __Vtableidx3;
         VL_IN(random_seed,22,0);
         VL_OUT(ram_raddr,31,0);
         VL_IN(ram_rdata,31,0);
@@ -669,25 +673,66 @@ class Vsimu_top___024root final : public VerilatedModule {
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_out;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_nop;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id;
+    };
+    struct {
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteData_wb;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__immout_id;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id_true;
-        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id_true;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id_true;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_ex_true;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_mem;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc1_ex;
-    };
-    struct {
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc2_ex;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pc_ex;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_ex;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_ex;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData;
+        IData/*17:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_control_data_wb;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_data_diff;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_paddr;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_vaddr;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_paddr;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_vaddr;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_data;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_csr_data;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdata;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_pc;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_crmd_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_prmd_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ectl_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_estat_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_era_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_badv_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_eentry_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbidx_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbehi_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo0_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo1_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_asid_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save0_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save1_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save2_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save3_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tid_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tcfg_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tval_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ticlr_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_llbctl_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbrentry_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw0_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw1_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdl_diff_0;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdh_diff_0;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_data;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__quotient;
+        IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__remainder;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_result;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_b;
         IData/*31:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__quotient_u;
@@ -699,6 +744,8 @@ class Vsimu_top___024root final : public VerilatedModule {
         IData/*22:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_random;
         IData/*22:0*/ simu_top__DOT__soc__DOT__delay__DOT__mask_random_next;
         IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rdata;
+    };
+    struct {
         IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rdata;
         IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__w_addr_dir_int;
         IData/*31:0*/ simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_hit_int;
@@ -744,8 +791,6 @@ class Vsimu_top___024root final : public VerilatedModule {
         IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr5;
         IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr6;
         IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__cr7;
-    };
-    struct {
         IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__led_data;
         IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__led_rg0_data;
         IData/*31:0*/ simu_top__DOT__soc__DOT__confreg__DOT__led_rg1_data;
@@ -765,91 +810,25 @@ class Vsimu_top___024root final : public VerilatedModule {
         IData/*19:0*/ simu_top__DOT__soc__DOT__confreg__DOT__count;
         IData/*31:0*/ __VstlIterCount;
         IData/*31:0*/ __VicoIterCount;
-        IData/*31:0*/ __VactIterCount;
-        VL_IN64(DifftestInstrCommit__02Epc,63,0);
-        VL_IN64(timer_64_value,63,0);
-        VL_IN64(wdata,63,0);
-        VL_IN64(exceptionPC,63,0);
-        VL_IN64(DifftestTrapEvent__02Epc,63,0);
-        VL_IN64(cycleCnt,63,0);
-        VL_IN64(instrCnt,63,0);
-        VL_IN64(storePAddr,63,0);
-        VL_IN64(storeVAddr,63,0);
-        VL_IN64(storeData,63,0);
-        VL_IN64(paddr,63,0);
-        VL_IN64(vaddr,63,0);
-        VL_IN64(crmd,63,0);
-        VL_IN64(prmd,63,0);
-        VL_IN64(euen,63,0);
-        VL_IN64(ecfg,63,0);
-        VL_IN64(estat,63,0);
-        VL_IN64(era,63,0);
-        VL_IN64(badv,63,0);
-        VL_IN64(eentry,63,0);
-        VL_IN64(tlbidx,63,0);
-        VL_IN64(tlbehi,63,0);
-        VL_IN64(tlbelo0,63,0);
-        VL_IN64(tlbelo1,63,0);
-        VL_IN64(asid,63,0);
-        VL_IN64(pgdl,63,0);
-        VL_IN64(pgdh,63,0);
-        VL_IN64(save0,63,0);
-        VL_IN64(save1,63,0);
-        VL_IN64(save2,63,0);
-        VL_IN64(save3,63,0);
-        VL_IN64(tid,63,0);
-        VL_IN64(tcfg,63,0);
-        VL_IN64(tval,63,0);
-        VL_IN64(ticlr,63,0);
-        VL_IN64(llbctl,63,0);
-        VL_IN64(tlbrentry,63,0);
-        VL_IN64(dmw0,63,0);
-        VL_IN64(dmw1,63,0);
-        VL_IN64(gpr_0,63,0);
-        VL_IN64(gpr_1,63,0);
-        VL_IN64(gpr_2,63,0);
-        VL_IN64(gpr_3,63,0);
-        VL_IN64(gpr_4,63,0);
     };
     struct {
-        VL_IN64(gpr_5,63,0);
-        VL_IN64(gpr_6,63,0);
-        VL_IN64(gpr_7,63,0);
-        VL_IN64(gpr_8,63,0);
-        VL_IN64(gpr_9,63,0);
-        VL_IN64(gpr_10,63,0);
-        VL_IN64(gpr_11,63,0);
-        VL_IN64(gpr_12,63,0);
-        VL_IN64(gpr_13,63,0);
-        VL_IN64(gpr_14,63,0);
-        VL_IN64(gpr_15,63,0);
-        VL_IN64(gpr_16,63,0);
-        VL_IN64(gpr_17,63,0);
-        VL_IN64(gpr_18,63,0);
-        VL_IN64(gpr_19,63,0);
-        VL_IN64(gpr_20,63,0);
-        VL_IN64(gpr_21,63,0);
-        VL_IN64(gpr_22,63,0);
-        VL_IN64(gpr_23,63,0);
-        VL_IN64(gpr_24,63,0);
-        VL_IN64(gpr_25,63,0);
-        VL_IN64(gpr_26,63,0);
-        VL_IN64(gpr_27,63,0);
-        VL_IN64(gpr_28,63,0);
-        VL_IN64(gpr_29,63,0);
-        VL_IN64(gpr_30,63,0);
-        VL_IN64(gpr_31,63,0);
+        IData/*31:0*/ __VactIterCount;
         QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__id__data_out;
-        VlWide<4>/*106:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out;
+        VlWide<6>/*191:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__mem__data_out;
+        VlWide<7>/*218:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out;
+        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__timer_64_diff;
+        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_timer_64;
+        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cycleCnt;
+        QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instrCnt;
         QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_data;
-        VlWide<6>/*188:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data;
+        VlWide<8>/*236:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data;
         QData/*63:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__mul_result;
         QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend;
         QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_shifted;
         QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_next;
         QData/*32:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__difference;
-        VlWide<3>/*79:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data;
-        VlWide<4>/*106:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data;
+        VlWide<6>/*191:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data;
+        VlWide<7>/*218:0*/ simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data;
         QData/*37:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__addr_in_die;
         QData/*47:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__ID_INFORM;
         QData/*37:0*/ simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_ADDR;
@@ -858,6 +837,7 @@ class Vsimu_top___024root final : public VerilatedModule {
         QData/*44:0*/ simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_datas;
         QData/*44:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_datas;
         QData/*44:0*/ simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_datas;
+        VlUnpacked<IData/*31:0*/, 32> simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regs;
         VlUnpacked<IData/*31:0*/, 32> simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rf__DOT__rf;
         VlUnpacked<CData/*3:0*/, 5> simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bid;
         VlUnpacked<CData/*1:0*/, 5> simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bresp;
@@ -874,8 +854,8 @@ class Vsimu_top___024root final : public VerilatedModule {
     };
     VlTriggerVec<1> __VstlTriggered;
     VlTriggerVec<1> __VicoTriggered;
-    VlTriggerVec<8> __VactTriggered;
-    VlTriggerVec<8> __VnbaTriggered;
+    VlTriggerVec<1> __VactTriggered;
+    VlTriggerVec<1> __VnbaTriggered;
 
     // INTERNAL VARIABLES
     Vsimu_top__Syms* const vlSymsp;

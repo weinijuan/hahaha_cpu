@@ -2,9 +2,9 @@
 module Forwarding
     import cpuDefine::*;
     (
-    input Gr rj_no_id, rk_no_id,
+    input Gr rj_no_id, rd_no_id,
     input Gr rj_no_ex, rk_no_ex,rd_no_ex,
-    input DType rj_id, rk_id,
+    input DType rj_id, rd_id,
     input DType rj_ex, rk_ex, rd_ex,
     input logic regWriteEn_mem, 
     input DType aluout,
@@ -13,7 +13,7 @@ module Forwarding
     input Gr rd_no_wb,
     input DType regWriteData,
     output DType rj_id_true,
-    output DType rk_id_true,
+    output DType rd_id_true,
     output DType rj_ex_true, rk_ex_true, rd_ex_true
 );
 
@@ -26,8 +26,8 @@ module Forwarding
 
 
 
-logic MEM_forward_valid =  regWriteEn_mem && (rd_no_mem != 0);
-logic WB_forward_valid = regWriteEn_wb && (rd_no_wb != 0) ;
+wire MEM_forward_valid =  regWriteEn_mem && (rd_no_mem != 0);
+wire WB_forward_valid = regWriteEn_wb && (rd_no_wb != 0) ;
 
 always_comb begin
     if (MEM_forward_valid && (rd_no_mem == rj_no_id)) begin
@@ -42,14 +42,14 @@ always_comb begin
 end
 
 always_comb begin
-    if (MEM_forward_valid && (rd_no_mem == rk_no_id)) begin
-        rk_id_true = aluout;
+    if (MEM_forward_valid && (rd_no_mem == rd_no_id)) begin
+        rd_id_true = aluout;
     end
-    else if (WB_forward_valid && (rd_no_wb == rk_no_id) ) begin
-        rk_id_true = regWriteData;
+    else if (WB_forward_valid && (rd_no_wb == rd_no_id) ) begin
+        rd_id_true = regWriteData;
     end
     else begin
-        rk_id_true = rk_id;
+        rd_id_true = rd_id;
     end
 end
 

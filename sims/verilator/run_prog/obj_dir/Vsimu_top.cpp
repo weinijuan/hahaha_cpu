@@ -12,38 +12,7 @@
 Vsimu_top::Vsimu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vsimu_top__Syms(contextp(), _vcname__, this)}
-    , DifftestInstrCommit__02Eclock{vlSymsp->TOP.DifftestInstrCommit__02Eclock}
-    , DifftestExcpEvent__02Eclock{vlSymsp->TOP.DifftestExcpEvent__02Eclock}
-    , DifftestTrapEvent__02Eclock{vlSymsp->TOP.DifftestTrapEvent__02Eclock}
-    , DifftestStoreEvent__02Eclock{vlSymsp->TOP.DifftestStoreEvent__02Eclock}
-    , DifftestLoadEvent__02Eclock{vlSymsp->TOP.DifftestLoadEvent__02Eclock}
-    , DifftestCSRRegState__02Eclock{vlSymsp->TOP.DifftestCSRRegState__02Eclock}
-    , DifftestGRegState__02Eclock{vlSymsp->TOP.DifftestGRegState__02Eclock}
     , aclk{vlSymsp->TOP.aclk}
-    , DifftestInstrCommit__02Ecoreid{vlSymsp->TOP.DifftestInstrCommit__02Ecoreid}
-    , DifftestInstrCommit__02Eindex{vlSymsp->TOP.DifftestInstrCommit__02Eindex}
-    , DifftestInstrCommit__02Evalid{vlSymsp->TOP.DifftestInstrCommit__02Evalid}
-    , skip{vlSymsp->TOP.skip}
-    , is_TLBFILL{vlSymsp->TOP.is_TLBFILL}
-    , TLBFILL_index{vlSymsp->TOP.TLBFILL_index}
-    , is_CNTinst{vlSymsp->TOP.is_CNTinst}
-    , wen{vlSymsp->TOP.wen}
-    , wdest{vlSymsp->TOP.wdest}
-    , csr_rstat{vlSymsp->TOP.csr_rstat}
-    , DifftestExcpEvent__02Ecoreid{vlSymsp->TOP.DifftestExcpEvent__02Ecoreid}
-    , excp_valid{vlSymsp->TOP.excp_valid}
-    , eret{vlSymsp->TOP.eret}
-    , DifftestTrapEvent__02Ecoreid{vlSymsp->TOP.DifftestTrapEvent__02Ecoreid}
-    , DifftestTrapEvent__02Evalid{vlSymsp->TOP.DifftestTrapEvent__02Evalid}
-    , code{vlSymsp->TOP.code}
-    , DifftestStoreEvent__02Ecoreid{vlSymsp->TOP.DifftestStoreEvent__02Ecoreid}
-    , DifftestStoreEvent__02Eindex{vlSymsp->TOP.DifftestStoreEvent__02Eindex}
-    , DifftestStoreEvent__02Evalid{vlSymsp->TOP.DifftestStoreEvent__02Evalid}
-    , DifftestLoadEvent__02Ecoreid{vlSymsp->TOP.DifftestLoadEvent__02Ecoreid}
-    , DifftestLoadEvent__02Eindex{vlSymsp->TOP.DifftestLoadEvent__02Eindex}
-    , DifftestLoadEvent__02Evalid{vlSymsp->TOP.DifftestLoadEvent__02Evalid}
-    , DifftestCSRRegState__02Ecoreid{vlSymsp->TOP.DifftestCSRRegState__02Ecoreid}
-    , DifftestGRegState__02Ecoreid{vlSymsp->TOP.DifftestGRegState__02Ecoreid}
     , aresetn{vlSymsp->TOP.aresetn}
     , enable_delay{vlSymsp->TOP.enable_delay}
     , ram_ren{vlSymsp->TOP.ram_ren}
@@ -65,11 +34,6 @@ Vsimu_top::Vsimu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     , btn_key_row{vlSymsp->TOP.btn_key_row}
     , btn_step{vlSymsp->TOP.btn_step}
     , led{vlSymsp->TOP.led}
-    , instr{vlSymsp->TOP.instr}
-    , csr_data{vlSymsp->TOP.csr_data}
-    , intrNo{vlSymsp->TOP.intrNo}
-    , cause{vlSymsp->TOP.cause}
-    , exceptionInst{vlSymsp->TOP.exceptionInst}
     , random_seed{vlSymsp->TOP.random_seed}
     , ram_raddr{vlSymsp->TOP.ram_raddr}
     , ram_rdata{vlSymsp->TOP.ram_rdata}
@@ -79,77 +43,6 @@ Vsimu_top::Vsimu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     , debug0_wb_rf_wdata{vlSymsp->TOP.debug0_wb_rf_wdata}
     , num_data{vlSymsp->TOP.num_data}
     , uart_ctr_bus{vlSymsp->TOP.uart_ctr_bus}
-    , DifftestInstrCommit__02Epc{vlSymsp->TOP.DifftestInstrCommit__02Epc}
-    , timer_64_value{vlSymsp->TOP.timer_64_value}
-    , wdata{vlSymsp->TOP.wdata}
-    , exceptionPC{vlSymsp->TOP.exceptionPC}
-    , DifftestTrapEvent__02Epc{vlSymsp->TOP.DifftestTrapEvent__02Epc}
-    , cycleCnt{vlSymsp->TOP.cycleCnt}
-    , instrCnt{vlSymsp->TOP.instrCnt}
-    , storePAddr{vlSymsp->TOP.storePAddr}
-    , storeVAddr{vlSymsp->TOP.storeVAddr}
-    , storeData{vlSymsp->TOP.storeData}
-    , paddr{vlSymsp->TOP.paddr}
-    , vaddr{vlSymsp->TOP.vaddr}
-    , crmd{vlSymsp->TOP.crmd}
-    , prmd{vlSymsp->TOP.prmd}
-    , euen{vlSymsp->TOP.euen}
-    , ecfg{vlSymsp->TOP.ecfg}
-    , estat{vlSymsp->TOP.estat}
-    , era{vlSymsp->TOP.era}
-    , badv{vlSymsp->TOP.badv}
-    , eentry{vlSymsp->TOP.eentry}
-    , tlbidx{vlSymsp->TOP.tlbidx}
-    , tlbehi{vlSymsp->TOP.tlbehi}
-    , tlbelo0{vlSymsp->TOP.tlbelo0}
-    , tlbelo1{vlSymsp->TOP.tlbelo1}
-    , asid{vlSymsp->TOP.asid}
-    , pgdl{vlSymsp->TOP.pgdl}
-    , pgdh{vlSymsp->TOP.pgdh}
-    , save0{vlSymsp->TOP.save0}
-    , save1{vlSymsp->TOP.save1}
-    , save2{vlSymsp->TOP.save2}
-    , save3{vlSymsp->TOP.save3}
-    , tid{vlSymsp->TOP.tid}
-    , tcfg{vlSymsp->TOP.tcfg}
-    , tval{vlSymsp->TOP.tval}
-    , ticlr{vlSymsp->TOP.ticlr}
-    , llbctl{vlSymsp->TOP.llbctl}
-    , tlbrentry{vlSymsp->TOP.tlbrentry}
-    , dmw0{vlSymsp->TOP.dmw0}
-    , dmw1{vlSymsp->TOP.dmw1}
-    , gpr_0{vlSymsp->TOP.gpr_0}
-    , gpr_1{vlSymsp->TOP.gpr_1}
-    , gpr_2{vlSymsp->TOP.gpr_2}
-    , gpr_3{vlSymsp->TOP.gpr_3}
-    , gpr_4{vlSymsp->TOP.gpr_4}
-    , gpr_5{vlSymsp->TOP.gpr_5}
-    , gpr_6{vlSymsp->TOP.gpr_6}
-    , gpr_7{vlSymsp->TOP.gpr_7}
-    , gpr_8{vlSymsp->TOP.gpr_8}
-    , gpr_9{vlSymsp->TOP.gpr_9}
-    , gpr_10{vlSymsp->TOP.gpr_10}
-    , gpr_11{vlSymsp->TOP.gpr_11}
-    , gpr_12{vlSymsp->TOP.gpr_12}
-    , gpr_13{vlSymsp->TOP.gpr_13}
-    , gpr_14{vlSymsp->TOP.gpr_14}
-    , gpr_15{vlSymsp->TOP.gpr_15}
-    , gpr_16{vlSymsp->TOP.gpr_16}
-    , gpr_17{vlSymsp->TOP.gpr_17}
-    , gpr_18{vlSymsp->TOP.gpr_18}
-    , gpr_19{vlSymsp->TOP.gpr_19}
-    , gpr_20{vlSymsp->TOP.gpr_20}
-    , gpr_21{vlSymsp->TOP.gpr_21}
-    , gpr_22{vlSymsp->TOP.gpr_22}
-    , gpr_23{vlSymsp->TOP.gpr_23}
-    , gpr_24{vlSymsp->TOP.gpr_24}
-    , gpr_25{vlSymsp->TOP.gpr_25}
-    , gpr_26{vlSymsp->TOP.gpr_26}
-    , gpr_27{vlSymsp->TOP.gpr_27}
-    , gpr_28{vlSymsp->TOP.gpr_28}
-    , gpr_29{vlSymsp->TOP.gpr_29}
-    , gpr_30{vlSymsp->TOP.gpr_30}
-    , gpr_31{vlSymsp->TOP.gpr_31}
     , __PVT____024unit{vlSymsp->TOP.__PVT____024unit}
     , rootp{&(vlSymsp->TOP)}
 {

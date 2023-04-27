@@ -3,7 +3,7 @@
 import cpuDefine::*;
 module Control(
     input Instr instr,
-    input logic zero,
+    input logic eq,
     input logic lt,
     output PcSelBit pcsel,
     output ItypeBit itype,
@@ -23,7 +23,9 @@ module Control(
     output logic signed is_compare,
 
     output logic [1:0] size_mem,
-    output logic is_unsign_load
+    output logic is_unsign_load,
+    output logic [7:0] load_valid_diff,
+    output logic [7:0] store_valid_diff
 );
 
 
@@ -179,7 +181,7 @@ module Control(
 
 
     //!!!!!!!!!!!!!!!!!!!!!! This control have problem !!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // (is_PC_ADD4 & PC_ADD4) is error because is_PC_ADD4 will zero-extend
+    // (is_PC_ADD4 & PC_ADD4) is error because is_PC_ADD4 will eq-extend
 
     // unsignBranchCmp is used for branch such as bgeu/bltu
     // is_bl_type is used for regfile for bl and jirl 
@@ -189,9 +191,10 @@ module Control(
 
     wire signed is_PC_ADD4 = is_reg_inst | is_shamt_inst | is_regimm_inst | is_u_inst | is_load_inst | is_store_inst;
 
-    // beq/blt
+    // beq/blt ~eq 等价于 eq==0
     assign unsignBranchCmp = is_BLTU_TYPE | is_BGEU_TYPE;
-    wire signed is_PC_BRANCH = (is_BEQ_TYPE & zero) | (is_BNE_TYPE & ~zero) | (is_BLT_TYPE & lt) | (is_BLTU_TYPE & lt) | (is_BGE_TYPE & ~lt) | (is_BGEU_TYPE & ~lt) | is_JIRL_TYPE | is_B_TYPE | is_BL_TYPE;
+    wire signed is_PC_BRANCH = (is_BEQ_TYPE & eq) | (is_BNE_TYPE & (~eq)) | (is_BLT_TYPE & lt)
+        | (is_BLTU_TYPE & lt) | (is_BGE_TYPE & ~lt) | (is_BGEU_TYPE & ~lt) | is_JIRL_TYPE | is_B_TYPE | is_BL_TYPE;
 
     // this sentence can be optimized by using system verilog ? I forget
 
@@ -281,6 +284,13 @@ module Control(
 
     //---------is bl type---------------------
     assign reglink = is_bl_type;
+
+
+    // --------load_valid_diff-----------
+    assign load_valid_diff = {2'b0, is_LL_TYPE, is_LD_W_TYPE, is_LD_HU_TYPE, is_LD_H_TYPE, is_LD_BU_TYPE, is_LD_B_TYPE};
+    assign store_valid_diff = {4'b0, is_SC_TYPE, is_ST_W_TYPE, is_ST_H_TYPE, is_ST_B_TYPE};
+//     -  {4'b0, llbit && sc_w, st_w, st_h, st_b}
+// -  {2'b0, ll_w, ld_w, ld_hu, ld_h, ld_bu, ld_b}
 
 
 endmodule

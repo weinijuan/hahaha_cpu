@@ -72,7 +72,7 @@ package cpuDefine;
     } AluSel2Bit;
 
     // attention: enum + data type, the data type is modified for enum element not the number of element
-    typedef enum logic {
+    typedef enum logic[1:0] {
         PC_ADD4,
         PC_BRANCH
     } PcSel;
@@ -116,6 +116,8 @@ package cpuDefine;
     typedef struct packed {
         logic regWriteEn;
         RegWriteDataSel regWriteDataSel;
+        logic [7:0] load_valid_diff; 
+        logic [7:0] store_valid_diff; 
     } WB_CONTROL_DATA;
 
     typedef struct packed {
@@ -126,6 +128,7 @@ package cpuDefine;
         Gr rjNo, rkNo, rdNo;
         DType immout;
         DType pc;
+        Instr instr;
     } EX_DATA;
 
     typedef struct packed {
@@ -135,6 +138,9 @@ package cpuDefine;
         Gr rdNo;
         DType aluout;
         DType pc;
+        Instr instr;
+        DType memaddr;
+        DType rd;
     } MEM_DATA;
 
     typedef struct packed {
@@ -144,6 +150,9 @@ package cpuDefine;
         DType readData;
         DType pc;
         logic[3:0] wstrb;
+        Instr instr;
+        DType memaddr;     
+        DType rd;
     } WB_DATA;
 
     // nop define

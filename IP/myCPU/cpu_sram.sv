@@ -29,7 +29,8 @@ module cpu_sram
     output [31:0] debug0_wb_pc,
     output [3:0] debug0_wb_rf_wen,
     output [4:0] debug0_wb_rf_wnum,
-    output [31:0] debug0_wb_rf_wdata
+    output [31:0] debug0_wb_rf_wdata,
+    output [31:0] debug0_wb_inst
 );
 
 
@@ -93,6 +94,8 @@ module cpu_sram
     PcSel pcsel;
     DType pcAdd;
     DType branchPC;
+    DType branchPC_temp;
+    logic branchPC_temp_valid;
 
 
 
@@ -144,12 +147,28 @@ module cpu_sram
     assign pc_if = if_data_out;
     assign pcAdd = pc_if + 4;
     always_comb begin
+        if (branchPC_temp_valid) begin
+            nextPC = branchPC_temp;
+        end
+        else begin
         unique case (pcsel)
             PC_ADD4:   nextPC = pcAdd;
             PC_BRANCH: nextPC = branchPC;
             default:   nextPC = '0;
         endcase
+        end
     end
+
+    // ex_flush=0表示此时在id阶段执行的指令有效，也就是没发生危害的情况。
+    always_ff @(posedge aclk) begin
+        if ((pcsel == PC_BRANCH)&&(~if_valid_in || ~preif_allow_in)&&(~ex_flush)) begin
+            branchPC_temp <= branchPC;
+            branchPC_temp_valid <= 1;
+        end else if (branchPC_temp_valid && preif_allow_in && if_valid_in) begin
+            branchPC_temp_valid <= 0;
+        end
+    end
+
 
     always_ff @(posedge aclk) begin
         if (if_ready_go && ~if_allow_in) begin
@@ -197,7 +216,7 @@ module cpu_sram
 
     Instr instr_id = id_data_out.instr;
     DType pc_id = id_data_out.pc;
-    logic zero, lt, overflow;
+    logic eq, lt, overflow;
     Itype itype;
     logic regWriteEn_id, memWriteEn_id, memRead_id;
     AluSel1 alusel1_id;
@@ -212,9 +231,11 @@ module cpu_sram
     logic is_compare;
     logic [1:0] size_mem_id;
     logic is_unsign_load_id;
+    logic[7:0] load_valid_diff_id;
+    logic[7:0] store_valid_diff_id;
     Control control (
         .instr(instr_id),
-        .zero(zero),
+        .eq(eq),
         .lt(lt),
         .pcsel(pcsel),
         .itype(itype),
@@ -233,7 +254,9 @@ module cpu_sram
         .branchPcFromJ(branchPcFromJ),
         .is_compare(is_compare),
         .size_mem(size_mem_id),
-        .is_unsign_load(is_unsign_load_id)
+        .is_unsign_load(is_unsign_load_id),
+        .load_valid_diff(load_valid_diff_id),
+        .store_valid_diff(store_valid_diff_id)
     );
 
 
@@ -276,7 +299,7 @@ module cpu_sram
         .immout(immout_id)
     );
 
-    DType rj_id_true, rk_id_true, rj_ex_true, rk_ex_true, rd_ex_true;
+    DType rj_id_true, rd_id_true, rj_ex_true, rk_ex_true, rd_ex_true;
 
     Gr rd_no_mem, rd_no_wb;
     logic regWriteEn_mem;
@@ -284,12 +307,12 @@ module cpu_sram
 
     Forwarding forwarding (
         .rj_no_id(rj_no_id),
-        .rk_no_id(rk_no_id),
+        .rd_no_id(rd_no_id),
         .rj_no_ex(rj_no_ex),
         .rk_no_ex(rk_no_ex),
         .rd_no_ex(rd_no_ex),
         .rj_id(rj_id),
-        .rk_id(rk_id),
+        .rd_id(rd_id),
         .rj_ex(rj_ex),
         .rk_ex(rk_ex),
         .rd_ex(rd_ex),
@@ -300,7 +323,7 @@ module cpu_sram
         .rd_no_wb(rd_no_wb),
         .regWriteData(regWriteData_wb),
         .rj_id_true(rj_id_true),
-        .rk_id_true(rk_id_true),
+        .rd_id_true(rd_id_true),
         .rj_ex_true(rj_ex_true),
         .rk_ex_true(rk_ex_true),
         .rd_ex_true(rd_ex_true)
@@ -308,9 +331,9 @@ module cpu_sram
 
     Comparator comp (
         .rj(rj_id_true),
-        .rk(rk_id_true),
+        .rd(rd_id_true),
         .unsign(unsignBranchCmp),
-        .zero(zero),
+        .eq(eq),
         .lt(lt)
     );
 
@@ -379,11 +402,15 @@ module cpu_sram
         };
     assign wb_control_data_id = '{
             regWriteEn: regWriteEn_id,
-            regWriteDataSel: regWriteDataSel_id
+            regWriteDataSel: regWriteDataSel_id, 
+            load_valid_diff:load_valid_diff_id,
+            store_valid_diff:store_valid_diff_id
         };
     assign wb_nop_control_data = '{
             regWriteEn: 0,
-            regWriteDataSel: REG_WRITE_ALU
+            regWriteDataSel: REG_WRITE_ALU,
+            load_valid_diff:'0,
+            store_valid_diff:'0
         };
     assign ex_data_in = '{
             ex_control_data: ex_control_data_id,
@@ -396,7 +423,8 @@ module cpu_sram
             rkNo: rk_no_id,
             rdNo: rd_no_id,
             immout: immout_id,
-            pc: pc_id
+            pc: pc_id,
+            instr : instr_id
         };
 
     assign ex_nop = '{
@@ -410,7 +438,8 @@ module cpu_sram
             rkNo: '0,
             rdNo: '0,
             immout: '0,
-            pc: '0
+            pc: '0,
+            instr : '0
         };
 
     Pipeline #(
@@ -444,6 +473,7 @@ module cpu_sram
     DType rj_ex, rk_ex, rd_ex;
     Gr rj_no_ex, rk_no_ex, rd_no_ex;
     DType immout_ex;
+    // Instr instr;
 
     logic memWriteEn_ex;
     logic [1:0] size_mem_ex;
@@ -459,6 +489,7 @@ module cpu_sram
     assign rd_ex = ex_data_out.rd;
     assign rj_no_ex = ex_data_out.rjNo;
     assign rk_no_ex = ex_data_out.rkNo;
+    Instr instr_ex = ex_data_out.instr;
     // rd_no_ex将送到hazard detection
     assign rd_no_ex = ex_data_out.rdNo;
     assign immout_ex = ex_data_out.immout;
@@ -503,6 +534,7 @@ module cpu_sram
     assign divNeed.aresetn = aresetn;
     DType memaddr_ex;
     DType aluout_ex;
+    logic alu_ready_go;
     alu alu (
         .aluSrc1 (aluSrc1_ex),
         .aluSrc2 (aluSrc2_ex),
@@ -510,7 +542,8 @@ module cpu_sram
         .divNeed (divNeed),
         .aluout  (aluout_ex),
         .overflow(overflow),
-        .memaddr (memaddr_ex)
+        .memaddr (memaddr_ex),
+        .ready_go(alu_ready_go)
     );
 
 
@@ -527,7 +560,10 @@ module cpu_sram
             rdNo: rd_no_ex,
             aluout: aluout_ex,
             wstrb_mem: wstrb_mem,
-            pc : pc_ex
+            pc : pc_ex,
+            instr: instr_ex,
+            memaddr: memaddr_ex,
+            rd:rd_ex_true
         };
     assign mem_nop = '{
             mem_control_data: mem_nop_control_data,
@@ -535,7 +571,10 @@ module cpu_sram
             rdNo: 0,
             aluout: '0,
             wstrb_mem: 4'b0000,
-            pc: '0
+            pc: '0,
+            instr: '0,
+            memaddr: '0,
+            rd:'0
         };
 
     // sram_mem 
@@ -593,7 +632,7 @@ module cpu_sram
 
     // pipelined signal 这里改动了，与preif不完全相同
     assign ex_ready_go = (addr_ok_mem & req_mem & (memRead_ex | memWriteEn_ex) ) 
-                        | (~(memRead_ex | memWriteEn_ex));
+                        | (~(memRead_ex | memWriteEn_ex) & alu_ready_go);
     assign req_mem = ex_allow_in & (memRead_ex | memWriteEn_ex);
     assign mem_ready_go = data_ok_mem || readData_temp_valid || (~(memRead_mem | memWriteEn_mem));
 
@@ -620,6 +659,7 @@ module cpu_sram
     logic is_unsign_load_mem;
     logic memRead_mem;
     logic memWriteEn_mem;
+    Instr instr_mem;
     WB_CONTROL_DATA wb_control_data_mem;
     MEM_CONTROL_DATA mem_control_data_mem;
     assign wb_control_data_mem = mem_data_out.wb_control_data;
@@ -631,7 +671,10 @@ module cpu_sram
     assign regWriteEn_mem = wb_control_data_mem.regWriteEn;
     assign memRead_mem = mem_control_data_mem.memRead;
     assign memWriteEn_mem = mem_control_data_mem.memWriteEn;
+    assign instr_mem = mem_data_out.instr;
     DType pc_mem = mem_data_out.pc;
+    DType memaddr_mem = mem_data_out.memaddr;
+    DType rd_mem = mem_data_out.rd;
 
 
     // mem signal
@@ -646,8 +689,13 @@ module cpu_sram
     //  4. 检查这些 ready_go 的代码逻辑是否有问题,尤其是memRead和memWriteEn的使用。
     //  5. 将 readData_mem 写入到 WB阶段的data_in 中去。
 
+
+    // wstrb_mem是传递给sram总线的片选信号
+    // wstrb_mem_mem是表示在mem阶段的wstrb_mem信号，是流水线中真正要用到的片选信号
+
+
     extend_memData extend_memData_u (
-        .wstrb(wstrb_mem),
+        .wstrb(wstrb_mem_mem),
         .is_unsign_load(is_unsign_load_mem),
         .rdata_mem(rdata_mem),
         .readData(readData)
@@ -686,7 +734,10 @@ module cpu_sram
             aluout: aluout_mem,
             readData: readData_mem,
             pc: pc_mem,
-            wstrb: wstrb_mem
+            wstrb: wstrb_mem_mem,
+            instr:instr_mem,
+            memaddr:memaddr_mem, 
+            rd: rd_mem
         };
 
     assign wb_nop = '{
@@ -695,7 +746,10 @@ module cpu_sram
             aluout: 0,
             readData: 0,
             pc: 0,
-            wstrb:'0
+            wstrb:'0,
+            instr:'0,
+            memaddr:'0,
+            rd:'0
         };
 
     assign wb_allow_in = 1;
@@ -730,13 +784,15 @@ module cpu_sram
     DType pc_wb = wb_data_out.pc;
     logic[3:0] wstrb_wb = wb_data_out.wstrb;
     assign debug0_wb_pc = pc_wb;
-    assign debug0_wb_rf_wen = wstrb_wb;
+    assign debug0_wb_rf_wen = {4{regWriteEn_wb}};
     assign debug0_wb_rf_wdata = regWriteData_wb;
     assign debug0_wb_rf_wnum = rd_no_wb;
-
-
-
-
+    Instr instr_wb = wb_data_out.instr;
+    assign debug0_wb_inst = instr_wb;
+    DType memaddr_wb = wb_data_out.memaddr;
+    logic [7:0] load_valid_diff_wb = wb_control_data_wb.load_valid_diff;
+    logic [7:0] store_valid_diff_wb = wb_control_data_wb.store_valid_diff;
+    DType rd_wb = wb_data_out.rd;
 
     always_comb begin
         unique case (regWriteDataSel_wb)
@@ -747,4 +803,283 @@ module cpu_sram
     end
 
 
-endmodule
+
+// to difftest
+
+
+
+    // difftest
+
+
+    `ifdef DIFFTEST_EN
+
+// 一些尚未定义的信号
+    logic excp_flush               ;
+    logic ertn_flush               ;
+    logic [5:0] ws_csr_ecode       ;
+    logic tlbfill_en               ;
+    logic[4:0] rand_index          ;
+
+
+    assign st_vaddr_diff = memaddr_wb;
+    assign st_paddr_diff = memaddr_wb;
+    assign ld_vaddr_diff = memaddr_wb;
+    assign ld_paddr_diff = memaddr_wb;
+    assign inst_ld_en_diff = load_valid_diff_wb;
+    assign inst_st_en_diff = store_valid_diff_wb;
+    assign st_data_diff =  rd_wb;
+
+
+
+
+// from wb_stage
+    // wire            ws_valid_diff       ;
+    wire            cnt_inst_diff       ;
+    wire    [63:0]  timer_64_diff       ;
+    wire    [ 7:0]  inst_ld_en_diff     ;
+    wire    [31:0]  ld_paddr_diff       ;
+    wire    [31:0]  ld_vaddr_diff       ;
+    wire    [ 7:0]  inst_st_en_diff     ;
+    wire    [31:0]  st_paddr_diff       ;
+    wire    [31:0]  st_vaddr_diff       ;
+    wire    [31:0]  st_data_diff        ;
+    wire            csr_rstat_en_diff   ;
+    wire    [31:0]  csr_data_diff       ;
+
+    wire inst_valid_diff = wb_valid_out ;
+    reg             cmt_valid           ;
+    reg             cmt_cnt_inst        ;
+    reg     [63:0]  cmt_timer_64        ;
+    reg     [ 7:0]  cmt_inst_ld_en      ;
+    reg     [31:0]  cmt_ld_paddr        ;
+    reg     [31:0]  cmt_ld_vaddr        ;
+    reg     [ 7:0]  cmt_inst_st_en      ;
+    reg     [31:0]  cmt_st_paddr        ;
+    reg     [31:0]  cmt_st_vaddr        ;
+    reg     [31:0]  cmt_st_data         ;
+    reg             cmt_csr_rstat_en    ;
+    reg     [31:0]  cmt_csr_data        ;
+
+    reg             cmt_wen             ;
+    reg     [ 7:0]  cmt_wdest           ;
+    reg     [31:0]  cmt_wdata           ;
+    reg     [31:0]  cmt_pc              ;
+    reg     [31:0]  cmt_inst            ;
+
+    reg             cmt_excp_flush      ;
+    reg             cmt_ertn            ;
+    reg     [5:0]   cmt_csr_ecode       ;
+    reg             cmt_tlbfill_en      ;
+    reg     [4:0]   cmt_rand_index      ;
+
+// to difftest debug
+    reg             trap                ;
+    reg     [ 7:0]  trap_code           ;
+    reg     [63:0]  cycleCnt            ;
+    reg     [63:0]  instrCnt            ;
+
+// from regfile
+    wire    [31:0]  regs[31:0]          ;
+    assign regs = rf.rf;
+
+// from csr
+    wire    [31:0]  csr_crmd_diff_0     ;
+    wire    [31:0]  csr_prmd_diff_0     ;
+    wire    [31:0]  csr_ectl_diff_0     ;
+    wire    [31:0]  csr_estat_diff_0    ;
+    wire    [31:0]  csr_era_diff_0      ;
+    wire    [31:0]  csr_badv_diff_0     ;
+    wire	[31:0]  csr_eentry_diff_0   ;
+    wire 	[31:0]  csr_tlbidx_diff_0   ;
+    wire 	[31:0]  csr_tlbehi_diff_0   ;
+    wire 	[31:0]  csr_tlbelo0_diff_0  ;
+    wire 	[31:0]  csr_tlbelo1_diff_0  ;
+    wire 	[31:0]  csr_asid_diff_0     ;
+    wire 	[31:0]  csr_save0_diff_0    ;
+    wire 	[31:0]  csr_save1_diff_0    ;
+    wire 	[31:0]  csr_save2_diff_0    ;
+    wire 	[31:0]  csr_save3_diff_0    ;
+    wire 	[31:0]  csr_tid_diff_0      ;
+    wire 	[31:0]  csr_tcfg_diff_0     ;
+    wire 	[31:0]  csr_tval_diff_0     ;
+    wire 	[31:0]  csr_ticlr_diff_0    ;
+    wire 	[31:0]  csr_llbctl_diff_0   ;
+    wire 	[31:0]  csr_tlbrentry_diff_0;
+    wire 	[31:0]  csr_dmw0_diff_0     ;
+    wire 	[31:0]  csr_dmw1_diff_0     ;
+    wire 	[31:0]  csr_pgdl_diff_0     ;
+    wire 	[31:0]  csr_pgdh_diff_0     ;
+
+    always @(posedge aclk) begin
+    if (~aresetn) begin
+    {cmt_valid, cmt_cnt_inst, cmt_timer_64, cmt_inst_ld_en, cmt_ld_paddr, cmt_ld_vaddr, cmt_inst_st_en, cmt_st_paddr, cmt_st_vaddr, cmt_st_data, cmt_csr_rstat_en, cmt_csr_data} <= 0;
+    {cmt_wen, cmt_wdest, cmt_wdata, cmt_pc, cmt_inst} <= 0;
+    {trap, trap_code, cycleCnt, instrCnt} <= 0;
+    end else if (~trap) begin
+    cmt_valid       <= inst_valid_diff          ;
+    cmt_cnt_inst    <= cnt_inst_diff            ;
+    cmt_timer_64    <= timer_64_diff            ;
+    cmt_inst_ld_en  <= inst_ld_en_diff          ;
+    cmt_ld_paddr    <= ld_paddr_diff            ;
+    cmt_ld_vaddr    <= ld_vaddr_diff            ;
+    cmt_inst_st_en  <= inst_st_en_diff          ;
+    cmt_st_paddr    <= st_paddr_diff            ;
+    cmt_st_vaddr    <= st_vaddr_diff            ;
+    cmt_st_data     <= st_data_diff             ;
+    cmt_csr_rstat_en<= csr_rstat_en_diff        ;
+    cmt_csr_data    <= csr_data_diff            ;
+
+    cmt_wen     <=  debug0_wb_rf_wen            ;
+    cmt_wdest   <=  {3'd0, debug0_wb_rf_wnum}   ;
+    cmt_wdata   <=  debug0_wb_rf_wdata          ;
+    cmt_pc      <=  debug0_wb_pc                ;
+    cmt_inst    <=  debug0_wb_inst              ;
+
+    cmt_excp_flush  <= excp_flush               ;
+    cmt_ertn        <= ertn_flush               ;
+    cmt_csr_ecode   <= ws_csr_ecode             ;
+    cmt_tlbfill_en  <= tlbfill_en               ;
+    cmt_rand_index  <= rand_index               ;
+
+    trap            <= 0                        ;
+    trap_code       <= regs[10][7:0]            ;
+    cycleCnt        <= cycleCnt + 1             ;
+    instrCnt        <= instrCnt + inst_valid_diff;
+    end
+    end
+
+    DifftestInstrCommit DifftestInstrCommit(
+    .clock              (aclk           ),
+    .coreid             (0              ),
+    .index              (0              ),
+    .valid              (cmt_valid      ),
+    .pc                 (cmt_pc         ),
+    .instr              (cmt_inst       ),
+    .skip               (0              ),
+    .is_TLBFILL         (cmt_tlbfill_en ),
+    .TLBFILL_index      (cmt_rand_index ),
+    .is_CNTinst         (cmt_cnt_inst   ),
+    .timer_64_value     (cmt_timer_64   ),
+    .wen                (cmt_wen        ),
+    .wdest              (cmt_wdest      ),
+    .wdata              (cmt_wdata      ),
+    .csr_rstat          (cmt_csr_rstat_en),
+    .csr_data           (cmt_csr_data   )
+    );
+
+    DifftestExcpEvent DifftestExcpEvent(
+    .clock              (aclk           ),
+    .coreid             (0              ),
+    .excp_valid         (cmt_excp_flush ),
+    .eret               (cmt_ertn       ),
+    .intrNo             (csr_estat_diff_0[12:2]),
+    .cause              (cmt_csr_ecode  ),
+    .exceptionPC        (cmt_pc         ),
+    .exceptionInst      (cmt_inst       )
+    );
+
+    DifftestTrapEvent DifftestTrapEvent(
+    .clock              (aclk           ),
+    .coreid             (0              ),
+    .valid              (trap           ),
+    .code               (trap_code      ),
+    .pc                 (cmt_pc         ),
+    .cycleCnt           (cycleCnt       ),
+    .instrCnt           (instrCnt       )
+    );
+
+    DifftestStoreEvent DifftestStoreEvent(
+    .clock              (aclk           ),
+    .coreid             (0              ),
+    .index              (0              ),
+    .valid              (cmt_inst_st_en ),
+    .storePAddr         (cmt_st_paddr   ),
+    .storeVAddr         (cmt_st_vaddr   ),
+    .storeData          (cmt_st_data    )
+    );
+
+    DifftestLoadEvent DifftestLoadEvent(
+    .clock              (aclk           ),
+    .coreid             (0              ),
+    .index              (0              ),
+    .valid              (cmt_inst_ld_en ),
+    .paddr              (cmt_ld_paddr   ),
+    .vaddr              (cmt_ld_vaddr   )
+    );
+
+    DifftestCSRRegState DifftestCSRRegState(
+    .clock              (aclk               ),
+    .coreid             (0                  ),
+    .crmd               (csr_crmd_diff_0    ),
+    .prmd               (csr_prmd_diff_0    ),
+    .euen               (0                  ),
+    .ecfg               (csr_ectl_diff_0    ),
+    .estat              (csr_estat_diff_0   ),
+    .era                (csr_era_diff_0     ),
+    .badv               (csr_badv_diff_0    ),
+    .eentry             (csr_eentry_diff_0  ),
+    .tlbidx             (csr_tlbidx_diff_0  ),
+    .tlbehi             (csr_tlbehi_diff_0  ),
+    .tlbelo0            (csr_tlbelo0_diff_0 ),
+    .tlbelo1            (csr_tlbelo1_diff_0 ),
+    .asid               (csr_asid_diff_0    ),
+    .pgdl               (csr_pgdl_diff_0    ),
+    .pgdh               (csr_pgdh_diff_0    ),
+    .save0              (csr_save0_diff_0   ),
+    .save1              (csr_save1_diff_0   ),
+    .save2              (csr_save2_diff_0   ),
+    .save3              (csr_save3_diff_0   ),
+    .tid                (csr_tid_diff_0     ),
+    .tcfg               (csr_tcfg_diff_0    ),
+    .tval               (csr_tval_diff_0    ),
+    .ticlr              (csr_ticlr_diff_0   ),
+    .llbctl             (csr_llbctl_diff_0  ),
+    .tlbrentry          (csr_tlbrentry_diff_0),
+    .dmw0               (csr_dmw0_diff_0    ),
+    .dmw1               (csr_dmw1_diff_0    )
+    );
+
+    DifftestGRegState DifftestGRegState(
+    .clock              (aclk       ),
+    .coreid             (0          ),
+    .gpr_0              (0          ),
+    .gpr_1              (regs[1]    ),
+    .gpr_2              (regs[2]    ),
+    .gpr_3              (regs[3]    ),
+    .gpr_4              (regs[4]    ),
+    .gpr_5              (regs[5]    ),
+    .gpr_6              (regs[6]    ),
+    .gpr_7              (regs[7]    ),
+    .gpr_8              (regs[8]    ),
+    .gpr_9              (regs[9]    ),
+    .gpr_10             (regs[10]   ),
+    .gpr_11             (regs[11]   ),
+    .gpr_12             (regs[12]   ),
+    .gpr_13             (regs[13]   ),
+    .gpr_14             (regs[14]   ),
+    .gpr_15             (regs[15]   ),
+    .gpr_16             (regs[16]   ),
+    .gpr_17             (regs[17]   ),
+    .gpr_18             (regs[18]   ),
+    .gpr_19             (regs[19]   ),
+    .gpr_20             (regs[20]   ),
+    .gpr_21             (regs[21]   ),
+    .gpr_22             (regs[22]   ),
+    .gpr_23             (regs[23]   ),
+    .gpr_24             (regs[24]   ),
+    .gpr_25             (regs[25]   ),
+    .gpr_26             (regs[26]   ),
+    .gpr_27             (regs[27]   ),
+    .gpr_28             (regs[28]   ),
+    .gpr_29             (regs[29]   ),
+    .gpr_30             (regs[30]   ),
+    .gpr_31             (regs[31]   )
+    );
+    `endif
+
+
+
+
+
+
+endmodule : cpu_sram
