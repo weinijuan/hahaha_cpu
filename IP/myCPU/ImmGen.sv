@@ -5,11 +5,18 @@ module ImmGen
 (
     input  Instr instr,
     input  Itype itype,
+    input  logic is_csrtype,
     input  logic is_unsign,
+    input  logic is_tlbinv,
     output DType immout
 );
     localparam width = $bits(DType);
     always_comb begin
+        if(is_csrtype)
+            immout = width'(instr[23:10]);
+        else if(is_tlbinv)
+            immout = width'(instr[4:0]);
+        else begin
         unique case (itype)
             // I8 must sll/sra/srl , unsigned extend
             I8: begin
@@ -37,8 +44,8 @@ module ImmGen
             default: begin
                 immout = '0;
             end
-
         endcase
+    end
     end
 
 endmodule

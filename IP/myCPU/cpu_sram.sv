@@ -1,12 +1,13 @@
 `include "cpu.svh"
-
+`include "csr_tlbDefines.svh"
 module cpu_sram
     import cpuDefine::*;
+    import csr_tlbDefines::*;
 (
     input logic aclk,
     input logic aresetn,
     // inst sram
-    output logic req_inst,
+    output logic  req_inst,
     output logic wr_inst,
     output logic [1:0] size_inst,
     output logic [31:0] addr_inst,
@@ -45,49 +46,238 @@ module cpu_sram
 
     logic if_allow_in;
     logic if_valid_in;
-    DType if_data_in;
+    IF_DATA if_data_in;
+    logic [5:0] if_excode;
+    logic if_is_exc;
+    CsrMsg if_csrmsgin;
+    CsrMsg if_csrmsgout;
 
-    DType if_data_out;
+    IF_DATA if_data_out;
     logic if_ready_go;
     logic if_flush;
-    DType if_nop;
+    IF_DATA if_nop;
 
     logic id_valid_in;
     ID_DATA id_data_in;
     ID_DATA id_data_out;
+    logic [5:0] id_excode;
+    logic id_is_exc;
     logic id_ready_go;
     logic id_allow_in;
     logic id_flush;
     ID_DATA id_nop;
+    CsrMsg id_csrmsgin;
+    CsrMsg id_csrmsgout;
 
     logic ex_valid_in;
     EX_DATA ex_data_in;
     EX_DATA ex_data_out;
+    logic [5:0] ex_excode;
+    logic ex_is_exc;
     logic ex_ready_go;
     logic ex_allow_in;
     logic ex_flush;
     EX_DATA ex_nop;
+    CsrMsg ex_csrmsgin;
+    CsrMsg ex_csrmsgout;
+    CsrCtrl ex_csrctrl;
+    TlbCtrl ex_tlbctrl;
 
     logic mem_valid_in;
     MEM_DATA mem_data_in;
     MEM_DATA mem_data_out;
+    logic [5:0] mem_excode;
+    logic [31:0] mem_badvaddr;
+    logic mem_is_exc;
     logic mem_ready_go;
     logic mem_allow_in;
     logic mem_flush;
     MEM_DATA mem_nop;
+    CsrMsg mem_csrmsgin;
+    CsrMsg mem_csrmsgout;
+    //CsrCtrl mem_csrctrl;
+    //TlbCtrl mem_tlbctrl;
 
     // write back will have valid_out and allow_in is no drive
     logic wb_valid_in;
     WB_DATA wb_data_in;
     WB_DATA wb_data_out;
+    logic [5:0] wb_excode;
+    logic [11:0] wb_intercode;
+    logic wb_is_exc;
     logic wb_ready_go;
     logic wb_allow_in;
     logic wb_flush;
     WB_DATA wb_nop;
     logic wb_valid_out;
     logic wb_allow_out;
+    CsrMsg wb_csrmsgin;
+    CsrMsg wb_csrmsgout;
+    //CsrCtrl wb_csrctrl;
+    //TlbCtrl wb_tlbctrl;
+    
+    
+//csr
+    //wire [31:0] csrout_id;
+    wire[31:0] csrout_wb;
+/*
+    for exception to if
+*/
+    wire [31:0]exaddr;              //
+    wire exlike;                    //
+/*
+    for exception from wb
+*/
+/*
+    for csr wire
+*/
+    wire   [1:0]plv;
+    wire   [9:0]asid;
+    wire   da;
+    wire   pg;
+    //instr to tlb 
+    
+    //just skip now
+    PcSelHigh pcselHigh;
+    assign pcselHigh = exlike?PC_CSR:PC_NORMAL;
+    //for interrupt 
+    wire[11:0] lie;
+    wire[11:0] is;
+    wire ie;
 
-
+    //for tlb
+    logic [TLBNUMSIZE-1:0] nextPC_tlb_ind;
+    PhytranItem nextPC_tlb_phytranitem;
+    logic nextPC_tlb_ne;
+    logic nextPC_tlb_ne_;
+    logic [TLBNUMSIZE-1:0]memaddr_tlb_ind;
+    PhytranItem memaddr_tlb_phytranitem;
+    logic memaddr_tlb_ne;
+    logic memaddr_tlb_ne_;
+    //
+    logic[TLBNUMSIZE-1:0]r_index;
+    logic[5:0] r_ps;
+    logic[9:0] r_asid;
+    logic r_ne;
+    PhytranItem r_phytran0;
+    PhytranItem r_phytran1;
+    logic r_g;
+    logic[18:0] r_vppn;
+    //
+    logic [TLBNUMSIZE-1:0] w_index;
+    PhytranItem w_phytran0;
+    PhytranItem w_phytran1;
+    logic w_ne;
+    logic [5:0] w_ps;
+    logic [9:0]w_asid;
+    logic [18:0]w_vppn;
+    logic w_g;
+    //
+    logic [9:0]f_asid;
+    logic [18:0] f_va;
+    //
+    tlb_ tlb(
+    .clk(aclk),
+    .reset(~aresetn),
+    .s0_vppn(nextPC[31:13]),
+    .s0_asid(asid),
+    .s0_odd(nextPC[12]),
+    .s0_index(nextPC_tlb_ind),
+    .s0_phytran(nextPC_tlb_phytranitem), 
+    .s0_ne(nextPC_tlb_ne),
+    //search1 
+    .s1_vppn({19{is_tlb_sen_id}}&csr.csr.TLBEHI[31:13]|{19{~is_tlb_sen_id}}&memaddr_ex[31:13]),
+    .s1_asid(ex_data_out.csrctrl.asid),
+    .s1_odd(memaddr_ex[12]),//tlbsearch would not use this bit
+    .s1_index(memaddr_tlb_ind),
+    .s1_phytran(memaddr_tlb_phytranitem), 
+    .s1_ne(memaddr_tlb_ne),
+    //read
+    .r_index(r_index),
+    .r_ps(r_ps),
+    .r_asid(r_asid),
+    .r_ne(r_ne),
+    .r_phytran0(r_phytran0),
+    .r_phytran1(r_phytran1),
+    .r_g(r_g),
+    .r_vppn(r_vppn),
+    //write 
+    .we(wb_data_out.tlbctrl.tlb_wen),
+    .w_index(w_index),
+    .w_ps(w_ps),
+    .w_ne(w_ne),
+    .w_asid(w_asid),
+    .w_vppn(w_vppn),
+    .w_g(w_g),
+    .w_phytran0(w_phytran0),
+    .w_phytran1(w_phytran1),
+    //                          s2_isfill,��ʵ��STLB��MTLB������ָ��ò��ûɶ��
+    //flush
+    .fe(wb_data_out.tlbctrl.tlb_fen),
+    .f_asid(f_asid),
+    .f_va(f_va),
+    .f_op(wb_data_out.csrctrl.csrnum)//if instr controller is right, csrnum will equal to the f_op
+    );
+    csr_ csr(
+    .clk(aclk),
+    .reset(~aresetn),
+    .csrnum_r(wb_data_out.csrctrl.csrnum),//in wb stage read and write csr
+    .csrnum_w(wb_data_out.csrctrl.csrnum),
+    .csrwe(wb_data_out.csrctrl.csr_wen),
+    .csrme(wb_data_out.csrctrl.is_musk),        
+    .musk(wb_data_out.csrctrl.musk),
+    .csrin(wb_data_out.csrctrl.csr_writedata),
+    .csrout(csrout_wb),//output in id
+//    for exception to if
+    .exaddr,
+    .exlike,
+//    for exception from wb
+    .is_ertn(wb_csrctrl.is_ertn),
+    .inter(wb_intercode),
+    .excode(wb_csrmsgout.excode),
+    .esubcode(wb_csrmsgout.esubcode),
+    .badvaddr(wb_csrmsgout.badvaddr),
+    .csr_pc(wb_csrmsgout.pc),
+    .is_exc(wb_csrmsgout.is_exc),
+    // for tlb instr
+    //search1  
+    .s1e(wb_data_out.tlbctrl.tlb_sen),
+    .s1_index(wb_data_out.tlbctrl.ind), 
+    .s1_ne(wb_data_out.tlbctrl.ne),
+    //read
+    .r_index(r_index),
+    .re(wb_data_out.tlbctrl.tlb_ren),
+    .r_ps(r_ps),
+    .r_asid(r_asid),
+    .r_ne(r_ne),
+    .r_phytran0(r_phytran0),
+    .r_phytran1(r_phytran1),
+    .r_g(r_g),
+    .r_vppn(r_vppn),
+    //write
+    .w_index(w_index),
+    .w_ps(w_ps),
+    .w_ne(w_ne),
+    .w_asid(w_asid),
+    .w_vppn(w_vppn),
+    .w_g(w_g),
+    .w_phytran0(w_phytran0),
+    .w_phytran1(w_phytran1),
+    //flush
+    .f_asid(f_asid),
+    .f_va(f_va),
+    // for csr output
+    .plv(plv),
+    .asid(asid),
+    .da(da),
+    .pg(pg),
+    // for interrupt
+    .lie(lie),
+    .is(is),
+    .ie(ie)
+    );//
+    //csr
+    
     // preif   signal 
     DType pc_if;
     DType nextPC;
@@ -97,13 +287,12 @@ module cpu_sram
     DType branchPC_temp;
     logic branchPC_temp_valid;
 
-
+    
 
     // preif pipelined signal 
-
-    assign preif_ready_go = addr_ok_inst & req_inst ;
+    assign preif_ready_go = (addr_ok_inst & req_inst) | if_is_exc ;
     // 复位时不能发请求
-    assign req_inst = preif_allow_in & aresetn;
+    assign req_inst = preif_allow_in & aresetn & ~pc_have_exc;
     assign preif_valid = 1;
 
     // if  signal 
@@ -115,15 +304,88 @@ module cpu_sram
     // instr sram 
     assign wr_inst = 0;
     assign size_inst = 2;
-    assign addr_inst = nextPC;
+
+    
+    //add addrtrans
+    logic[31:0] nextPC_addr_phyaddr;
+    addr_trans addr_trans_pc(
+        .virt_addr(nextPC),
+        .phy_addr(nextPC_addr_phyaddr),
+        .da(da),
+        .pg(pg),
+        .dmw0(csr.csr.DMW0),
+        .dmw1(csr.csr.DMW1),
+        .plv(plv),
+    //TLB
+        .pfn(nextPC_tlb_phytranitem.PPN),
+        .tlb_ne(nextPC_tlb_ne),
+        .tlb_ne_(nextPC_tlb_ne_)
+    );
+    assign addr_inst = nextPC_addr_phyaddr;
+    
+    
     assign instr = rdata_inst;
 
     // if pipelined signal 
     assign if_valid_in = preif_ready_go && preif_valid;
-    assign if_data_in = nextPC;
-    assign if_nop = 32'h1bfffffc;
+    assign if_nop = '{
+        pc: '0
+    };
     assign if_ready_go = data_ok_inst || instr_temp_valid;
     assign if_flush = 0;
+    
+    always_comb begin
+        if(nextPC_addr_phyaddr[1:0]!='0)begin
+            if_is_exc = 1'b1;
+            if_excode = ADEF_ADEM;
+        end
+        else if(nextPC_tlb_ne_)begin//tlb exception
+            if_is_exc = 1'b1;
+            if_excode = TLBR;
+        end
+        else if(~nextPC_tlb_phytranitem.V)begin
+            if_is_exc = 1'b1;
+            if_excode = PIL;
+        end
+        else if(plv>nextPC_tlb_phytranitem.PLV)begin
+            if_is_exc = 1'b1;
+            if_excode = PPI;
+        end
+        else begin
+            if_is_exc = 1'b0;
+            if_excode = '0;
+        end
+    end
+    //if exc justify
+    assign if_csrmsgin = '{
+        badvaddr: nextPC,
+        pc: nextPC,
+        excode: if_excode,
+        exsubcode: '0,
+        is_exc:if_is_exc,
+        is_fetch_again:is_tlb_ren_id|is_tlb_fen_id|is_tlb_wen_id|is_tlb_sen_id,
+        plv: plv,
+        da: da,//fetch from csr
+        pg: pg,
+        asid: asid
+    };
+    assign if_data_in = '{pc: nextPC};
+    
+    reg pc_have_exc;
+    wire pc_end_exc;
+    always_ff@(posedge aclk) begin
+        if (pc_end_exc) begin
+            pc_have_exc = 0;
+        end
+        else if (wb_is_exc||mem_is_exc||ex_is_exc||id_is_exc||if_is_exc || pc_have_exc) begin
+            pc_have_exc = 1;
+        end
+        else begin
+            pc_have_exc = 0;
+        end
+    end
+
+
 
     Pipeline #(
         // .WIDTH($bits(nextPC)),
@@ -141,28 +403,41 @@ module cpu_sram
         .flush(if_flush),
         .valid_out(id_valid_in),
         .data_out(if_data_out),
-        .allow_out(preif_allow_in)
+        .allow_out(preif_allow_in),
+        .csrmsg_in(if_csrmsgin),
+        .csrmsg_out(if_csrmsgout)
     );
-
-    assign pc_if = if_data_out;
+    assign pc_if = if_data_out.pc;//
     assign pcAdd = pc_if + 4;
     always_comb begin
         if (branchPC_temp_valid) begin
             nextPC = branchPC_temp;
         end
         else begin
-        unique case (pcsel)
-            PC_ADD4:   nextPC = pcAdd;
-            PC_BRANCH: nextPC = branchPC;
-            default:   nextPC = '0;
-        endcase
+            if (pcselHigh == PC_CSR) begin
+                nextPC = exaddr;
+            end
+            else begin
+                unique case (pcsel)
+                    PC_ADD4:   nextPC = pcAdd;
+                    PC_BRANCH: nextPC = branchPC;
+                    default:   nextPC = '0;
+                endcase
+            end
         end
     end
 
-    // ex_flush=0表示此时在id阶段执行的指令有效，也就是没发生危害的情况。
+    // ex_flush=0 
     always_ff @(posedge aclk) begin
         if ((pcsel == PC_BRANCH)&&(~if_valid_in || ~preif_allow_in)&&(~ex_flush)) begin
-            branchPC_temp <= branchPC;
+            if(exlike)
+            begin 
+                branchPC_temp <= exaddr;
+            end
+            else begin
+                branchPC_temp <= branchPC;
+            end
+            /*csraddr*/
             branchPC_temp_valid <= 1;
         end else if (branchPC_temp_valid && preif_allow_in && if_valid_in) begin
             branchPC_temp_valid <= 0;
@@ -192,9 +467,35 @@ module cpu_sram
     end
 
     // ID
-
-
-    assign id_data_in = '{pc: pc_if, instr: instr_if};
+    
+    always_comb begin
+        if(if_data_out.csrmsg.is_exc)begin
+            id_excode = if_csrmsgout.excode; 
+            id_is_exc = if_csrmsgout.is_exc;
+        end
+        else begin
+            id_is_exc = 1'b0;
+            id_excode = '0;
+        end
+        //csr justify
+    end
+    
+    assign id_csrmsgin = '{
+        badvaddr: if_csrmsgout.badvaddr,
+        pc: if_csrmsgout.pc,
+        excode: id_excode,
+        exsubcode: '0,
+        is_exc:id_is_exc,
+        is_fetch_again:if_csrmsgout.is_fetch_again,
+        plv: if_csrmsgout.plv,
+        da: if_csrmsgout.da,//fetch from csr
+        pg: if_csrmsgout.pg,
+        asid: if_csrmsgout.asid
+    };
+    assign id_data_in = '{
+    pc: pc_if, 
+    instr: instr_if
+    };
     // add x0, x0, x0
     assign id_nop = '{pc: '0, instr: 32'h00100000};
     Pipeline #(
@@ -211,7 +512,9 @@ module cpu_sram
         .ready_go(id_ready_go),
         .flush(id_flush),
         .nop_data(id_nop),
-        .data_out(id_data_out)
+        .data_out(id_data_out),
+        .csrmsg_in(id_csrmsgin),
+        .csrmsg_out(id_csrmsgout)
     );
 
     Instr instr_id = id_data_out.instr;
@@ -233,6 +536,18 @@ module cpu_sram
     logic is_unsign_load_id;
     logic[7:0] load_valid_diff_id;
     logic[7:0] store_valid_diff_id;
+    logic is_privil_id;//instr privil
+    logic is_ertn_id;
+    logic is_syscall_id;
+    logic is_brk_id;
+    logic is_ine_id;
+    logic is_tlb_fen_id;//invtlb
+    logic is_tlb_wen_id;//fill and write is same
+    logic is_tlb_sen_id;//search
+    logic is_tlb_ren_id;
+    logic is_csr_wen_id;//writeen
+    logic is_csr_ren_id;
+    logic is_csrMusk_id;//csrxchg
     Control control (
         .instr(instr_id),
         .eq(eq),
@@ -256,9 +571,21 @@ module cpu_sram
         .size_mem(size_mem_id),
         .is_unsign_load(is_unsign_load_id),
         .load_valid_diff(load_valid_diff_id),
-        .store_valid_diff(store_valid_diff_id)
+        .store_valid_diff(store_valid_diff_id),
+        .is_privil(is_privil_id),//instr privil
+        .is_ertn(is_ertn_id),
+        .is_syscall(is_syscall_id),
+        .is_brk(is_brk_id),
+        .is_ine(is_ine_id),
+        .tlb_fen(is_tlb_fen_id),//invtlb
+        .tlb_wen(is_tlb_wen_id),//fill and write is same
+        .tlb_sen(is_tlb_sen_id),//search
+        .tlb_ren(is_tlb_ren_id),
+        .csr_wen(is_csr_wen_id),//writeen
+        .csr_ren(is_csr_ren_id),
+        .is_csrMusk(is_csrMusk_id)//csrxchg
     );
-
+    
 
     // bl and jirl is write x1 register
     Gr rd_no_id, rj_no_id, rk_no_id;
@@ -296,6 +623,8 @@ module cpu_sram
         .instr(instr_id),
         .itype(itype),  // from control
         .is_unsign(is_unsign_imm),  // from control
+        .is_csrtype(is_csr_ren_id|is_csr_wen_id),
+        .is_tlbinv(is_tlb_fen_id),
         .immout(immout_id)
     );
 
@@ -350,6 +679,8 @@ module cpu_sram
 
     logic memRead_ex, regWriteEn_ex;
 
+    // logic mem_is_exc;
+    // logic wb_is_exc;
     HazardDetect hazard_detect (
         .rd_no_ex(rd_no_ex),
         .memRead_ex(memRead_ex),
@@ -363,8 +694,17 @@ module cpu_sram
         .alusel1_id(alusel1_id),
         .alusel2_id(alusel2_id),
         .memRead_mem(memRead_mem),
+        .mem_is_exc(mem_is_exc),
+        .wb_is_exc(wb_is_exc),
+        .ex_is_csr(ex_data_out.csrctrl.csr_ren),
+        .mem_is_csr(mem_data_out.csrctrl.csr_ren),
+        .mem_is_ertn(mem_data_out.csrctrl.is_ertn),
+        .wb_is_ertn(wb_data_out.csrctrl.is_ertn),
         //todo
         .IDFlush(id_flush),
+        .IFFlush(if_flush),
+        .EXFlush(ex_flush),
+        .MEMFLush(mem_flush),
         .IDWriteEn(id_ready_go),
         // .pcWriteEn(pcWriteEn),
         .EXFlush(ex_flush)
@@ -412,6 +752,61 @@ module cpu_sram
             load_valid_diff:'0,
             store_valid_diff:'0
         };
+    always_comb begin
+        if(is_syscall_id)begin
+            ex_excode = SYS;
+            ex_is_exc = 1;
+        end
+        else if(is_brk_id)begin
+            ex_excode = BRK;
+            ex_is_exc = 1;
+        end
+        else if(is_ine_id)begin
+            ex_excode = INE;
+            ex_is_exc = 1;
+        end
+        else if(is_privil_id&id_csrmsgout.plv!=2'b0)begin
+            ex_excode = IPE;
+            ex_is_exc = 1;
+        end
+        else if(id_csrmsgout.is_exc)begin
+            ex_excode = id_csrmsgout.excode;
+            ex_is_exc = id_csrmsgout.is_exc;
+        end
+        else begin
+            ex_is_exc = 1'b0;
+            ex_excode = '0;
+        end
+    end
+    assign ex_csrmsgin = '{
+        pc: id_csrmsgout.pc,
+        badvaddr: id_csrmsgout.badvaddr,
+        excode: ex_excode,
+        exsubcode: '0,
+        is_exc:ex_is_exc,
+        is_fetch_again:id_csrmsgout.is_fetch_again,
+        plv: id_csrmsgout.plv,
+        da: id_csrmsgout.da,//fetch from csr
+        pg: id_csrmsgout.pg,
+        asid: id_csrmsgout.asid
+    };
+    assign ex_tlbctrl = '{
+        tlb_ren:is_tlb_ren_id,
+        tlb_sen:is_tlb_sen_id,
+        tlb_wen:is_tlb_wen_id,
+        tlb_fen:is_tlb_fen_id,
+        ind: memaddr_tlb_ind,
+        ne: memaddr_tlb_ne
+    };
+    assign ex_csrctrl = '{
+        is_ertn: is_ertn_id,
+        is_musk: is_csrMusk_id,
+        csr_wen: is_csr_wen_id,
+        csr_ren: is_csr_ren_id,
+        musk: rj_id,
+        csrnum: immout_id,
+        csr_writedata: rd_id
+    };
     assign ex_data_in = '{
             ex_control_data: ex_control_data_id,
             mem_control_data: mem_control_data_id,
@@ -424,9 +819,10 @@ module cpu_sram
             rdNo: rd_no_id,
             immout: immout_id,
             pc: pc_id,
-            instr : instr_id
-        };
-
+            instr : instr_id,
+            csrctrl: ex_csrctrl,
+            tlbctrl: ex_tlbctrl
+    };
     assign ex_nop = '{
             ex_control_data: ex_nop_control_data,
             mem_control_data: mem_nop_control_data,
@@ -439,7 +835,9 @@ module cpu_sram
             rdNo: '0,
             immout: '0,
             pc: '0,
-            instr : '0
+            instr : '0,
+            csrctrl: '0,
+            tlbctrl: '0
         };
 
     Pipeline #(
@@ -456,7 +854,9 @@ module cpu_sram
         .valid_out(mem_valid_in),
         .data_out(ex_data_out),
         .allow_out(id_allow_in),
-        .flush(ex_flush)
+        .flush(ex_flush),
+        .csrmsg_in(ex_csrmsgin),
+        .csrmsg_out(ex_csrmsgout)
     );
 
 
@@ -490,7 +890,7 @@ module cpu_sram
     assign rj_no_ex = ex_data_out.rjNo;
     assign rk_no_ex = ex_data_out.rkNo;
     Instr instr_ex = ex_data_out.instr;
-    // rd_no_ex将送到hazard detection
+    // rd_no_ex将�?�到hazard detection
     assign rd_no_ex = ex_data_out.rdNo;
     assign immout_ex = ex_data_out.immout;
     assign pc_ex = ex_data_out.pc;
@@ -499,12 +899,12 @@ module cpu_sram
     assign aluctrl_ex = ex_control_data_ex.aluctrl;
 
     assign memWriteEn_ex = mem_control_data_ex.memWriteEn;
-    // memRead_ex将送到hazard detection
+    // memRead_ex将�?�到hazard detection
     assign memRead_ex = mem_control_data_ex.memRead;
     assign size_mem_ex = mem_control_data_ex.size_mem;
     assign is_unsign_load_ex = mem_control_data_ex.is_unsign_load;
 
-    // regWriteEn_ex将送到hazard detection
+    // regWriteEn_ex将�?�到hazard detection
     assign regWriteEn_ex = wb_control_data_ex.regWriteEn;
     assign regWriteDataSel_ex = wb_control_data_ex.regWriteDataSel;
 
@@ -530,7 +930,7 @@ module cpu_sram
 
     DivNeed divNeed;
     assign divNeed.aclk = aclk;
-    // 不知道怎么填
+    // 不知道�?�么�????
     assign divNeed.aresetn = aresetn;
     DType memaddr_ex;
     DType aluout_ex;
@@ -549,11 +949,67 @@ module cpu_sram
 
     //MEM
 
-    // MEM阶段需要根据总线接口重新设计
-    // wstrb 即可以作为写片选信号，也可以作为读片选信号
+    // MEM阶�?��??要根�??????�线接口重新设�??
+    // wstrb 即可以作为写片�?�信号，也可以作为�?�片??�信�????
+    
+    always_comb begin
+        if(memWriteEn_ex||memRead_ex)begin
+            if(memaddr_ex[1:0]!='0&size_mem==2'd2||memaddr_ex[0]!='0&size_mem==2'd1)begin
+                mem_excode = ALE;
+                mem_badvaddr = memaddr_ex;
+                mem_is_exc = 1'b1;
+            end
+            else if(memaddr_tlb_ne_)begin
+                mem_is_exc = 1'b1;
+                mem_excode = TLBR;
+                mem_badvaddr = memaddr_ex;
+            end
+            else if(~memaddr_tlb_phytranitem.V)begin
+                mem_is_exc = 1'b1;
+                mem_badvaddr = memaddr_ex;
+                if(memWriteEn_ex)begin
+                mem_excode = PIS;
+                end
+                else if(memRead_ex)begin
+                mem_excode = PIL;
+                end
+            end
+            else if(plv>memaddr_tlb_phytranitem.PLV)begin
+                mem_is_exc = 1'b1;
+                mem_excode = PPI;
+                mem_badvaddr = memaddr_ex;
+            end
+        end
+        else if(memWriteEn_ex&&memaddr_tlb_phytranitem.D==1'b0)begin
+            mem_is_exc = 1'b1;
+            mem_excode = PME;
+            mem_badvaddr = memaddr_ex;
 
-
+        end
+        else if(ex_csrmsgout.is_exc)begin
+            mem_excode = ex_csrmsgout.excode;
+            mem_badvaddr = ex_csrmsgout.badvaddr;
+            mem_is_exc = ex_csrmsgout.is_exc;
+        end
+        else begin
+            mem_is_exc = 0;
+            mem_excode = '0;
+            mem_badvaddr = ex_csrmsgout.badvaddr;
+        end
+    end
     // EX_DATA ex_data_in;
+    assign mem_csrmsgin = '{
+        pc:ex_csrmsgout.pc,
+        badvaddr: mem_badvaddr,
+        excode: mem_excode,
+        exsubcode: '0,
+        is_exc:mem_is_exc,
+        is_fetch_again:ex_csrmsgout.is_fetch_again,
+        plv: ex_csrmsgout.plv,
+        da: ex_csrmsgout.da,//fetch from csr
+        pg: ex_csrmsgout.pg,
+        asid :ex_csrmsgout.asid
+    };
     assign mem_data_in = '{
             mem_control_data: mem_control_data_ex,
             wb_control_data: wb_control_data_ex,
@@ -563,7 +1019,9 @@ module cpu_sram
             pc : pc_ex,
             instr: instr_ex,
             memaddr: memaddr_ex,
-            rd:rd_ex_true
+            rd:rd_ex_true,
+            csrctrl: ex_data_out.csrctrl,
+            tlbctrl: ex_data_out.tlbctrl
         };
     assign mem_nop = '{
             mem_control_data: mem_nop_control_data,
@@ -574,12 +1032,32 @@ module cpu_sram
             pc: '0,
             instr: '0,
             memaddr: '0,
-            rd:'0
+            rd:'0,
+            csrctrl:'0,
+            tlbctrl:'0
         };
 
     // sram_mem 
+    
+    //addr_trans
+    logic [31:0] memaddr_addr_phyaddr;
+    addr_trans addr_trans_memaddr(
+    .virt_addr(memaddr_ex),
+    .phy_addr(memaddr_addr_phyaddr),
+    .da(ex_csrmsgout.da),
+    .pg(ex_csrmsgout.pg),
+    .dmw0(csr.csr.DMW0),
+    .dmw1(csr.csr.DMW1),
+    .plv(ex_csrmsgout.plv),
+    //TLB
+    //.vpn2(),
+    //.odd_page,
+    .pfn(memaddr_tlb_phytranitem.PPN),
+    .tlb_ne(memaddr_tlb_ne),
+    .tlb_ne_(memaddr_tlb_ne_)
+    );
     assign wr_mem = memWriteEn_ex;
-    assign addr_mem = memaddr_ex;
+    assign addr_mem = memaddr_addr_phyaddr;//memaddr_ex
     assign wdata_mem = rd_ex_true;
     assign size_mem = size_mem_ex;
 
@@ -630,10 +1108,10 @@ module cpu_sram
 
 
 
-    // pipelined signal 这里改动了，与preif不完全相同
+    // pipelined signal 这里改动了，与preif不完全相�????
     assign ex_ready_go = (addr_ok_mem & req_mem & (memRead_ex | memWriteEn_ex) ) 
-                        | (~(memRead_ex | memWriteEn_ex) & alu_ready_go);
-    assign req_mem = ex_allow_in & (memRead_ex | memWriteEn_ex);
+                        | (~(memRead_ex | memWriteEn_ex) & alu_ready_go) | mem_is_exc;
+    assign req_mem = ex_allow_in & (memRead_ex | memWriteEn_ex) & ~mem_is_exc;
     assign mem_ready_go = data_ok_mem || readData_temp_valid || (~(memRead_mem | memWriteEn_mem));
 
 
@@ -651,7 +1129,9 @@ module cpu_sram
         .valid_out(wb_valid_in),
         .data_out(mem_data_out),
         .allow_out(ex_allow_in),
-        .flush(mem_flush)
+        .flush(mem_flush),
+        .csrmsg_in(mem_csrmsgin),
+        .csrmsg_out(mem_csrmsgout)
     );
 
 
@@ -683,15 +1163,15 @@ module cpu_sram
     DType readData_mem;
     DType readData;
 
-    //  readData 通过 rdata_mem生成。注意：1. 是否进行无符号扩展还是符号扩展 。ok
-    //  2. 将相应的位进行移动到低位中，并进行拼接.ok
-    //  3. 如何判断究竟是哪个字节有效呢？发送的请求会发生变化吗.ok
-    //  4. 检查这些 ready_go 的代码逻辑是否有问题,尤其是memRead和memWriteEn的使用。
-    //  5. 将 readData_mem 写入到 WB阶段的data_in 中去。
+    //  readData 通过 rdata_mem生成。注意：1. �????否进行无符号扩展还是符号扩�?? 。ok
+    //  2. 将相应的位进行移动到低位�????，并进�?�拼�????.ok
+    //  3. 如何判断究竟�????�????�????字节有效�????？发送的请求会发生变化吗.ok
+    //  4. �????查这�???? ready_go 的代码�?�辑�????否有�????�????,尤其是memRead和memWriteEn的使用�??
+    //  5. �???? readData_mem 写入�???? WB阶�?�的data_in �????去�?
 
 
-    // wstrb_mem是传递给sram总线的片选信号
-    // wstrb_mem_mem是表示在mem阶段的wstrb_mem信号，是流水线中真正要用到的片选信号
+    // wstrb_mem�????传�?�给sram总线的片选信�????
+    // wstrb_mem_mem�????表示在mem阶�?�的wstrb_mem信号，是流水线中真�?��?�用到的片�?�信�????
 
 
     extend_memData extend_memData_u (
@@ -701,7 +1181,7 @@ module cpu_sram
         .readData(readData)
     );
 
-    // 这里也改动了，与preif不完全相同
+    // 这里也改动了，与preif不完全相�????
     always_ff @(posedge aclk) begin
         if (mem_ready_go && ~ex_allow_in && (memRead_mem | memWriteEn_mem)) begin
             readData_temp <= readData;
@@ -722,12 +1202,33 @@ module cpu_sram
             default readData_mem = '0;
         endcase
     end
-
-
-
-
-    // WB
-
+    always_comb begin
+        if({12{ie}}&is&lie!=12'b0)begin//interrupt
+            wb_excode = INT;
+            wb_is_exc = 1'b1;
+        end
+        else if(mem_csrmsgout.is_exc)begin
+            wb_excode = mem_csrmsgout.excode;
+            wb_is_exc = 1'b1;
+        end
+        else
+        begin
+        wb_is_exc = 1'b0;
+       wb_excode = '0;     
+        end
+    end
+    assign wb_csrmsgin = '{
+        pc: mem_csrmsgout.pc,
+        badvaddr: mem_csrmsgout.badvaddr,
+        excode: wb_excode,
+        exsubcode: '0,
+        is_exc:wb_is_exc,
+        is_fetch_again: mem_csrmsgout.is_fetch_again,
+        plv: mem_csrmsgout.plv,
+        da: mem_csrmsgout.da,//fetch from csr
+        pg: mem_csrmsgout.pg,
+        asid :mem_csrmsgout.asid
+    };
     assign wb_data_in = '{
             wb_control_data: wb_control_data_mem,
             rdNo: rd_no_mem,
@@ -737,7 +1238,9 @@ module cpu_sram
             wstrb: wstrb_mem_mem,
             instr:instr_mem,
             memaddr:memaddr_mem, 
-            rd: rd_mem
+            rd: rd_mem,
+            csrctrl: mem_data_out.csrctrl,
+            tlbctrl: mem_data_out.tlbctrl
         };
 
     assign wb_nop = '{
@@ -749,7 +1252,9 @@ module cpu_sram
             wstrb:'0,
             instr:'0,
             memaddr:'0,
-            rd:'0
+            rd:'0,
+            csrctrl:'0,
+            tlbctrl:'0
         };
 
     assign wb_allow_in = 1;
@@ -769,7 +1274,9 @@ module cpu_sram
         .valid_out(wb_valid_out),
         .data_out(wb_data_out),
         .allow_out(mem_allow_in),
-        .flush(wb_flush)
+        .flush(wb_flush),
+        .csrmsg_in(wb_csrmsgin),
+        .csrmsg_out(wb_csrmsgout)
     );
 
     WB_CONTROL_DATA wb_control_data_wb;
@@ -798,6 +1305,7 @@ module cpu_sram
         unique case (regWriteDataSel_wb)
             REG_WRITE_ALU: regWriteData_wb = aluout_wb;
             REG_WRITE_MEM: regWriteData_wb = readData_wb;
+            REG_WRITE_CSR: regWriteData_wb = csrout_wb;
             default: regWriteData_wb = '0;
         endcase
     end
@@ -813,21 +1321,23 @@ module cpu_sram
 
     `ifdef DIFFTEST_EN
 
-// 一些尚未定义的信号
-    logic excp_flush               ;
-    logic ertn_flush               ;
-    logic [5:0] ws_csr_ecode       ;
+// �????些尚�????定义的信�????
+    //logic excp_flush               ;
+    //logic ertn_flush               ;
+    //logic [5:0] ws_csr_ecode       ;
     logic tlbfill_en               ;
     logic[4:0] rand_index          ;
 
 
     assign st_vaddr_diff = memaddr_wb;
-    assign st_paddr_diff = memaddr_wb;
+    assign st_paddr_diff = memaddr_addr_phyaddr;
     assign ld_vaddr_diff = memaddr_wb;
-    assign ld_paddr_diff = memaddr_wb;
+    assign ld_paddr_diff = memaddr_addr_phyaddr;
     assign inst_ld_en_diff = load_valid_diff_wb;
     assign inst_st_en_diff = store_valid_diff_wb;
-    assign st_data_diff =  rd_wb;
+    // the sram have wstrb, so my store data is not change , but there need change by wstrb
+    wire[31:0] extend_wstrb_wb =  {8{wstrb_wb[3]}, {8{wstrb_wb[2]}}, {8{wstrb_wb[1]}}, {8{wstrb_wb[0]}}};
+    assign st_data_diff =  rd_wb & extend_wstrb_wb;
 
 
 
@@ -884,31 +1394,57 @@ module cpu_sram
 
 // from csr
     wire    [31:0]  csr_crmd_diff_0     ;
+    assign csr_crmd_diff_0 = csr.csr.CRMD;
     wire    [31:0]  csr_prmd_diff_0     ;
+    assign csr_prmd_diff_0 = csr.csr.PRMD;
     wire    [31:0]  csr_ectl_diff_0     ;
+    assign csr_ectl_diff_0 = csr.csr.ECFG;
     wire    [31:0]  csr_estat_diff_0    ;
+    assign csr_estat_diff_0= csr.csr.ESTAT;
     wire    [31:0]  csr_era_diff_0      ;
+    assign csr_era_diff_0 = csr.csr.ERA;
     wire    [31:0]  csr_badv_diff_0     ;
+    assign csr_badv_diff_0 = csr.csr.BADV;
     wire	[31:0]  csr_eentry_diff_0   ;
+    assign csr_eentry_diff_0 = csr.csr.EENTRY;
     wire 	[31:0]  csr_tlbidx_diff_0   ;
+    assign csr_tlbidx_diff_0 = csr.csr.TLBIDX;
     wire 	[31:0]  csr_tlbehi_diff_0   ;
+    assign csr_tlbehi_diff_0 = csr.csr.TLBEHI;
     wire 	[31:0]  csr_tlbelo0_diff_0  ;
+    assign csr_tlbelo0_diff_0 = csr.csr.TLBELO0;
     wire 	[31:0]  csr_tlbelo1_diff_0  ;
+    assign csr_tlbelo1_diff_1 = csr.csr.TLBELO1;
     wire 	[31:0]  csr_asid_diff_0     ;
+    assign csr_asid_diff_0 = csr.csr.ASID;
     wire 	[31:0]  csr_save0_diff_0    ;
+    assign csr_save0_diff_0 = csr.csr.SAVE0;
     wire 	[31:0]  csr_save1_diff_0    ;
+    assign csr_save1_diff_0 = csr.csr.SAVE1;
     wire 	[31:0]  csr_save2_diff_0    ;
+    assign csr_save2_diff_0 = csr.csr.SAVE2;
     wire 	[31:0]  csr_save3_diff_0    ;
+    assign csr_save3_diff_0 = csr.csr.SAVE3;
     wire 	[31:0]  csr_tid_diff_0      ;
+    assign csr_tid_diff_0 = csr.csr.TID;
     wire 	[31:0]  csr_tcfg_diff_0     ;
+    assign csr_tcfg_diff_0 = csr.csr.TCFG;
     wire 	[31:0]  csr_tval_diff_0     ;
+    assign csr_tval_diff_0 = csr.csr.TVAL;
     wire 	[31:0]  csr_ticlr_diff_0    ;
+    assign csr_ticlr_diff_0 = csr.csr.TICLR;
     wire 	[31:0]  csr_llbctl_diff_0   ;
+    assign csr_llbctl_diff_0 = csr.csr.LLBCTL;
     wire 	[31:0]  csr_tlbrentry_diff_0;
+    assign csr_tlbrentry_diff_0 = csr.csr.TLBRENTRY;
     wire 	[31:0]  csr_dmw0_diff_0     ;
+    assign csr_dmw0_diff_0 = csr.csr.DMW0;
     wire 	[31:0]  csr_dmw1_diff_0     ;
+    assign csr_dmw1_diff_0 = csr.csr.DMW1;
     wire 	[31:0]  csr_pgdl_diff_0     ;
+    assign csr_pgdl_diff_0 = csr.csr.PGDL;
     wire 	[31:0]  csr_pgdh_diff_0     ;
+    assign csr_pgdh_diff_0 = csr.csr.PGDH;
 
     always @(posedge aclk) begin
     if (~aresetn) begin
@@ -935,9 +1471,9 @@ module cpu_sram
     cmt_pc      <=  debug0_wb_pc                ;
     cmt_inst    <=  debug0_wb_inst              ;
 
-    cmt_excp_flush  <= excp_flush               ;
-    cmt_ertn        <= ertn_flush               ;
-    cmt_csr_ecode   <= ws_csr_ecode             ;
+    cmt_excp_flush  <= wb_csrmsgout.is_exc      ;
+    cmt_ertn        <= wb_data_out.csrctrl.is_ertn;
+    cmt_csr_ecode   <= wb_csrmsgout.excode      ;
     cmt_tlbfill_en  <= tlbfill_en               ;
     cmt_rand_index  <= rand_index               ;
 
@@ -947,7 +1483,6 @@ module cpu_sram
     instrCnt        <= instrCnt + inst_valid_diff;
     end
     end
-
     DifftestInstrCommit DifftestInstrCommit(
     .clock              (aclk           ),
     .coreid             (0              ),

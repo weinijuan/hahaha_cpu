@@ -22,10 +22,25 @@ module Control(
     output logic branchPcFromJ,
     output logic signed is_compare,
 
+    //tlb csr 
+    output logic is_privil,//instr privil
+    output logic is_ertn,
+    output logic is_syscall,
+    output logic is_brk,
+    output logic is_ine,
+    output logic tlb_fen,//invtlb
+    output logic tlb_wen,//fill and write is same
+    output logic tlb_sen,//search
+    output logic tlb_ren,
+    output logic csr_wen,//writeen
+    output logic csr_ren,
+    output logic is_csrMusk,//csrxchg
+
     output logic [1:0] size_mem,
     output logic is_unsign_load,
     output logic [7:0] load_valid_diff,
     output logic [7:0] store_valid_diff
+
 );
 
 
@@ -42,6 +57,8 @@ module Control(
     wire signed is_2RI14_TYPE = (instr[31:25] == _2RI14_TYPE);
     wire signed is_2RI12_TYPE_2 = (instr[31:26] == _2RI12_TYPE_2);
     wire signed is_BRANCH_TYPE = (instr[31:30] == BRANCH_TYPE);
+    wire signed is_TLB_TYPEH = (instr[31:20]==TLB_TYPEH);
+    wire signed is_CSR_TYPE = (instr[31:24]==CSR_TYPE);
     // wire signed is_1RI21_TYPE = (instr[31:27] == 1RI21_TYPE);
     // wire signed is_I26_TYPE = (instr[31:27] == I26_TYPE);
     // wire signed is_2RI16_TYPE_1 = ((instr[31:27] == 2RI16_TYPE_1));
@@ -67,6 +84,9 @@ module Control(
     wire signed is_MOD_TYPE = (_3R_TYPE_low == MOD_TYPE) & is_3R_TYPE;
     wire signed is_DIVU_TYPE = (_3R_TYPE_low == DIVU_TYPE) & is_3R_TYPE;
     wire signed is_MODU_TYPE = (_3R_TYPE_low == MODU_TYPE) & is_3R_TYPE;
+    //BRK SYSCALL
+    wire signed is_BRK_TYPE = (_3R_TYPE_low == BREAK_TYPE) & is_3R_TYPE;
+    wire signed is_SYSCALL_TYPE = (_3R_TYPE_low ==SYSCALL_TYPE)& is_3R_TYPE;
     // _2RI8_TYPE_low
     wire [6:0] _2RI8_TYPE_low = instr[21:15];
     wire signed is_SLLI_TYPE = (_2RI8_TYPE_low == SLLI_TYPE) & is_2RI8_TYPE;
@@ -117,14 +137,22 @@ module Control(
     wire signed is_BLTU_TYPE = (BRANCH_TYPE_low == BLTU_TYPE) & is_BRANCH_TYPE;
     wire signed is_BGEU_TYPE = (BRANCH_TYPE_low == BGEU_TYPE) & is_BRANCH_TYPE;
 
-    // 未实现的指令,因为nop regWriteEn 和 memRead和 memWriteEn 都为0,因此不会干啥
-    wire signed is_break = instr[31:15] == 17'b0000_0000_0010_10100;
-    wire signed is_syscall = instr[31:15] == 17'b0000_0000_0010_10110;
-    wire signed is_csrrd = instr[31:24] == 8'b00000100 && instr[9:5] == 5'b00000;
-    wire signed is_csrwd = instr[31:24] == 8'b00000100 && instr[9:5] == 5'b00001;
-    wire signed is_csrxchg = instr[31:24] == 8'b00000100 && instr[9:6] != 4'b0000;
-    wire signed is_nop = is_break && is_syscall && is_csrrd && is_csrwd && is_csrxchg;
+    // CSR
+    wire [4:0] CSR_TYPE_low = instr[9:5];
+    wire signed is_CSRRD_TYPE   = (CSR_TYPE_low==CSRRD_TYPE)&is_CSR_TYPE;
+    wire signed is_CSRWR_TYPE   = (CSR_TYPE_low==CSRWR_TYPE)&is_CSR_TYPE;
+    wire signed is_CSRXCHG_TYPE = (~is_CSRRD_TYPE)&(~is_CSRWR_TYPE)&is_CSR_TYPE;
 
+    // TLB
+    wire signed is_TLB_TYPEM = (instr[19:15]==TLB_TYPEM)&is_TLB_TYPEH;
+    wire [4:0] TLB_TYPEL_low = instr[14:10];
+    wire signed is_TLBSRCH_TYPE = (TLB_TYPEL_low==TLBSRCH_TYPE)&is_TLB_TYPEM;
+    wire signed is_TLBRD_TYPE =  (TLB_TYPEL_low==TLBRD_TYPE)&is_TLB_TYPEM;
+    wire signed is_TLBWR_TYPE = (TLB_TYPEL_low==TLBWR_TYPE)&is_TLB_TYPEM;
+    wire signed is_TLBFILL_TYPE = (TLB_TYPEL_low==TLBFILL_TYPE)&is_TLB_TYPEM;
+    wire signed is_ERTN_TYPE = (TLB_TYPEL_low==ERTN_TYPE)&is_TLB_TYPEM;
+    wire signed is_IDLE_TYPEM = (instr[19:15]==IDLE_TYPEM)&is_TLB_TYPEH;
+    wire signed is_TLBINV_TYPEM = (instr[19:15]==TLB_INV_TYPEM)&is_TLB_TYPEH;
 
 
 
@@ -140,14 +168,14 @@ module Control(
     wire signed is_shamt_inst = is_SLLI_TYPE | is_SRLI_TYPE | is_SRAI_TYPE;
     wire signed is_regimm_inst = is_SLTI_TYPE | is_SLTUI_TYPE | is_ADDI_TYPE | is_ANDI_TYPE | is_ORI_TYPE
         | is_XORI_TYPE;
-    wire a = 1'b1;
+    //wire a = 1'b1;
     wire signed is_u_inst = is_LUI_TYPE | is_PCADDU12I_TYPE;
     wire signed is_load_inst = is_LD_B_TYPE | is_LD_H_TYPE | is_LD_W_TYPE | is_LD_BU_TYPE | is_LD_HU_TYPE;
     wire signed is_store_inst = is_ST_B_TYPE | is_ST_H_TYPE | is_ST_W_TYPE;
     wire signed is_b_inst = is_B_TYPE | is_BL_TYPE;
     wire signed is_branch_inst = is_BLT_TYPE | is_BGE_TYPE | is_BLTU_TYPE | is_BGEU_TYPE | is_BEQ_TYPE | is_BNE_TYPE;
     wire signed is_j_inst = is_JIRL_TYPE;
-
+    
     /*
         这里是控制信号的生成
 
@@ -170,7 +198,7 @@ module Control(
         end
     end
 
-    assign is_unsign_load = is_LD_BU_TYPE | is_LD_HU_TYPE;
+    assign is_unsign_load = is_LD_BU_TYPE | is_LD_HU_TYPE | is_CSR_TYPE;
 
     // assign inst_ram_en = 1;
     // assign inst_ram_wen = 0;
@@ -224,7 +252,7 @@ module Control(
         is_shamt_inst |
         is_load_inst | is_BL_TYPE |
         is_JIRL_TYPE |
-        is_u_inst;
+        is_u_inst | is_CSRRD_TYPE|is_CSRXCHG_TYPE;
 
 
     // -----------memWriteEn--------------
@@ -274,8 +302,8 @@ module Control(
     wire signed is_bl_type = is_BL_TYPE;
     // this is used for selecting data not enable signal (enable signal must explictly use the instruction type)
     assign regWriteDataSel =
-        (REG_WRITE_ALU & (~is_load_inst)) |
-            (REG_WRITE_MEM & (is_load_inst));
+        ((REG_WRITE_ALU & (~{2{is_load_inst}})) |
+            (REG_WRITE_MEM & {2{is_load_inst}}))|(REG_WRITE_CSR&({2{is_CSRRD_TYPE}}));//csr read
 
 
     // ---------is_unsign_imm-------------------
@@ -292,6 +320,17 @@ module Control(
 //     -  {4'b0, llbit && sc_w, st_w, st_h, st_b}
 // -  {2'b0, ll_w, ld_w, ld_hu, ld_h, ld_bu, ld_b}
 
-
+    assign is_privil = is_TLB_TYPEM|is_CSR_TYPE;
+    assign is_syscall = is_SYSCALL_TYPE;
+    assign is_brk = is_BRK_TYPE;
+    assign is_ine = ~(is_IDLE_TYPEM|is_PC_BRANCH|regWriteEn|memWriteEn|tlb_wen|tlb_fen|tlb_sen|tlb_ren|csr_wen|is_syscall|is_brk);
+    assign tlb_fen = is_TLBINV_TYPEM;//invtlb
+    assign is_ertn = is_ERTN_TYPE;
+    assign tlb_wen = is_TLBWR_TYPE|is_TLBFILL_TYPE;//fill and write is same
+    assign tlb_sen = is_TLBSRCH_TYPE;//search
+    assign tlb_ren = is_TLBRD_TYPE;
+    assign csr_wen = is_CSRWR_TYPE|is_CSRXCHG_TYPE;//writeen
+    assign csr_ren = is_CSRRD_TYPE;
+    assign is_csrMusk = is_CSRXCHG_TYPE;//csrxchg
 endmodule
 

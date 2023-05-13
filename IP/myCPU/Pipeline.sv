@@ -1,6 +1,8 @@
 `include "cpu.svh"
+`include "csr_tlbDefines.svh"
 module Pipeline
     import cpuDefine::*;
+    import csr_tlbDefines::*;
 #(
     // parameter WIDTH = 100,
     type T = ID_DATA,
@@ -17,7 +19,9 @@ module Pipeline
     input logic flush,
     output logic valid_out,
     output T data_out,
-    output logic allow_out
+    output logic allow_out,
+    input CsrMsg csrmsg_in,
+    output CsrMsg csrmsg_out
 );
 // allow_in 和 valid_in 系列参与了逐级互锁机制，因此不能动
 // 停顿， 让ready_go = 0即可
@@ -27,6 +31,7 @@ module Pipeline
     // valid = request and allow = response
     // valid_out = next valid_in != pipeline_valid
     logic pipeline_valid;
+    CsrMsg csrmsg_data;
     T pipeline_data;
     // allow pre to this , allow_in = ~stall
     assign allow_out = !pipeline_valid || (valid_out && allow_in);
@@ -38,12 +43,19 @@ module Pipeline
         if (~aresetn || flush) begin
             pipeline_valid <= 1'b0;
             pipeline_data <= reset_value;
-        end else if (allow_out) begin
+            csrmsg_data <= '0;
+        end else if (csrmsg_in.is_exc) begin
+            pipeline_valid <= 1'b0;
+            pipeline_data <= reset_value;
+        end
+        
+         else if (allow_out) begin
             pipeline_valid <= valid_in;
         end
 
         if (allow_out && valid_in && aresetn) begin
             pipeline_data <= data_in;
+            csrmsg_data <= csrmsg_in;
         end
     end
 
@@ -54,6 +66,7 @@ module Pipeline
         end  else begin
             data_out = nop_data;
         end
+        csrmsg_out = csrmsg_data;
     end
 
 
