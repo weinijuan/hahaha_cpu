@@ -606,7 +606,7 @@ end
 assign cpu_aresetn = cpu_aresetn_2;
 
 // cpu
-core_top cpu_mid(
+mycpu_top cpu_mid(
   .aclk             (cpu_clk),
   .intrpt           ({3'b0, int_out[4:0]}),  //232 only 5bit
   //.nmi              (1'b1),
@@ -647,12 +647,7 @@ core_top cpu_mid(
   .bid          (m0_bid[3:0]  ),
   .bresp        (m0_bresp     ),
   .bvalid       (m0_bvalid    ),
-  .bready       (m0_bready    ),
-
-  .debug0_wb_pc         (),
-  .debug0_wb_rf_wen     (),
-  .debug0_wb_rf_wnum    (),
-  .debug0_wb_rf_wdata   ()
+  .bready       (m0_bready    )
 );
 
 // cpu_axi asyn

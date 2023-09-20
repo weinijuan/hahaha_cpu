@@ -49,7 +49,7 @@ class GoldenTrace:CpuTool
 	int prefix_end;
 	unsigned long tail_base = 0;
 
-    GoldenTrace(Vtop * top,const char*path,const char* file_out,const char*uart_path,const char*file_in):CpuTool(top){ 
+    GoldenTrace( * top,const char*path,const char* file_out,const char*uart_path,const char*file_in):CpuTool(top){ 
         sprintf(simu_out_path,"./%s%s",path,file_out); 
 		#ifdef SLICE_SIMU_TRACE
 		int simu_out_path_index = 0;

@@ -22,9 +22,9 @@ static const char* reg_name[DIFFTEST_NR_REG] = {
 };
 
 static const char compare_mask[DIFFTEST_NR_CSRREG] = {
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
-    0,  0,  0,  0,  0,  0,  0
+    1,  1,  0,  1,  1,  1,  1,  1,  1,  1,
+    1,  1,  1,  1,  1,  1,  1,  1,  1,  1,
+    1,  0,  1,  1,  1,  0,  1
 };
 
 #ifdef RAND_TEST
@@ -190,7 +190,7 @@ int Difftest::step(vluint64_t &main_time) {
         if (dut.excp.exception != 0) {     // not hard interrupt, nemu can detect itself
             // printf("receive exception 0x%x at pc 0x%x\n", dut.excp.exception, dut.excp.exceptionPC);
             // fprintf(trace_out,"receive exception 0x%x at pc 0x%x\n", dut.excp.exception, dut.excp.exceptionPC);
-            proxy->exec(1);
+            proxy->exec(0);
         } else {    // hard interrupt, dut copy intr code to nemu
 //               printf("excp pc : 0x%x\n", dut.excp.exceptionPC);
 //               printf("cpu pc : 0x%x\n", dut.csr.this_pc);
@@ -207,6 +207,7 @@ int Difftest::step(vluint64_t &main_time) {
 
     ref.csr.tval = dut.csr.tval;
     if(dut.excp.excp_valid){
+        printf("%x %x\n", ref.csr.this_pc, dut.csr.this_pc);
         dut.csr.this_pc = ref.csr.this_pc;
     }
     bool ecode_error = false;

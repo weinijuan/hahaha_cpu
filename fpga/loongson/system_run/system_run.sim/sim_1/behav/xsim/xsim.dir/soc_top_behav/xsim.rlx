@@ -1,0 +1,12 @@
+
+{ 
+    crc :  3216519264393570717  , 
+    ccp_crc :  0  , 
+    cmdline : " -wto 6c1fb159a8da46e296128ad1578aae5d --incr --debug typical --relax --mt 8 -L xil_defaultlib -L fifo_generator_v13_2_5 -L axi_interconnect_v1_7_17 -L blk_mem_gen_v8_4_4 -L axi_infrastructure_v1_1_0 -L axi_clock_converter_v2_1_19 -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot soc_top_behav xil_defaultlib.soc_top xil_defaultlib.glbl" , 
+    buildDate : "Nov  6 2019" , 
+    buildTime : "21:42:20" , 
+    linkCmd : "/usr/bin/gcc -Wa,-W  -O -fPIC  -m64  -Wl,--no-as-needed  -Wl,--unresolved-symbols=ignore-all  -o \"xsim.dir/soc_top_behav/xsimk\"   \"xsim.dir/soc_top_behav/obj/xsim_0.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_1.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_2.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_3.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_4.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_5.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_6.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_7.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_8.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_9.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_10.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_11.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_12.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_13.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_14.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_15.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_16.lnx64.o\" \"xsim.dir/soc_top_behav/obj/xsim_17.lnx64.o\" -L\"/home/weinijuan/open/vivado/Vivado/2019.2/lib/lnx64.o\" -lrdi_simulator_kernel   -lrdi_simbridge_kernel" , 
+    aggregate_nets : 
+    [ 
+    ] 
+} 

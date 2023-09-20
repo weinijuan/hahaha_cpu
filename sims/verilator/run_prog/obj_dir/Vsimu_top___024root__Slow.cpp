@@ -27,9 +27,10 @@ Vsimu_top___024root::~Vsimu_top___024root() {
 
 // Savable
 void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
-    uint64_t __Vcheckval = 0x996bf4e6b228972aULL;
+    uint64_t __Vcheckval = 0xe6ca8542e2b0c4f9ULL;
     os << __Vcheckval;
     os << vlSymsp->_vm_contextp__;
+    os<<clk;
     os<<aclk;
     os<<simu_top__DOT__soc__DOT__m0_awvalid;
     os<<simu_top__DOT__soc__DOT__m0_wvalid;
@@ -54,6 +55,51 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT10;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT11;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_HIT;
+    os<<resetn;
+    os<<inst_req;
+    os<<inst_wr;
+    os<<inst_size;
+    os<<inst_wstrb;
+    os<<inst_addr_ok;
+    os<<inst_data_ok;
+    os<<data_req;
+    os<<data_wr;
+    os<<data_size;
+    os<<data_wstrb;
+    os<<data_addr_ok;
+    os<<data_data_ok;
+    os<<arid;
+    os<<arlen;
+    os<<arsize;
+    os<<arburst;
+    os<<arlock;
+    os<<arcache;
+    os<<arprot;
+    os<<arvalid;
+    os<<arready;
+    os<<rid;
+    os<<rresp;
+    os<<rlast;
+    os<<rvalid;
+    os<<rready;
+    os<<awid;
+    os<<awlen;
+    os<<awsize;
+    os<<awburst;
+    os<<awlock;
+    os<<awcache;
+    os<<awprot;
+    os<<awvalid;
+    os<<awready;
+    os<<wid;
+    os<<wstrb;
+    os<<wlast;
+    os<<wvalid;
+    os<<wready;
+    os<<bid;
+    os<<bresp;
+    os<<bvalid;
+    os<<bready;
     os<<aresetn;
     os<<enable_delay;
     os<<ram_ren;
@@ -75,10 +121,19 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<btn_key_row;
     os<<btn_step;
     os<<uart_rx__en0;
-    os<<simu_top__DOT__uart_rx__out__strong__out3;
-    os<<simu_top__DOT__soc__DOT__cpu_awvalid;
+    os<<cpu_axi_interface__DOT__do_req;
+    os<<cpu_axi_interface__DOT__do_req_or;
+    os<<cpu_axi_interface__DOT__do_wr_r;
+    os<<cpu_axi_interface__DOT__do_size_r;
+    os<<cpu_axi_interface__DOT__do_wstrb_r;
+    os<<cpu_axi_interface__DOT__data_back;
+    os<<cpu_axi_interface__DOT__addr_rcv;
+    os<<cpu_axi_interface__DOT__wdata_rcv;
+    os<<simu_top__DOT__soc__DOT__cpu_awready;
     os<<simu_top__DOT__soc__DOT__cpu_wvalid;
+    os<<simu_top__DOT__soc__DOT__cpu_bvalid;
     os<<simu_top__DOT__soc__DOT__cpu_arvalid;
+    os<<simu_top__DOT__soc__DOT__cpu_arready;
     os<<simu_top__DOT__soc__DOT__m0_awready;
     os<<simu_top__DOT__soc__DOT__m0_wready;
     os<<simu_top__DOT__soc__DOT__m0_bid;
@@ -104,62 +159,81 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wnum;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__req_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__wstrb_inst;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__addr_ok_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__req_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__wstrb_mem;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cacheop_wb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT____Vcellinp__sram_to_axi_u__d_cacheop;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT____Vcellinp__sram_to_axi_u__i_cacheop;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_allow_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_ready_go;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_allow_in;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_excode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_is_exc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_ready_go;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_valid_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_allow_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_valid_in;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_is_exc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_allow_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_valid_in;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_excode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_is_exc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_ready_go;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_valid_in;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_excode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_is_exc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_flush;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_out;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__exlike;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__plv;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__da;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ie;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_tlb_ind;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_tlb_ne;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_is_usetlb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_tlb_ind;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_tlb_ne;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_is_usetlb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_ps;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_ne;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_g;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mat_i;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mat_d;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_is_dmw;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pc_have_exc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__eq;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lt;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__overflow;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteEn_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__unsignBranchCmp;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_id;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__regWriteDataSel;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_ine_id;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_tlb_wen_id;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_csr_wen_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__aluctrl;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel2;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel1;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__itype;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__pcsel;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_id;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_mem;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel1_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel2_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluctrl_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_no_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_no_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__size_mem_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wstrb_mem_mem;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_mem;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_mem;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_mem;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__brstall;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__error_inst_in_if;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_is_dmw;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellinp__addr_trans_memaddr__pg;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__excp_flush;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ertn_flush;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ws_csr_ecode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_excode_tmp;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_tmp_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_is_exc_last;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlbfill_en;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rand_index;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cnt_inst_diff;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_rstat_en_diff;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_cnt_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_ld_en;
@@ -174,7 +248,11 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_rand_index;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap_code;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_hb2577766__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgExtracted_h16cb5132__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_h0da1d373__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__tmp0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__tmp1;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__inter_ti;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SUB_TYPE;
@@ -194,6 +272,8 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_MOD_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_DIVU_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_MODU_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BRK_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SYSCALL_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SLLI_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SRLI_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SRAI_TYPE;
@@ -220,22 +300,38 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BGE_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BLTU_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BGEU_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_CSRWR_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_CSRXCHG_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLB_TYPEM;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLBSRCH_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLBRD_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_ERTN_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLBINV_TYPEM;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_RDCNTID_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_RDCNTVL_TYPE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_RDCNTVH_TYPE;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_reg_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_shamt_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_regimm_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_u_inst;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_load_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_store_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_b_inst;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_branch_inst;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_PC_BRANCH;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hffea2556__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hc260b695__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hfa3cf28f__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_h9c888c86__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__MEM_forward_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__WB_forward_valid;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__stall;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rj_ex_true_temp_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rk_ex_true_temp_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rd_ex_true_temp_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__cancel;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_hf7cffa19__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h2a69b9a6__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h81692869__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h7e7f3c05__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h0dac690a__0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divUnsigned;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divEn;
@@ -244,22 +340,222 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__count;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_valid;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_valid;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_req;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_req_or;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wr_r;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_size_r;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wstrb_r;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__data_back;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__addr_rcv;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__wdata_rcv;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT____VdfgTmp_hf519d2e1__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache_rd_rdy;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache_ret_valid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache_rd_rdy;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__waiting_for_rvalid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_arvalid_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_arvalid_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT____Vcellout__priority_ar__out;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT____Vcellinp__priority_ar__in;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__hit_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__v_ways;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__d_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__d_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__state;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_offset;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_write;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_wstrb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_size;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_uncached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop_hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop_wb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_replace_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_hit_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_offset;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_write;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_wstrb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_size;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_uncached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_cacheop;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_cacheop_hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_ways;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_ways_init;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_ways_next;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_to_dirty_miss;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT___hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_wstrb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_idle;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_overlap;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__forword_byte_from_write_buffer;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__lookup_to_lookup;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_to_refill;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__first_cycle_of_REPLACE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_buf_ptr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_requested_word;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__invalidate_ways;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__lookup_data_ok;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_data_ok_cached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_data_ok_uncached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_hbe0a95ac__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_h1fa730de__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_h0ea5640d__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_he5eb326c__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_h09374013__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_he381076c__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_hbe37574e__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__state_next_mux__DOT__and_gates__BRA__4__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg_next;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__table_index_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__hit_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__v_ways;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__d_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__d_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__state;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_offset;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_write;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_wstrb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_size;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_uncached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop_hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop_wb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_replace_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_hit_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_offset;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_write;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_wstrb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_size;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_uncached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_cacheop;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_cacheop_hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_ways;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_ways_init;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_ways_next;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_to_dirty_miss;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT___hit;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_way;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_index;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_wstrb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_bank_num;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_idle;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_overlap;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__forword_byte_from_write_buffer;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__lookup_to_lookup;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__dirty_miss_to_replace;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_to_refill;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__first_cycle_of_REPLACE;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_buf_ptr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_requested_word;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__invalidate_ways;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__lookup_data_ok;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_data_ok_cached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_data_ok_uncached;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_hbe0a95ac__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h7fa9a667__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h1fa730de__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h0ea5640d__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_he5eb326c__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h09374013__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_he381076c__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_ha3470664__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_hbe37574e__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h5478a6f0__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__state_next_mux__DOT__and_gates__BRA__4__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg_next;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__table_index_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_empty;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_data_ptr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_burst;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_size;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_strb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__state;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__w_last;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__w_handshake;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__w_finish;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__idle_to_aw_w;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT____VdfgTmp_hb3e29d94__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT____VdfgTmp_ha3725e82__0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__next_mux__DOT__and_gates__BRA__3__KET____DOT__or_result;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_ar_disable;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_aw_disable;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_no_delay;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_short_delay;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_w_disable;
-    os<<simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h34d16b8e__0;
-    os<<simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_hb251d2f0__0;
     os<<simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h765eb7cb__0;
     os<<simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h76518f96__0;
     os<<simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h4bbe5f71__0;
@@ -315,13 +611,9 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_dir_ins;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_pre_sel;
-    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h24eed626__0;
-    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h78044575__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h6c6cb05b__1;
-    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h4078c6a7__0;
-    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h7d0af1f5__0;
-    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h136afa62__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_hee60d8fe__1;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h9973e968__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h58a8c0e9__0;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__wr_ptr;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__rd_ptr;
@@ -443,9 +735,6 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__d1_fifo_read;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h84138141__0;
-    os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcfb8fec4__0;
-    os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h8af93b88__0;
-    os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcb11cbc5__0;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
@@ -619,21 +908,60 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__confreg__DOT__step0_flag;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__step1_flag;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__scan_data;
+    os<<__VdfgTmp_hf20fd9bb__0;
+    os<<__VdfgTmp_hce404a6e__0;
+    os<<__VdfgTmp_h966d58da__0;
+    os<<__VdfgTmp_hfd5d21d5__0;
+    os<<__VdfgTmp_hc4b92322__0;
+    os<<__VdfgTmp_he8917e58__0;
+    os<<__VdfgTmp_h208b8f36__0;
+    os<<__VdfgTmp_haa7259b7__0;
     os<<__VdfgTmp_hcd04e225__0;
-    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__Vfuncout;
-    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__valid;
-    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__pre_num;
-    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__Vfuncout;
-    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__valid;
-    os<<__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__pre_num;
-    os<<__Vtableidx1;
-    os<<__Vtableidx2;
-    os<<__Vtableidx4;
-    os<<__Vtableidx5;
-    os<<__Vtableidx8;
+    os<<__Vdly__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
+    os<<__Vdly__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_pop;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rls_int_pnd;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rda_int_pnd;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__thre_int_pnd;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ms_int_pnd;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tstate;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__error_time;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tx_error;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__parity_xor;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_out;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__bottom;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tf_count;
+    os<<__Vdlyvdim0__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram__v0;
+    os<<__Vdlyvval__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram__v0;
+    os<<__Vdlyvset__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram__v0;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rstate;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rparity_xor;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rshift;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__counter_b;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_count;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DONE;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DMA_REQ;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_STATE;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__write_timer_end_r1;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__state_count;
+    os<<__Vtrigrprev__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
+    os<<__Vtrigrprev__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_ready_go;
+    os<<__VstlDidInit;
+    os<<__Vtrigrprev__TOP__clk;
     os<<__Vtrigrprev__TOP__aclk;
+    os<<__VactDidInit;
     os<<__VactContinue;
     os<<led;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_intercode;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__asid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lie;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_asid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__ar_mux__DOT__and_gates__BRA__3__KET____DOT__or_result;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__dlc;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__counter_t;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__M_cnt;
@@ -647,7 +975,17 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__data_count;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__btn_key_r;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__btn_key_tmp;
-    os<<__Vtableidx3;
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__dlc;
+    os<<inst_addr;
+    os<<inst_wdata;
+    os<<inst_rdata;
+    os<<data_addr;
+    os<<data_wdata;
+    os<<data_rdata;
+    os<<araddr;
+    os<<rdata;
+    os<<awaddr;
+    os<<wdata;
     os<<random_seed;
     os<<ram_raddr;
     os<<ram_rdata;
@@ -659,34 +997,49 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         os<<uart_ctr_bus[__Vi0];
     }
+    os<<cpu_axi_interface__DOT__do_addr_r;
+    os<<cpu_axi_interface__DOT__do_wdata_r;
     os<<simu_top__DOT__soc__DOT__m0_rdata;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_pc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wdata;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__wdata_inst;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cacheop_addr;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_in;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_out;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_nop;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csrout_wb;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__exaddr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_tlb_phytranitem;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_tlb_phytranitem;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_phytran0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_phytran1;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_vppn;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__counter_lower;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__counter_higher;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tid;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellinp__tlb__s1_vppn;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteData_wb;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__immout_id;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id_true;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id_true;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_ex_true;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_ex_true;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_ex_true;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_mem;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc1_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc2_ex;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pc_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_ex;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_ex;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_addr_phyaddr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__extend_store_u__extend_data;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_control_data_wb;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_data_diff;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_paddr;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_vaddr;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_paddr;
@@ -696,33 +1049,14 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdata;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_pc;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_crmd_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_prmd_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ectl_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_estat_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_era_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_badv_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_eentry_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbidx_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbehi_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo0_diff_0;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo1_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_asid_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save0_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save1_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save2_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save3_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tid_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tcfg_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tval_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ticlr_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_llbctl_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbrentry_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw0_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw1_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdl_diff_0;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdh_diff_0;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__i;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__pc_tmp;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__musk_rel;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_data;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rj_ex_true_temp;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rk_ex_true_temp;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rd_ex_true_temp;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__quotient;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__remainder;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_result;
@@ -731,10 +1065,127 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__remainder_u;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__dividend_reg;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__dividend_next;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_addr_r;
-    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wdata_r;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____Vcellinp__addr_parse__addr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_tag;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_wdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_tag_new;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_wdata;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_read_lines[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_wdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__lookup_rdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_word;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__0__KET____DOT__tag_v__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellinp__way__BRA__0__KET____DOT__tag_v__din;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__d[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__tag_v__dout;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__d[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__dout;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__line_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wr_data_cacheop_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wr_addr_cacheop_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__table_write_mux__DOT__and_gates__BRA__2__KET____DOT__or_result[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__table_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__rdata_mux__DOT__and_gates__BRA__2__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____Vcellinp__addr_parse__addr;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_tag;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_wdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_tag_new;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_wdata;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_read_lines[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_wdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__lookup_rdata;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_word;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__0__KET____DOT__tag_v__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellinp__way__BRA__0__KET____DOT__tag_v__din;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__d[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__tag_v__dout;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__d[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__dout;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__dout;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__line_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wr_data_cacheop_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wr_addr_cacheop_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__table_write_mux__DOT__and_gates__BRA__2__KET____DOT__or_result[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__table_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_data[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_addr;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_random;
     os<<simu_top__DOT__soc__DOT__delay__DOT__mask_random_next;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_wdata;
+    os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_araddr;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rdata;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rdata;
     os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__w_addr_dir_int;
@@ -798,22 +1249,65 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__confreg__DOT__step0_count;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__step1_count;
     os<<simu_top__DOT__soc__DOT__confreg__DOT__count;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<__VdfgTmp_ha5fa42eb__0[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<__VdfgTmp_hfea590d9__0[__Vi0];
+    }
+    os<<__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_command;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__key_count;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__step0_count;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__step1_count;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__count;
+    os<<__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__timer;
     os<<__VstlIterCount;
     os<<__VicoIterCount;
     os<<__VactIterCount;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_csrmsgin[__Vi0];
+    }
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__id__data_out;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 11; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__ex__data_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 12; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__mem__data_out[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 13; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out[__Vi0];
     }
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__timer_64_diff;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_timer_64;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cycleCnt;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instrCnt;
+    for (int __Vi0 = 0; __Vi0 < 30; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__csr[__Vi0];
+    }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__stable_counter;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__csrmsg_data[__Vi0];
+    }
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_data;
-    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 11; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data[__Vi0];
     }
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__mul_result;
@@ -821,25 +1315,115 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_shifted;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_next;
     os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__difference;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 12; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 13; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data[__Vi0];
     }
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_read_tags;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_read_tags;
+    os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__wr_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__addr_in_die;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__ID_INFORM;
     os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_ADDR;
     os<<simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_push_data;
     os<<simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_queue_datas;
+    os<<simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_push_data;
     os<<simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_datas;
     os<<simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_datas;
     os<<simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_datas;
+    for (int __Vi0 = 0; __Vi0 < 30; ++__Vi0) {
+        os<<__Vdly__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__csr[__Vi0];
+    }
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regs[__Vi0];
     }
+    for (int __Vi0 = 0; __Vi0 < 16; ++__Vi0) {
+        for (int __Vi1 = 0; __Vi1 < 3; ++__Vi1) {
+            os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__tlb[__Vi0][__Vi1];
+        }
+    }
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rf__DOT__rf[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os<<simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
     }
     for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bid[__Vi0];
@@ -874,14 +1458,15 @@ void Vsimu_top___024root::__Vserialize(VerilatedSerialize& os) {
     for (int __Vi0 = 0; __Vi0 < 16; ++__Vi0) {
         os<<simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__rfifo__DOT__ram[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 9; ++__Vi0) {
         os<<__Vm_traceActivity[__Vi0];
     }
 }
 void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
-    uint64_t __Vcheckval = 0x996bf4e6b228972aULL;
+    uint64_t __Vcheckval = 0xe6ca8542e2b0c4f9ULL;
     os.readAssert(__Vcheckval);
     os >> vlSymsp->_vm_contextp__;
+    os>>clk;
     os>>aclk;
     os>>simu_top__DOT__soc__DOT__m0_awvalid;
     os>>simu_top__DOT__soc__DOT__m0_wvalid;
@@ -906,6 +1491,51 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT10;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__HIT11;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_HIT;
+    os>>resetn;
+    os>>inst_req;
+    os>>inst_wr;
+    os>>inst_size;
+    os>>inst_wstrb;
+    os>>inst_addr_ok;
+    os>>inst_data_ok;
+    os>>data_req;
+    os>>data_wr;
+    os>>data_size;
+    os>>data_wstrb;
+    os>>data_addr_ok;
+    os>>data_data_ok;
+    os>>arid;
+    os>>arlen;
+    os>>arsize;
+    os>>arburst;
+    os>>arlock;
+    os>>arcache;
+    os>>arprot;
+    os>>arvalid;
+    os>>arready;
+    os>>rid;
+    os>>rresp;
+    os>>rlast;
+    os>>rvalid;
+    os>>rready;
+    os>>awid;
+    os>>awlen;
+    os>>awsize;
+    os>>awburst;
+    os>>awlock;
+    os>>awcache;
+    os>>awprot;
+    os>>awvalid;
+    os>>awready;
+    os>>wid;
+    os>>wstrb;
+    os>>wlast;
+    os>>wvalid;
+    os>>wready;
+    os>>bid;
+    os>>bresp;
+    os>>bvalid;
+    os>>bready;
     os>>aresetn;
     os>>enable_delay;
     os>>ram_ren;
@@ -927,10 +1557,19 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>btn_key_row;
     os>>btn_step;
     os>>uart_rx__en0;
-    os>>simu_top__DOT__uart_rx__out__strong__out3;
-    os>>simu_top__DOT__soc__DOT__cpu_awvalid;
+    os>>cpu_axi_interface__DOT__do_req;
+    os>>cpu_axi_interface__DOT__do_req_or;
+    os>>cpu_axi_interface__DOT__do_wr_r;
+    os>>cpu_axi_interface__DOT__do_size_r;
+    os>>cpu_axi_interface__DOT__do_wstrb_r;
+    os>>cpu_axi_interface__DOT__data_back;
+    os>>cpu_axi_interface__DOT__addr_rcv;
+    os>>cpu_axi_interface__DOT__wdata_rcv;
+    os>>simu_top__DOT__soc__DOT__cpu_awready;
     os>>simu_top__DOT__soc__DOT__cpu_wvalid;
+    os>>simu_top__DOT__soc__DOT__cpu_bvalid;
     os>>simu_top__DOT__soc__DOT__cpu_arvalid;
+    os>>simu_top__DOT__soc__DOT__cpu_arready;
     os>>simu_top__DOT__soc__DOT__m0_awready;
     os>>simu_top__DOT__soc__DOT__m0_wready;
     os>>simu_top__DOT__soc__DOT__m0_bid;
@@ -956,62 +1595,81 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wnum;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__req_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__wstrb_inst;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__addr_ok_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__req_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__wstrb_mem;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cacheop_wb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT____Vcellinp__sram_to_axi_u__d_cacheop;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT____Vcellinp__sram_to_axi_u__i_cacheop;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_allow_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_ready_go;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_allow_in;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_excode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_is_exc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_ready_go;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_valid_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_allow_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_valid_in;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_is_exc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_allow_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_valid_in;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_excode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_is_exc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_ready_go;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_valid_in;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_excode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_is_exc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_flush;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_allow_out;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__exlike;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__plv;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__da;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ie;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_tlb_ind;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_tlb_ne;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_is_usetlb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_tlb_ind;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_tlb_ne;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_is_usetlb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_ps;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_ne;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_g;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mat_i;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mat_d;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_is_dmw;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pc_have_exc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__eq;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lt;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__overflow;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteEn_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__unsignBranchCmp;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_id;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__regWriteDataSel;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_ine_id;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_tlb_wen_id;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_csr_wen_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__aluctrl;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel2;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__alusel1;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__itype;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__control__pcsel;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_id;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_mem;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel1_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alusel2_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluctrl_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_no_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_no_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_no_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__size_mem_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wstrb_mem_mem;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is_unsign_load_mem;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memRead_mem;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memWriteEn_mem;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__brstall;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__error_inst_in_if;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_is_dmw;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellinp__addr_trans_memaddr__pg;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__excp_flush;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ertn_flush;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ws_csr_ecode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_excode_tmp;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_tmp_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_is_exc_last;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlbfill_en;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rand_index;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cnt_inst_diff;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_rstat_en_diff;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_cnt_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst_ld_en;
@@ -1026,7 +1684,11 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_rand_index;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__trap_code;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_hb2577766__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgExtracted_h16cb5132__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____VdfgTmp_h0da1d373__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__tmp0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__tmp1;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__inter_ti;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SUB_TYPE;
@@ -1046,6 +1708,8 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_MOD_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_DIVU_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_MODU_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BRK_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SYSCALL_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SLLI_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SRLI_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_SRAI_TYPE;
@@ -1072,22 +1736,38 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BGE_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BLTU_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_BGEU_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_CSRWR_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_CSRXCHG_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLB_TYPEM;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLBSRCH_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLBRD_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_ERTN_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_TLBINV_TYPEM;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_RDCNTID_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_RDCNTVL_TYPE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_RDCNTVH_TYPE;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_reg_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_shamt_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_regimm_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_u_inst;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_load_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_store_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_b_inst;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_branch_inst;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT__is_PC_BRANCH;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hffea2556__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hc260b695__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_hfa3cf28f__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__control__DOT____VdfgTmp_h9c888c86__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__MEM_forward_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__WB_forward_valid;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__stall;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rj_ex_true_temp_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rk_ex_true_temp_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rd_ex_true_temp_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT__cancel;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_hf7cffa19__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h2a69b9a6__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h81692869__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h7e7f3c05__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__hazard_detect__DOT____VdfgTmp_h0dac690a__0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divUnsigned;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__divEn;
@@ -1096,22 +1776,222 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__count;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_valid;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_valid;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_req;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_req_or;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wr_r;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_size_r;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wstrb_r;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__data_back;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__addr_rcv;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__wdata_rcv;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT____VdfgTmp_hf519d2e1__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache_rd_rdy;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache_ret_valid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache_rd_rdy;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__waiting_for_rvalid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_arvalid_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_arvalid_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT____Vcellout__priority_ar__out;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT____Vcellinp__priority_ar__in;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__hit_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__v_ways;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__d_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__d_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__state;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_offset;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_write;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_wstrb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_size;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_uncached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop_hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_cacheop_wb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_replace_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_hit_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_offset;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_write;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_wstrb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_size;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_uncached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_cacheop;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_cacheop_hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_ways;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_ways_init;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wb_ways_next;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_to_dirty_miss;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT___hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_wstrb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_idle;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_overlap;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__forword_byte_from_write_buffer;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__lookup_to_lookup;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_to_refill;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__first_cycle_of_REPLACE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_buf_ptr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_requested_word;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__invalidate_ways;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__lookup_data_ok;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_data_ok_cached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_data_ok_uncached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_hbe0a95ac__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_h1fa730de__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_h0ea5640d__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_he5eb326c__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_h09374013__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_he381076c__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____VdfgTmp_hbe37574e__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__state_next_mux__DOT__and_gates__BRA__4__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg_next;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__table_index_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__hit_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__v_ways;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__d_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__d_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__state;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_offset;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_write;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_wstrb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_size;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_uncached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop_hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_cacheop_wb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_replace_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_hit_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_offset;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_write;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_wstrb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_size;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_uncached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_cacheop;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_cacheop_hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_ways;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_ways_init;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wb_ways_next;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_to_dirty_miss;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT___hit;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_way;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_index;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_wstrb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_bank_num;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_idle;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_overlap;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__forword_byte_from_write_buffer;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__lookup_to_lookup;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__dirty_miss_to_replace;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_to_refill;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__first_cycle_of_REPLACE;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_buf_ptr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_requested_word;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__invalidate_ways;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__lookup_data_ok;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_data_ok_cached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_data_ok_uncached;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_hbe0a95ac__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h7fa9a667__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h1fa730de__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h0ea5640d__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_he5eb326c__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h09374013__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_he381076c__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_ha3470664__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_hbe37574e__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____VdfgTmp_h5478a6f0__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank_we;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__addr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__we_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__state_next_mux__DOT__and_gates__BRA__4__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_way_gen__DOT__lfsr__DOT__lfsr_reg_next;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__table_index_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_empty;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_data_ptr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_burst;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_size;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_strb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__state;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__w_last;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__w_handshake;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__w_finish;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__idle_to_aw_w;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT____VdfgTmp_hb3e29d94__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT____VdfgTmp_ha3725e82__0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__next_mux__DOT__and_gates__BRA__3__KET____DOT__or_result;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_ar_disable;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_aw_disable;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_no_delay;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_short_delay;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_w_disable;
-    os>>simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h34d16b8e__0;
-    os>>simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_hb251d2f0__0;
     os>>simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h765eb7cb__0;
     os>>simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h76518f96__0;
     os>>simu_top__DOT__soc__DOT__delay__DOT____VdfgTmp_h4bbe5f71__0;
@@ -1167,13 +2047,9 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_dir_ins;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_addr_dir;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__rd_data_pre_sel;
-    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h24eed626__0;
-    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h78044575__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h6c6cb05b__1;
-    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h4078c6a7__0;
-    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h7d0af1f5__0;
-    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_h136afa62__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____Vlvbound_hee60d8fe__1;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h9973e968__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT____VdfgTmp_h58a8c0e9__0;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__wr_ptr;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__wr_fifo__DOT__rd_ptr;
@@ -1295,9 +2171,6 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__d1_fifo_read;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h84138141__0;
-    os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcfb8fec4__0;
-    os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_h8af93b88__0;
-    os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT____VdfgTmp_hcb11cbc5__0;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
@@ -1471,21 +2344,60 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__confreg__DOT__step0_flag;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__step1_flag;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__scan_data;
+    os>>__VdfgTmp_hf20fd9bb__0;
+    os>>__VdfgTmp_hce404a6e__0;
+    os>>__VdfgTmp_h966d58da__0;
+    os>>__VdfgTmp_hfd5d21d5__0;
+    os>>__VdfgTmp_hc4b92322__0;
+    os>>__VdfgTmp_he8917e58__0;
+    os>>__VdfgTmp_h208b8f36__0;
+    os>>__VdfgTmp_haa7259b7__0;
     os>>__VdfgTmp_hcd04e225__0;
-    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__Vfuncout;
-    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__valid;
-    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__7__pre_num;
-    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__Vfuncout;
-    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__valid;
-    os>>__Vfunc_simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__get_num__8__pre_num;
-    os>>__Vtableidx1;
-    os>>__Vtableidx2;
-    os>>__Vtableidx4;
-    os>>__Vtableidx5;
-    os>>__Vtableidx8;
+    os>>__Vdly__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp_valid;
+    os>>__Vdly__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp_valid;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_pop;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rls_int_pnd;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rda_int_pnd;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__thre_int_pnd;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ms_int_pnd;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__ti_int_pnd;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tstate;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__error_time;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__counter;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__tx_error;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_counter;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__parity_xor;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__shift_out;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__bit_out;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__bottom;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__tf_count;
+    os>>__Vdlyvdim0__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram__v0;
+    os>>__Vdlyvval__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram__v0;
+    os>>__Vdlyvset__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__transmitter__DOT__fifo_tx__DOT__tfifo__DOT__ram__v0;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rstate;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rparity_xor;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__rshift;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__counter_b;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__rf_count;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DONE;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_DMA_REQ;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_STATE;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__write_timer_end_r1;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__state_count;
+    os>>__Vtrigrprev__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_ready_go;
+    os>>__Vtrigrprev__TOP__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_ready_go;
+    os>>__VstlDidInit;
+    os>>__Vtrigrprev__TOP__clk;
     os>>__Vtrigrprev__TOP__aclk;
+    os>>__VactDidInit;
     os>>__VactContinue;
     os>>led;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_intercode;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__asid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__lie;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__is;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_asid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__ar_mux__DOT__and_gates__BRA__3__KET____DOT__or_result;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__dlc;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__counter_t;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__M_cnt;
@@ -1499,7 +2411,17 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__data_count;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__btn_key_r;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__btn_key_tmp;
-    os>>__Vtableidx3;
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__dlc;
+    os>>inst_addr;
+    os>>inst_wdata;
+    os>>inst_rdata;
+    os>>data_addr;
+    os>>data_wdata;
+    os>>data_rdata;
+    os>>araddr;
+    os>>rdata;
+    os>>awaddr;
+    os>>wdata;
     os>>random_seed;
     os>>ram_raddr;
     os>>ram_rdata;
@@ -1511,34 +2433,49 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
         os>>uart_ctr_bus[__Vi0];
     }
+    os>>cpu_axi_interface__DOT__do_addr_r;
+    os>>cpu_axi_interface__DOT__do_wdata_r;
     os>>simu_top__DOT__soc__DOT__m0_rdata;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_pc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__debug1_wb_rf_wdata;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__wdata_inst;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cacheop_addr;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_in;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_data_out;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__preif_nop;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csrout_wb;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__exaddr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC_tlb_phytranitem;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_tlb_phytranitem;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_phytran0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_phytran1;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__r_vppn;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__counter_lower;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__counter_higher;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tid;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellinp__tlb__s1_vppn;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__nextPC;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__branchPC_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instr_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regWriteData_wb;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__immout_id;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_id_true;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_id_true;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rj_ex_true;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rk_ex_true;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rd_ex_true;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_mem;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc1_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluSrc2_ex;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__pc_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_ex;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__aluout_ex;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__memaddr_addr_phyaddr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__extend_store_u__extend_data;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__readData;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_control_data_wb;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_data_diff;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_paddr;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_ld_vaddr;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_st_paddr;
@@ -1548,33 +2485,14 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_wdata;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_pc;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_inst;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_crmd_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_prmd_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ectl_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_estat_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_era_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_badv_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_eentry_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbidx_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbehi_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo0_diff_0;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbelo1_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_asid_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save0_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save1_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save2_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_save3_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tid_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tcfg_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tval_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_ticlr_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_llbctl_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_tlbrentry_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw0_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_dmw1_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdl_diff_0;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr_pgdh_diff_0;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__i;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__pc_tmp;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__musk_rel;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__pipeline_data;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rj_ex_true_temp;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rk_ex_true_temp;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__forwarding__DOT__rd_ex_true_temp;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__quotient;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__remainder;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__adder_result;
@@ -1583,10 +2501,127 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__remainder_u;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__dividend_reg;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__dividend_next;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_addr_r;
-    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_axi_interface_u__DOT__do_wdata_r;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT____Vcellinp__addr_parse__addr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_tag;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__req_buf_wdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_tag_new;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_wdata;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_read_lines[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__write_buf_wdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__lookup_rdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__refill_word;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__0__KET____DOT__tag_v__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellinp__way__BRA__0__KET____DOT__tag_v__din;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__d[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__tag_v__dout;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__d[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__dout;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__line_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wr_data_cacheop_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__wr_addr_cacheop_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__table_write_mux__DOT__and_gates__BRA__2__KET____DOT__or_result[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__table_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__rdata_mux__DOT__and_gates__BRA__2__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT____Vcellinp__addr_parse__addr;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_tag;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__req_buf_wdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_tag_new;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_wdata;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_read_lines[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__write_buf_wdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__lookup_rdata;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__refill_word;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__0__KET____DOT__tag_v__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellinp__way__BRA__0__KET____DOT__tag_v__din;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__d[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__tag_v__dout;
+    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__d[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__dout;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT____Vcellout__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__dout;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__line_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__j;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__din_reg;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__j;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wr_data_cacheop_mux__DOT__and_gates__BRA__1__KET____DOT__or_result[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__wr_addr_cacheop_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__table_write_mux__DOT__and_gates__BRA__2__KET____DOT__or_result[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__table_tag_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_data[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__buf_addr;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_random;
     os>>simu_top__DOT__soc__DOT__delay__DOT__mask_random_next;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_wdata;
+    os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_araddr;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s1_rdata;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s4_rdata;
     os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__w_addr_dir_int;
@@ -1650,22 +2685,65 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__confreg__DOT__step0_count;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__step1_count;
     os>>simu_top__DOT__soc__DOT__confreg__DOT__count;
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>__VdfgTmp_ha5fa42eb__0[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>__VdfgTmp_hfea590d9__0[__Vi0];
+    }
+    os>>__Vdly__simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__nand_command;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__key_count;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__step0_count;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__step1_count;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__count;
+    os>>__Vdly__simu_top__DOT__soc__DOT__confreg__DOT__timer;
     os>>__VstlIterCount;
     os>>__VicoIterCount;
     os>>__VactIterCount;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__if_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem_csrmsgin[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb_csrmsgin[__Vi0];
+    }
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__id__data_out;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 11; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__ex__data_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 12; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__mem__data_out[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 13; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT____Vcellout__wb__data_out[__Vi0];
     }
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__timer_64_diff;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cmt_timer_64;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__cycleCnt;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__instrCnt;
+    for (int __Vi0 = 0; __Vi0 < 30; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__csr[__Vi0];
+    }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__stable_counter;
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__If__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__csrmsg_data[__Vi0];
+    }
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__id__DOT__pipeline_data;
-    for (int __Vi0 = 0; __Vi0 < 8; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 11; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__ex__DOT__pipeline_data[__Vi0];
     }
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__mul_result;
@@ -1673,25 +2751,115 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_shifted;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__minuend_next;
     os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__alu__DOT__myDiv__DOT__difference;
-    for (int __Vi0 = 0; __Vi0 < 6; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 12; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__mem__DOT__pipeline_data[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 7; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__csrmsg_data[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 13; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__wb__DOT__pipeline_data[__Vi0];
     }
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__replace_buf_read_tags;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__replace_buf_read_tags;
+    os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__axi_wr__DOT__wr_mux__DOT__and_gates__BRA__1__KET____DOT__or_result;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__addr_in_die;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__ID_INFORM;
     os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__nand_module__DOT__NAND__DOT__NAND_ADDR;
     os>>simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_push_data;
     os>>simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_r_a_queue_datas;
+    os>>simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_push_data;
     os>>simu_top__DOT__soc__DOT__conf_axi_ram__DOT__ram_w_a_queue_datas;
     os>>simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_r_a_queue_datas;
     os>>simu_top__DOT__soc__DOT__sram_axi_ram__DOT__ram_w_a_queue_datas;
+    for (int __Vi0 = 0; __Vi0 < 30; ++__Vi0) {
+        os>>__Vdly__simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__csr__DOT__csr[__Vi0];
+    }
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__regs[__Vi0];
     }
+    for (int __Vi0 = 0; __Vi0 < 16; ++__Vi0) {
+        for (int __Vi1 = 0; __Vi1 < 3; ++__Vi1) {
+            os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__tlb__DOT__tlb[__Vi0][__Vi1];
+        }
+    }
     for (int __Vi0 = 0; __Vi0 < 32; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__cpu__DOT__cpu_sram_u__DOT__rf__DOT__rf[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__i_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 4; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank_out[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__0__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__tag_v__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__0__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__1__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__2__KET____DOT__bank__DOT__ram_[__Vi0];
+    }
+    for (int __Vi0 = 0; __Vi0 < 256; ++__Vi0) {
+        os>>simu_top__DOT__soc__DOT__cpu__DOT__sram_to_axi_u__DOT__d_cache__DOT__cache_table__DOT__way__BRA__1__KET____DOT__bank__BRA__3__KET____DOT__bank__DOT__ram_[__Vi0];
     }
     for (int __Vi0 = 0; __Vi0 < 5; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__AXI_SLAVE_MUX__DOT__s_bid[__Vi0];
@@ -1726,7 +2894,7 @@ void Vsimu_top___024root::__Vdeserialize(VerilatedDeserialize& os) {
     for (int __Vi0 = 0; __Vi0 < 16; ++__Vi0) {
         os>>simu_top__DOT__soc__DOT__APB_DEV__DOT__uart0__DOT__regs__DOT__receiver__DOT__fifo_rx__DOT__rfifo__DOT__ram[__Vi0];
     }
-    for (int __Vi0 = 0; __Vi0 < 3; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 9; ++__Vi0) {
         os>>__Vm_traceActivity[__Vi0];
     }
 }

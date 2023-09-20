@@ -12,7 +12,7 @@ VM_TIMING = 0
 # Coverage output mode?  0/1 (from --coverage)
 VM_COVERAGE = 0
 # Parallel builds?  0/1 (from --output-split)
-VM_PARALLEL_BUILDS = 0
+VM_PARALLEL_BUILDS = 1
 # Tracing output mode?  0/1 (from --trace/--trace-fst)
 VM_TRACE = 1
 # Tracing output mode in VCD format?  0/1 (from --trace)
@@ -26,6 +26,7 @@ VM_CLASSES_FAST += \
 	Vsimu_top \
 	Vsimu_top___024root__DepSet_h01c9ced2__0 \
 	Vsimu_top___024root__DepSet_h93a688e3__0 \
+	Vsimu_top___024root__DepSet_h93a688e3__1 \
 	Vsimu_top___024unit__DepSet_hf2f07682__0 \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
@@ -34,6 +35,7 @@ VM_CLASSES_SLOW += \
 	Vsimu_top___024root__Slow \
 	Vsimu_top___024root__DepSet_h01c9ced2__0__Slow \
 	Vsimu_top___024root__DepSet_h93a688e3__0__Slow \
+	Vsimu_top___024root__DepSet_h93a688e3__1__Slow \
 	Vsimu_top___024unit__Slow \
 	Vsimu_top___024unit__DepSet_h82bd2113__0__Slow \
 
@@ -41,6 +43,7 @@ VM_CLASSES_SLOW += \
 VM_SUPPORT_FAST += \
 	Vsimu_top__Dpi \
 	Vsimu_top__Trace__0 \
+	Vsimu_top__Trace__1 \
 
 # Generated support classes, non-fast-path, compile with low/medium optimization
 VM_SUPPORT_SLOW += \

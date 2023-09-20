@@ -1,0 +1,32 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/Comparator.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Comparator
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/Control.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Control
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/Forwarding.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Forwarding
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/HazardDetect.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module HazardDetect
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/ImmGen.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module ImmGen
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/Pipeline.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module Pipeline
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/addr_trans.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module addr_trans
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/alu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/cpu_sram.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module cpu_sram
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/csr_.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module csr_
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/extend_memData.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module extend_memData
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/extend_store.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module extend_store
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/mycpu_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module mycpu_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/regfile.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module regfile
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/signed_to_abs.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module signed_to_abs
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "/home/weinijuan/cpu/IP/myCPU/tlb_.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tlb_

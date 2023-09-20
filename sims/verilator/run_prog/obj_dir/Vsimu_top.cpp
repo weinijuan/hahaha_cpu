@@ -12,7 +12,53 @@
 Vsimu_top::Vsimu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     : VerilatedModel{*_vcontextp__}
     , vlSymsp{new Vsimu_top__Syms(contextp(), _vcname__, this)}
+    , clk{vlSymsp->TOP.clk}
     , aclk{vlSymsp->TOP.aclk}
+    , resetn{vlSymsp->TOP.resetn}
+    , inst_req{vlSymsp->TOP.inst_req}
+    , inst_wr{vlSymsp->TOP.inst_wr}
+    , inst_size{vlSymsp->TOP.inst_size}
+    , inst_wstrb{vlSymsp->TOP.inst_wstrb}
+    , inst_addr_ok{vlSymsp->TOP.inst_addr_ok}
+    , inst_data_ok{vlSymsp->TOP.inst_data_ok}
+    , data_req{vlSymsp->TOP.data_req}
+    , data_wr{vlSymsp->TOP.data_wr}
+    , data_size{vlSymsp->TOP.data_size}
+    , data_wstrb{vlSymsp->TOP.data_wstrb}
+    , data_addr_ok{vlSymsp->TOP.data_addr_ok}
+    , data_data_ok{vlSymsp->TOP.data_data_ok}
+    , arid{vlSymsp->TOP.arid}
+    , arlen{vlSymsp->TOP.arlen}
+    , arsize{vlSymsp->TOP.arsize}
+    , arburst{vlSymsp->TOP.arburst}
+    , arlock{vlSymsp->TOP.arlock}
+    , arcache{vlSymsp->TOP.arcache}
+    , arprot{vlSymsp->TOP.arprot}
+    , arvalid{vlSymsp->TOP.arvalid}
+    , arready{vlSymsp->TOP.arready}
+    , rid{vlSymsp->TOP.rid}
+    , rresp{vlSymsp->TOP.rresp}
+    , rlast{vlSymsp->TOP.rlast}
+    , rvalid{vlSymsp->TOP.rvalid}
+    , rready{vlSymsp->TOP.rready}
+    , awid{vlSymsp->TOP.awid}
+    , awlen{vlSymsp->TOP.awlen}
+    , awsize{vlSymsp->TOP.awsize}
+    , awburst{vlSymsp->TOP.awburst}
+    , awlock{vlSymsp->TOP.awlock}
+    , awcache{vlSymsp->TOP.awcache}
+    , awprot{vlSymsp->TOP.awprot}
+    , awvalid{vlSymsp->TOP.awvalid}
+    , awready{vlSymsp->TOP.awready}
+    , wid{vlSymsp->TOP.wid}
+    , wstrb{vlSymsp->TOP.wstrb}
+    , wlast{vlSymsp->TOP.wlast}
+    , wvalid{vlSymsp->TOP.wvalid}
+    , wready{vlSymsp->TOP.wready}
+    , bid{vlSymsp->TOP.bid}
+    , bresp{vlSymsp->TOP.bresp}
+    , bvalid{vlSymsp->TOP.bvalid}
+    , bready{vlSymsp->TOP.bready}
     , aresetn{vlSymsp->TOP.aresetn}
     , enable_delay{vlSymsp->TOP.enable_delay}
     , ram_ren{vlSymsp->TOP.ram_ren}
@@ -34,6 +80,16 @@ Vsimu_top::Vsimu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     , btn_key_row{vlSymsp->TOP.btn_key_row}
     , btn_step{vlSymsp->TOP.btn_step}
     , led{vlSymsp->TOP.led}
+    , inst_addr{vlSymsp->TOP.inst_addr}
+    , inst_wdata{vlSymsp->TOP.inst_wdata}
+    , inst_rdata{vlSymsp->TOP.inst_rdata}
+    , data_addr{vlSymsp->TOP.data_addr}
+    , data_wdata{vlSymsp->TOP.data_wdata}
+    , data_rdata{vlSymsp->TOP.data_rdata}
+    , araddr{vlSymsp->TOP.araddr}
+    , rdata{vlSymsp->TOP.rdata}
+    , awaddr{vlSymsp->TOP.awaddr}
+    , wdata{vlSymsp->TOP.wdata}
     , random_seed{vlSymsp->TOP.random_seed}
     , ram_raddr{vlSymsp->TOP.ram_raddr}
     , ram_rdata{vlSymsp->TOP.ram_rdata}
